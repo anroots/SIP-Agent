@@ -8,8 +8,8 @@ Course homepage: https://wiki.itcollege.ee/index.php/Category:Programmeerimine_C
 
 Team members:
 
-Jana Mrots
-Rene Pärnpuu
-Ando Roots
-Sander Sülla
-Tõnis Umbsaar
+* Jana Mrots
+* Rene Pärnpuu
+* Ando Roots
+* Sander Sülla
+* Tõnis Umbsaar
