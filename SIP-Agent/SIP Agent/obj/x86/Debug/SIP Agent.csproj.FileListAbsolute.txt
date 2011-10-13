@@ -1,0 +1,25 @@
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\bin\Debug\SIP Agent.exe
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\bin\Debug\SIP Agent.pdb
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\obj\x86\Debug\MainWindow.baml
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\obj\x86\Debug\MainWindow.g.cs
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\obj\x86\Debug\App.g.cs
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\obj\x86\Debug\SIP Agent_MarkupCompile.cache
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\obj\x86\Debug\SIP Agent.g.resources
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\obj\x86\Debug\SIP_Agent.Properties.Resources.resources
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\obj\x86\Debug\SIP Agent.exe
+C:\Users\david\Documents\Visual Studio 2010\Projects\sip-agent\SIP Agent\obj\x86\Debug\SIP Agent.pdb
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent.exe
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent.pdb
+C:\Users\snake596\SIP-Agent\SIP Agent\bin\Debug\SIP Agent.exe
+C:\Users\snake596\SIP-Agent\SIP Agent\bin\Debug\SIP Agent.pdb
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent.csprojResolveAssemblyReference.cache
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\MainWindow.baml
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\MainWindow.g.cs
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\App.g.cs
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent_MarkupCompile.cache
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent.g.resources
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP_Agent.Properties.Resources.resources
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent.csproj.GenerateResource.Cache
