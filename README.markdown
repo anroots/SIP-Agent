@@ -1,7 +1,7 @@
 SIP Agent
 ===========
 
-A C# collage course project for managin helpdesk calls.
+A .NET course project for documenting helpdesk calls.
 
 Project homepage: http://trac.sqroot.eu/projects/sip-agent/issues
 Course homepage: https://wiki.itcollege.ee/index.php/Category:Programmeerimine_CSharp_keeles
