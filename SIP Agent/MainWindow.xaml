@@ -8,6 +8,6 @@
         <Label Content="Enter task ID:" Height="28" HorizontalAlignment="Left" Margin="43,142,0,0" Name="label1" VerticalAlignment="Top" />
         <TextBlock Height="71" HorizontalAlignment="Left" Margin="77,76,0,0" Name="textBlock1" Text="Uset this to test if the connection to the database works. Enter a task ID to try fetching data. Hint: try #1 or #2." VerticalAlignment="Top" Width="301" TextWrapping="Wrap" />
         <Button Content="Show Standby" Height="23" HorizontalAlignment="Left" Margin="53,254,0,0" Name="button2" VerticalAlignment="Top" Width="102" Click="button2_Click" />
-        <Button Content="Show Entry" Height="23" HorizontalAlignment="Left" Margin="190,254,0,0" Name="button3" VerticalAlignment="Top" Width="102" />
+        <Button Content="Show Entry" Height="23" HorizontalAlignment="Left" Margin="190,254,0,0" Name="button3" VerticalAlignment="Top" Width="102" Click="button3_Click" />
     </Grid>
 </Window>

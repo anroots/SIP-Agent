@@ -11,10 +11,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace SIP_Agent
+namespace SIP_Agent.Views
 {
     /// <summary>
-    /// Interaction logic for Standby.xaml
+    /// Interaction logic for Entry.xaml
     /// </summary>
     public partial class Standby : Window
     {

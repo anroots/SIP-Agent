@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\david\Documents\Visual Studio 2010\Projects\SIP-Agent\SIP Agent\App.xaml
-2-1439686801
+3-1303226601
 
-7433771537
+8-1888867976
 12-1547151337
-MainWindow.xaml;StandbyWindow.xaml;
+MainWindow.xaml;Views\EntryWindow.xaml;Views\StandbyWindow.xaml;
 
 False
 

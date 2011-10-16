@@ -26,8 +26,14 @@ namespace SIP_Agent
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            var Standby = new Standby();
+            var Standby = new Views.Standby();
             Standby.Show();
+        }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            var Entry = new Views.Entry();
+            Entry.Show();
         }
     }
 }
