@@ -16,10 +16,16 @@ C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent.pdb
 C:\Users\snake596\SIP-Agent\SIP Agent\bin\Debug\SIP Agent.exe
 C:\Users\snake596\SIP-Agent\SIP Agent\bin\Debug\SIP Agent.pdb
 C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent.csprojResolveAssemblyReference.cache
-C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\MainWindow.baml
-C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\MainWindow.g.cs
 C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\App.g.cs
 C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent_MarkupCompile.cache
 C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent.g.resources
 C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP_Agent.Properties.Resources.resources
 C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent.csproj.GenerateResource.Cache
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\PageSwitcher.baml
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\PageSwitcher.g.cs
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\Menu\UserLogin.baml
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\Menu\UserMain.baml
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\Menu\UserStandby.baml
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\Menu\UserLogin.g.cs
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\Menu\UserMain.g.cs
+C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\Menu\UserStandby.g.cs
