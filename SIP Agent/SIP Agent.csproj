@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Calls.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="Phonebook.cs" />
+    <Compile Include="Task_Status.cs" />
+    <Compile Include="Task_Type.cs" />
     <Compile Include="Views\EntryWindow.xaml.cs">
       <DependentUpon>EntryWindow.xaml</DependentUpon>
     </Compile>

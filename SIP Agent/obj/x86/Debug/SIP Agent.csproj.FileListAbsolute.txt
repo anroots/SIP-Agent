@@ -15,3 +15,5 @@ C:\Users\david\Documents\Visual Studio 2010\Projects\SIP-Agent\SIP Agent\obj\x86
 C:\Users\david\Documents\Visual Studio 2010\Projects\SIP-Agent\SIP Agent\obj\x86\Debug\Views\StandbyWindow.g.cs
 C:\Users\david\Documents\Visual Studio 2010\Projects\SIP-Agent\SIP Agent\obj\x86\Debug\Views\EntryWindow.baml
 C:\Users\david\Documents\Visual Studio 2010\Projects\SIP-Agent\SIP Agent\obj\x86\Debug\Views\EntryWindow.g.cs
+C:\Users\Projekt\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent.exe
+C:\Users\Projekt\SIP-Agent\SIP Agent\obj\x86\Debug\SIP Agent.pdb
