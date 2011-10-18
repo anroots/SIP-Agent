@@ -18,9 +18,19 @@
 
         <Image Height="139" HorizontalAlignment="Left" Margin="12,78,0,0" Name="picture" Stretch="Fill" VerticalAlignment="Top" Width="147" ImageFailed="image1_ImageFailed" Source="/SIP Agent;component/pic/sample.gif" Grid.Column="1" />
         <Label Content="Eelnevad kõned: " Height="32" HorizontalAlignment="Left" Margin="172,12,0,0" Name="lastCallsLabel" VerticalAlignment="Top" Width="190" Grid.Column="1" Grid.ColumnSpan="2" />
-        <DataGrid AutoGenerateColumns="False" Height="139" HorizontalAlignment="Left" Margin="0,41,0,0" Name="lastCallsData" VerticalAlignment="Top" Width="503" ItemsSource="{Binding}" Grid.Column="2" />
-        <Label Content="Viimased Sissekanded: " Height="29" HorizontalAlignment="Left" Margin="172,188,0,0" Name="lastEntryLabel" VerticalAlignment="Top" Width="143" Grid.Column="1" Grid.ColumnSpan="2" />
-        <DataGrid AutoGenerateColumns="False" Height="105" HorizontalAlignment="Left" Margin="0,215,0,0" Name="lastEntry" VerticalAlignment="Top" Width="503" Grid.Column="2" />
+        <DataGrid AutoGenerateColumns="False" Height="139" HorizontalAlignment="Left" Margin="0,41,0,0" Name="lastCallsData" VerticalAlignment="Top" Width="503" ItemsSource="{Binding}" Grid.Column="2" SelectionChanged="lastCallsData_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" />
+                <DataGridTextColumn Header="Aeg" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Seotud tööd" Height="29" HorizontalAlignment="Left" Margin="172,188,0,0" Name="lastEntryLabel" VerticalAlignment="Top" Width="143" Grid.Column="1" Grid.ColumnSpan="2" />
+        <DataGrid AutoGenerateColumns="False" Height="105" HorizontalAlignment="Left" Margin="0,215,0,0" Name="lastEntry" VerticalAlignment="Top" Width="503" Grid.Column="2" SelectionChanged="lastEntry_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" />
+                <DataGridTextColumn Header="Kirjeldus" />
+            </DataGrid.Columns>
+        </DataGrid>
         <Separator Height="2" HorizontalAlignment="Left" Margin="-35,326,0,0" Name="botSeparator" VerticalAlignment="Top" Width="723" Grid.ColumnSpan="3" />
 
         <Label Content="Kõne kokkuvõte" Height="23" HorizontalAlignment="Left" Margin="12,334,0,0" Name="SummaryLabel" VerticalAlignment="Top" Width="133" Grid.Column="1" />

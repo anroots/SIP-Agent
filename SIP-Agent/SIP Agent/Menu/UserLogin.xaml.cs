@@ -58,7 +58,7 @@ namespace SIP_Agent
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new UserStandby());
+            Switcher.Switch(new SystemStandby());
         }
 
 

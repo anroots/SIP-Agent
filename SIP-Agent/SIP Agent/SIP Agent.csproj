@@ -61,6 +61,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Menu\SystemStandby.xaml.cs">
+      <DependentUpon>SystemStandby.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageSwitcher.xaml.cs">
       <DependentUpon>PageSwitcher.xaml</DependentUpon>
     </Compile>
@@ -71,9 +74,13 @@
     <Compile Include="Menu\UserMain.xaml.cs">
       <DependentUpon>UserMain.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Menu\UserStandby.xaml.cs">
-      <DependentUpon>UserStandby.xaml</DependentUpon>
+    <Compile Include="Menu\ClientInfo.xaml.cs">
+      <DependentUpon>ClientInfo.xaml</DependentUpon>
     </Compile>
+    <Page Include="Menu\SystemStandby.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PageSwitcher.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -86,7 +93,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Menu\UserStandby.xaml">
+    <Page Include="Menu\ClientInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

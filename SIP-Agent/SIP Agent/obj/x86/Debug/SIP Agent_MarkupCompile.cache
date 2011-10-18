@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\snake596\SIP-Agent\SIP Agent\obj\x86\Debug\
+C:\Users\david\Documents\Visual Studio 2010\Projects\SIP-Agent\SIP-Agent\SIP Agent\obj\x86\Debug\
 SIP_Agent
 none
 false
 DEBUG;TRACE
-C:\Users\snake596\SIP-Agent\SIP Agent\App.xaml
-4-1836717418
+C:\Users\david\Documents\Visual Studio 2010\Projects\SIP-Agent\SIP-Agent\SIP Agent\App.xaml
+5153079377
 
-10565166093
-131287280978
-PageSwitcher.xaml;Menu\UserLogin.xaml;Menu\UserMain.xaml;Menu\UserStandby.xaml;
+11-67945602
+13-1771804517
+Menu\SystemStandby.xaml;PageSwitcher.xaml;Menu\UserLogin.xaml;Menu\UserMain.xaml;Menu\ClientInfo.xaml;
 
 False
 

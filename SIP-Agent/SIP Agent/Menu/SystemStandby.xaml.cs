@@ -15,36 +15,52 @@ using System.Windows.Shapes;
 namespace SIP_Agent
 {
     /// <summary>
-    /// Interaction logic for UserStandby.xaml
+    /// Interaction logic for SystemStandby.xaml
     /// </summary>
-    public partial class UserStandby : UserControl, ISwitchable
+    public partial class SystemStandby : UserControl, ISwitchable
     {
-        public UserStandby()
+        public SystemStandby()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
+
+        #region Event For Child Window
+        private void btn_login_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            
+        }
+
+
+        #endregion
+
         #region ISwitchable Members
+
         public void UtilizeState(object state)
         {
             throw new NotImplementedException();
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            
-        }
+
+
+
         #endregion
 
-        private void btn_sSaveData_Click(object sender, RoutedEventArgs e)
+        private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
-        private void btn_UserMain_Click(object sender, RoutedEventArgs e)
+        private void userBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void btn_login_Click(object sender, RoutedEventArgs e)
         {
             Switcher.Switch(new UserMain());
         }
+
 
     }
 }
