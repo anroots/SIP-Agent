@@ -1,8 +1,0 @@
-﻿<Window x:Class="SIP_Agent.Views.Standby"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Standby" Height="300" Width="300">
-    <Grid>
-        <TextBlock Height="57" HorizontalAlignment="Left" Margin="12,67,0,0" Name="textBlock1" Text="This contains the form for determining the caller." VerticalAlignment="Top" Width="266" />
-    </Grid>
-</Window>
