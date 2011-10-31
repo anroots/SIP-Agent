@@ -58,7 +58,16 @@ namespace SIP_Agent
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new SystemStandby());
+
+            if (App.CurrentUser.Login(txtUsername.Text, txtPassword.Password))
+            {
+                Switcher.Switch(new SystemStandby());
+            }
+            else
+            {
+                MessageBox.Show("Login Failed!");
+            }
+            
         }
 
 

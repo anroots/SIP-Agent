@@ -7,10 +7,13 @@ using System.Windows;
 
 namespace SIP_Agent
 {
+
+    
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
+        public static Model.User CurrentUser = new Model.User();
     }
 }
