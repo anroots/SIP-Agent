@@ -73,6 +73,17 @@ namespace SIP_Agent
             // }
         }
 
+        /// <summary>
+        /// Show the About window on menu click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Help_About_Click(object sender, RoutedEventArgs e)
+        {
+            Menu.Main.Help.About about = new Menu.Main.Help.About();
+            about.Show();
+        }
+
 
     }
 }

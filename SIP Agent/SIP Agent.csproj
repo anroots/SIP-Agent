@@ -79,6 +79,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Menu\Main\Help\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Menu\SystemStandby.xaml.cs">
       <DependentUpon>SystemStandby.xaml</DependentUpon>
     </Compile>
@@ -101,6 +104,10 @@
     <Compile Include="Menu\ClientInfo.xaml.cs">
       <DependentUpon>ClientInfo.xaml</DependentUpon>
     </Compile>
+    <Page Include="Menu\Main\Help\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Menu\SystemStandby.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
