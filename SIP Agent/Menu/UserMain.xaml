@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="700">
+             d:DesignHeight="600" d:DesignWidth="700" Loaded="UserControl_Loaded">
     <Grid Height="600">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*" />
@@ -16,12 +16,15 @@
 
         <Label Content="Firma: " Height="31" HorizontalAlignment="Left" Margin="12,0,0,528" Name="companyLabel" VerticalAlignment="Bottom" Width="42" Grid.Column="1" />
 
-        <Image Height="139" HorizontalAlignment="Left" Margin="12,78,0,0" Name="picture" Stretch="Fill" VerticalAlignment="Top" Width="147" ImageFailed="image1_ImageFailed" Source="/SIP Agent;component/pic/sample.gif" Grid.Column="1" />
+        <Image Height="139" HorizontalAlignment="Left" Margin="12,78,0,0" Name="picture" Stretch="Fill" VerticalAlignment="Top" Width="147" ImageFailed="image1_ImageFailed" Source="/SIP Agent;component/Images/sample.gif" Grid.Column="1" />
         <Label Content="Eelnevad kõned: " Height="32" HorizontalAlignment="Left" Margin="172,12,0,0" Name="lastCallsLabel" VerticalAlignment="Top" Width="190" Grid.Column="1" Grid.ColumnSpan="2" />
         <DataGrid AutoGenerateColumns="False" Height="139" HorizontalAlignment="Left" Margin="0,41,0,0" Name="lastCallsData" VerticalAlignment="Top" Width="503" ItemsSource="{Binding}" Grid.Column="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" />
-                <DataGridTextColumn Header="Aeg" />
+                <DataGridTextColumn Header="Seotud tööd" />
+                <DataGridTextColumn Header="Vastu võetud" />
+                <DataGridTextColumn Header="Kestus" />
+                <DataGridTextColumn Header="Kokkuvõte" />
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Seotud tööd" Height="29" HorizontalAlignment="Left" Margin="172,188,0,0" Name="lastEntryLabel" VerticalAlignment="Top" Width="143" Grid.Column="1" Grid.ColumnSpan="2" />

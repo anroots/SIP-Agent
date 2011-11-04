@@ -49,5 +49,9 @@ namespace SIP_Agent
         {
             
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }
