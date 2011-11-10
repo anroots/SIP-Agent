@@ -17,6 +17,7 @@
       <Column Name="first_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="last_name" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Member="password" Type="System.String" CanBeNull="false" />
       <Association Name="person_task" Member="tasks" ThisKey="id" OtherKey="notifier_id" Type="task" />
     </Type>
   </Table>

@@ -213,6 +213,8 @@ namespace SIP_Agent
 		
 		private bool _deleted;
 		
+		private string _password;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -225,6 +227,8 @@ namespace SIP_Agent
     partial void Onlast_nameChanged();
     partial void OndeletedChanging(bool value);
     partial void OndeletedChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
     #endregion
 		
 		public person()
@@ -308,6 +312,26 @@ namespace SIP_Agent
 					this._deleted = value;
 					this.SendPropertyChanged("deleted");
 					this.OndeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", CanBeNull=false)]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
 				}
 			}
 		}

@@ -14,6 +14,6 @@ namespace SIP_Agent
     /// </summary>
     public partial class App : Application
     {
-        public static Model.User CurrentUser = new Model.User();
+        public static Model.Person CurrentUser = new Model.Person();
     }
 }

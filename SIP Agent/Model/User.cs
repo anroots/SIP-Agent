@@ -6,10 +6,11 @@ using System.Text;
 namespace SIP_Agent.Model
 {
 
-    public class User
+    public class Person
     {
 
         private int ID { get; set; }
+        private string first_name { get; set; }
 
         
 
@@ -21,12 +22,25 @@ namespace SIP_Agent.Model
         /// <returns>True on succes, False on authenticate error</returns>
         public bool Login(string Username, string Password)
         {
-            // TODO!
-            this.ID = 1;
-            return true;
+
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+                var query = from x 
+                                in db.persons 
+                            where  (x.first_name+x.last_name).Equals(Username) 
+                            where x.password.Equals(Password)
+                            select x;
+
+                if (query.Count() > 0)
+                {
+                    this.ID = query.FirstOrDefault().id;
+                    return true;
+                }
+            }
+            return false;
         }
 
-        public User()
+        public Person()
         {
             // TODO: Complete member initialization
         }
