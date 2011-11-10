@@ -58,6 +58,14 @@ namespace SIP_Agent
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
+            // Example on how to query the database
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+                var query = from x in db.tasks select x;
+
+                
+                MessageBox.Show(query.FirstOrDefault().title);
+            }
 
             if (App.CurrentUser.Login(txtUsername.Text, txtPassword.Password))
             {

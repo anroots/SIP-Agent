@@ -16,12 +16,12 @@
             <ColumnDefinition Width="360" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Menu Height="21" HorizontalAlignment="Left" Name="menu1" VerticalAlignment="Top" Width="920" Grid.ColumnSpan="4" DataContext="{Binding}">
-            <MenuItem Header="File">
-                <MenuItem Command="ApplicationCommands.Close" Header="Quit" />
+        <Menu Height="21" HorizontalAlignment="Left" Name="menu1" VerticalAlignment="Top" Width="920" Grid.ColumnSpan="4" DataContext="{Binding}" Background="#FFE8E8E8">
+            <MenuItem Header="Rakendus">
+                <MenuItem Command="ApplicationCommands.Close" Header="Quit"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Help">
-                <MenuItem Header="About" Click="Help_About_Click" />
+            <MenuItem Header="Teave">
+                <MenuItem Header="About" Click="Help_About_Click"></MenuItem>
             </MenuItem>
         </Menu>
         <GroupBox Grid.Column="0" Header="Helistaja tuvastamine" Height="321" HorizontalAlignment="Left" Margin="11,35,0,0" Name="groupBox1" VerticalAlignment="Top" Width="335" Grid.ColumnSpan="2" Grid.RowSpan="2">
