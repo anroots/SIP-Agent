@@ -68,20 +68,21 @@ namespace SIP_Agent
             ACNameList.Clear();
 
             //TODO fix commented list
-
-            /*
+            List<string> PersonList = new List<string>();
+            
             foreach (string item in PersonList)
             {
                 if (!string.IsNullOrEmpty(userBox.Text))
                 {
                     if (item.StartsWith(typedString))
                     {
-                        ACNameList.Add(item);
-                        */
+                        //ACNameList.Add(item);
+                        
                     }
                 }
             }
 
+            
             if (ACNameList.Count > 0)
             {
                 SuggestionBox.ItemsSource = ACNameList;
