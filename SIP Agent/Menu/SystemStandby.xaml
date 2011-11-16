@@ -29,12 +29,13 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBox Height="35" HorizontalAlignment="Left" Margin="13,102,0,0" Name="userBox" VerticalAlignment="Top" Width="290" TextChanged="userBox_TextChanged" />
+                <TextBox x:Name="userBox" Height="35" HorizontalAlignment="Left" Margin="13,102,0,0"  VerticalAlignment="Top" Width="290" TextChanged="userBox_TextChanged" />
                 <Button Content="Registreeri kõne" Height="35" HorizontalAlignment="Left" Margin="35,240,0,0" Name="btn_login" VerticalAlignment="Top" Width="100" Click="btn_login_Click" IsDefault="True" />
                 <Label Content="Nimi (autocomplete):" Height="28" HorizontalAlignment="Left" Margin="13,68,0,0" Name="label1" VerticalAlignment="Top" />
                 <Label Content="Telefoninumber (autocomplete)" Height="28" HorizontalAlignment="Left" Margin="13,143,0,0" Name="label2" VerticalAlignment="Top" />
                 <TextBox Height="35" HorizontalAlignment="Left" Margin="13,177,0,0" Name="textBox1" VerticalAlignment="Top" Width="290"  />
                 <TextBlock Height="48" HorizontalAlignment="Left" Margin="13,14,0,0" Name="textBlock1" Text="Standby režiim: kirjuta helistaja nimi või telefoninumber kõne info sisestamiseks." VerticalAlignment="Top" TextWrapping="Wrap" Width="236" />
+                <ListBox Height="2" HorizontalAlignment="Left" Margin="13,135,0,0" x:Name="SuggestionBox" SelectionChanged="SuggestionBox_SelectionChanged" VerticalAlignment="Top" Width="290" />
             </Grid>
         </GroupBox>
         <TabControl Grid.Column="1" Height="550" HorizontalAlignment="Left" Margin="15,39,0,0" Name="tabControl1" VerticalAlignment="Top" Width="533">

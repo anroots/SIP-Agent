@@ -96,6 +96,8 @@
     <Compile Include="Menu\SystemStandby.xaml.cs">
       <DependentUpon>SystemStandby.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AutoComplete.cs" />
+    <Compile Include="Model\AutoCompleteViewModel.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="PageSwitcher.xaml.cs">
       <DependentUpon>PageSwitcher.xaml</DependentUpon>

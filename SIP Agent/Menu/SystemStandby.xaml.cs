@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SIP_Agent.Model;
 
 namespace SIP_Agent
 {
@@ -22,6 +23,8 @@ namespace SIP_Agent
         public SystemStandby()
         {
             InitializeComponent();
+
+            
         }
 
 
@@ -51,8 +54,52 @@ namespace SIP_Agent
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void userBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            userBox.TextChanged += new TextChangedEventHandler(userBox_TextChanged);
+
+            string typedString = userBox.Text;
+            List<AutoComplete> ACNameList = new List<AutoComplete>();
+            ACNameList.Clear();
+
+            //TODO fix commented list
+            List<string> PersonList = new List<string>();
+            
+            foreach (string item in PersonList)
+            {
+                if (!string.IsNullOrEmpty(userBox.Text))
+                {
+                    if (item.StartsWith(typedString))
+                    {
+                        //ACNameList.Add(item);
+                        
+                    }
+                }
+            }
+
+            
+            if (ACNameList.Count > 0)
+            {
+                SuggestionBox.ItemsSource = ACNameList;
+                SuggestionBox.Visibility = Visibility.Visible;
+            }
+            else if (userBox.Text.Equals(""))
+            {
+                SuggestionBox.Visibility = Visibility.Collapsed;
+                SuggestionBox.ItemsSource = null;
+            }
+            else
+            {
+                SuggestionBox.Visibility = Visibility.Collapsed;
+                SuggestionBox.ItemsSource = null;
+            }
+
+
 
         }
 
@@ -82,6 +129,22 @@ namespace SIP_Agent
         {
             Menu.Main.Help.About about = new Menu.Main.Help.About();
             about.Show();
+        }
+
+
+        private void SuggestionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SuggestionBox.ItemsSource != null)
+            {
+                SuggestionBox.Visibility = Visibility.Collapsed;
+                userBox.TextChanged -= new TextChangedEventHandler(userBox_TextChanged);
+                if (SuggestionBox.SelectedIndex != -1)
+                {
+                    userBox.Text = SuggestionBox.SelectedItem.ToString();
+                }
+                userBox.TextChanged += new TextChangedEventHandler(userBox_TextChanged);
+            }
+
         }
 
 
