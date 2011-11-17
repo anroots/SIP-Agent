@@ -130,7 +130,7 @@ Kohana::modules(array(
                      // 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
                      //'database' => MODPATH . 'database', // Database access
                      // 'image'      => MODPATH.'image',      // Image manipulation
-                     'orm' => MODPATH . 'orm', // Object Relationship Mapping
+                     //'orm' => MODPATH . 'orm', // Object Relationship Mapping
                       //'unittest'   => MODPATH.'unittest',   // Unit testing
                      //'userguide' => MODPATH . 'userguide', // User guide and API documentation
                      //'notify' => MODPATH . 'notify',
@@ -144,12 +144,12 @@ Kohana::modules(array(
 
 Route::set('api1', 'api/(<directory>/(<controller>(/<action>(/<id>))))')
         ->defaults(array(
-                        'controller' => 'api',
+                        'controller' => 'call',
                         'action' => 'index',
                    ));
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
         ->defaults(array(
-                        'controller' => 'dash',
+                        'controller' => 'main',
                         'action' => 'index',
                    ));

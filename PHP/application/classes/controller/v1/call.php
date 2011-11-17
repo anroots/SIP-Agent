@@ -2,7 +2,7 @@
 /**
  * Call API
  */
-class Controller_Api_V1_Call extends Controller_Api
+class Controller_V1_Call extends Controller_Api
 {
 
 	/**
@@ -18,7 +18,9 @@ class Controller_Api_V1_Call extends Controller_Api
 	 */
 	public function action_index()
 	{
-		$this->respond(array('commands' => $this->_actions));
+		$this->respond(array(
+		                    'commands' => $this->_actions
+		               ));
 	}
 
 
@@ -29,13 +31,10 @@ class Controller_Api_V1_Call extends Controller_Api
 	 */
 	public function action_recording()
 	{
-		$call_id = $this->request->post('call_id');
-		$recording_file = 'kamarius.mp3';
-
-		$this->respond(array(
-		                    'call_id' => $call_id,
-		                    'recording_url' => URL::base() . 'recordings/' . $recording_file
-		               ));
+		$this->respond(
+			Model::factory('call')
+					->recording($this->id)
+		);
 	}
 
 } 
