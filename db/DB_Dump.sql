@@ -1,103 +1,187 @@
-USE [master]
+USE [sip-agent]
 GO
-
-/****** Object:  Database [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF]    Script Date: 11/20/2011 20:34:10 ******/
-CREATE DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] ON  PRIMARY 
-( NAME = N'agent', FILENAME = N'C:\Users\david\Documents\Visual Studio 2010\Projects\SIP-Agent\db\agent.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
- LOG ON 
-( NAME = N'agent_log', FILENAME = N'C:\Users\david\Documents\Visual Studio 2010\Projects\SIP-Agent\db\C__USERS_PROJEKT_SIP-AGENT_SIP-AGENT_DB_AGENT.MDF_log.LDF' , SIZE = 504KB , MAXSIZE = UNLIMITED, FILEGROWTH = 10%)
+/****** Object:  Table [dbo].[tasks_calls]    Script Date: 11/20/2011 22:08:02 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET COMPATIBILITY_LEVEL = 100
+SET QUOTED_IDENTIFIER ON
 GO
-
-IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
-begin
-EXEC [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF].[dbo].[sp_fulltext_database] @action = 'enable'
-end
+CREATE TABLE [dbo].[tasks_calls](
+	[call_id] [int] NOT NULL,
+	[task_id] [int] NOT NULL,
+	[id] [int] NOT NULL,
+ CONSTRAINT [PK_tasks_calls] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET ANSI_NULL_DEFAULT OFF 
+/****** Object:  Table [dbo].[tasks]    Script Date: 11/20/2011 22:08:02 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET ANSI_NULLS OFF 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET ANSI_PADDING OFF 
+SET ANSI_PADDING ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET ANSI_WARNINGS OFF 
+CREATE TABLE [dbo].[tasks](
+	[id] [int] NOT NULL,
+	[parent_id] [int] NULL,
+	[created] [datetime] NOT NULL,
+	[title] [varchar](255) NOT NULL,
+	[details] [text] NOT NULL,
+	[notifier_id] [int] NOT NULL,
+	[assignee_id] [int] NOT NULL,
+	[clerk_id] [int] NOT NULL,
+	[status_id] [int] NOT NULL,
+	[category_id] [int] NOT NULL,
+	[deleted] [tinyint] NOT NULL,
+ CONSTRAINT [PK_tasks] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET ARITHABORT OFF 
+SET ANSI_PADDING OFF
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET AUTO_CLOSE OFF 
+INSERT [dbo].[tasks] ([id], [parent_id], [created], [title], [details], [notifier_id], [assignee_id], [clerk_id], [status_id], [category_id], [deleted]) VALUES (1, 1, CAST(0x00009E5E00107AC0 AS DateTime), N'Testtöö', N'Vaja testida kõnet', 1, 1, 1, 1, 1, 0)
+/****** Object:  Table [dbo].[task_statuses]    Script Date: 11/20/2011 22:08:02 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET AUTO_CREATE_STATISTICS ON 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET AUTO_SHRINK OFF 
+CREATE TABLE [dbo].[task_statuses](
+	[id] [int] NOT NULL,
+	[name] [nchar](10) NOT NULL,
+	[deleted] [tinyint] NULL,
+	[parent_id] [int] NULL,
+ CONSTRAINT [PK_task_statuses] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET AUTO_UPDATE_STATISTICS ON 
+INSERT [dbo].[task_statuses] ([id], [name], [deleted], [parent_id]) VALUES (1, N'Uus       ', 0, NULL)
+/****** Object:  Table [dbo].[task_categories]    Script Date: 11/20/2011 22:08:02 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET CURSOR_CLOSE_ON_COMMIT OFF 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET CURSOR_DEFAULT  GLOBAL 
+SET ANSI_PADDING ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET CONCAT_NULL_YIELDS_NULL OFF 
+CREATE TABLE [dbo].[task_categories](
+	[id] [int] NOT NULL,
+	[name] [varchar](45) NOT NULL,
+	[parent_id] [int] NULL,
+	[deleted] [tinyint] NOT NULL,
+ CONSTRAINT [PK_task_categories] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET NUMERIC_ROUNDABORT OFF 
+SET ANSI_PADDING OFF
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET QUOTED_IDENTIFIER OFF 
+INSERT [dbo].[task_categories] ([id], [name], [parent_id], [deleted]) VALUES (1, N'Riistvara', 1, 0)
+/****** Object:  Table [dbo].[phonebook]    Script Date: 11/20/2011 22:08:02 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET RECURSIVE_TRIGGERS OFF 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET  DISABLE_BROKER 
+CREATE TABLE [dbo].[phonebook](
+	[id] [int] NOT NULL,
+	[phone] [nchar](20) NULL,
+	[email] [nchar](40) NULL,
+	[person_id] [int] NULL,
+	[deleted] [tinyint] NOT NULL,
+ CONSTRAINT [PK_phonebook] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+INSERT [dbo].[phonebook] ([id], [phone], [email], [person_id], [deleted]) VALUES (1, N'+372581314512       ', N'ando@roots.ee                           ', 1, 0)
+/****** Object:  Table [dbo].[persons]    Script Date: 11/20/2011 22:08:02 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET DATE_CORRELATION_OPTIMIZATION OFF 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET TRUSTWORTHY OFF 
+CREATE TABLE [dbo].[persons](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[first_name] [nchar](64) NULL,
+	[last_name] [nchar](64) NULL,
+	[username] [nchar](32) NULL,
+	[password] [nchar](32) NULL,
+	[created] [datetime] NULL,
+	[deleted] [tinyint] NOT NULL,
+	[company_id] [int] NULL,
+ CONSTRAINT [PK_persons] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+SET IDENTITY_INSERT [dbo].[persons] ON
+INSERT [dbo].[persons] ([id], [first_name], [last_name], [username], [password], [created], [deleted], [company_id]) VALUES (1, N'Ando                                                            ', N'Roots                                                           ', N'ando                            ', N'ando                            ', CAST(0x00009E5E00B85894 AS DateTime), 0, 1)
+SET IDENTITY_INSERT [dbo].[persons] OFF
+/****** Object:  Table [dbo].[companies]    Script Date: 11/20/2011 22:08:02 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET PARAMETERIZATION SIMPLE 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET READ_COMMITTED_SNAPSHOT OFF 
+SET ANSI_PADDING ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET HONOR_BROKER_PRIORITY OFF 
+CREATE TABLE [dbo].[companies](
+	[id] [int] NOT NULL,
+	[name] [varchar](60) NOT NULL,
+	[created] [datetime] NOT NULL,
+	[address] [text] NOT NULL,
+	[deleted] [tinyint] NOT NULL,
+ CONSTRAINT [PK_companies] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET  READ_WRITE 
+SET ANSI_PADDING OFF
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET RECOVERY SIMPLE 
+INSERT [dbo].[companies] ([id], [name], [created], [address], [deleted]) VALUES (1, N'Diara OÜ', CAST(0x00009E5E000007D5 AS DateTime), N'Pas', 0)
+/****** Object:  Table [dbo].[calls]    Script Date: 11/20/2011 22:08:02 ******/
+SET ANSI_NULLS ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET  MULTI_USER 
+SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET PAGE_VERIFY CHECKSUM  
+CREATE TABLE [dbo].[calls](
+	[id] [int] NOT NULL,
+	[summary] [text] NULL,
+	[caller_id] [int] NULL,
+	[clerk_id] [int] NULL,
+	[start] [datetime] NULL,
+	[finished] [datetime] NULL,
+	[deleted] [tinyint] NOT NULL,
+ CONSTRAINT [PK_calls] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-
-ALTER DATABASE [C:\USERS\PROJEKT\SIP-AGENT\SIP-AGENT\DB\AGENT.MDF] SET DB_CHAINING OFF 
+INSERT [dbo].[calls] ([id], [summary], [caller_id], [clerk_id], [start], [finished], [deleted]) VALUES (1, N'Testkõne', 1, 1, CAST(0x00009EDA00C5C100 AS DateTime), CAST(0x00009EDA00D5F570 AS DateTime), 0)
+/****** Object:  Default [DF_calls_deleted]    Script Date: 11/20/2011 22:08:02 ******/
+ALTER TABLE [dbo].[calls] ADD  CONSTRAINT [DF_calls_deleted]  DEFAULT ((0)) FOR [deleted]
 GO
-
+/****** Object:  Default [DF_persons_deleted]    Script Date: 11/20/2011 22:08:02 ******/
+ALTER TABLE [dbo].[persons] ADD  CONSTRAINT [DF_persons_deleted]  DEFAULT ((0)) FOR [deleted]
+GO
+/****** Object:  Default [DF_phonebook_deleted]    Script Date: 11/20/2011 22:08:02 ******/
+ALTER TABLE [dbo].[phonebook] ADD  CONSTRAINT [DF_phonebook_deleted]  DEFAULT ((0)) FOR [deleted]
+GO
+/****** Object:  Default [DF_task_categories_deleted]    Script Date: 11/20/2011 22:08:02 ******/
+ALTER TABLE [dbo].[task_categories] ADD  CONSTRAINT [DF_task_categories_deleted]  DEFAULT ((0)) FOR [deleted]
+GO
+/****** Object:  Default [DF_task_statuses_deleted]    Script Date: 11/20/2011 22:08:02 ******/
+ALTER TABLE [dbo].[task_statuses] ADD  CONSTRAINT [DF_task_statuses_deleted]  DEFAULT ((0)) FOR [deleted]
+GO
+/****** Object:  ForeignKey [FK_task_categories_task_categories]    Script Date: 11/20/2011 22:08:02 ******/
+ALTER TABLE [dbo].[task_categories]  WITH CHECK ADD  CONSTRAINT [FK_task_categories_task_categories] FOREIGN KEY([id])
+REFERENCES [dbo].[task_categories] ([id])
+GO
+ALTER TABLE [dbo].[task_categories] CHECK CONSTRAINT [FK_task_categories_task_categories]
+GO
