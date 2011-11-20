@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SIP_Agent
 {
-    class phone
+    class phoneBox
     {
         public int id { get; set; }
         public string phone { get; set; }

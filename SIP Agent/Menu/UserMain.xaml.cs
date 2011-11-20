@@ -80,7 +80,7 @@ namespace SIP_Agent
                 companies comp = new companies();
                 comp.name = companyBox.Text;
 
-                phone phon = new phone();
+                phoneBox phon = new phoneBox();
                 phon.phone = phoneBox.Text;
 
                 calls callInfo = new calls();
