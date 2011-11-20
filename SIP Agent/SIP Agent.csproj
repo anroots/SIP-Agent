@@ -85,6 +85,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Data\calls.cs" />
+    <Compile Include="Data\companies.cs" />
+    <Compile Include="Data\phone.cs" />
+    <Compile Include="Data\tasks.cs" />
     <Compile Include="ISwitchable.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -93,6 +97,7 @@
     <Compile Include="Menu\Main\Help\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\persons.cs" />
     <Compile Include="Menu\SystemStandby.xaml.cs">
       <DependentUpon>SystemStandby.xaml</DependentUpon>
     </Compile>

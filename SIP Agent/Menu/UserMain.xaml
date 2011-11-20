@@ -12,11 +12,11 @@
             <ColumnDefinition Width="527*" />
         </Grid.ColumnDefinitions>
 
-        <Label Content="Nimi: " HorizontalAlignment="Left" Margin="12,12,0,483" Name="name" Width="37" Grid.Column="1" />
+        <Label Content="Nimi: " HorizontalAlignment="Left" Margin="12,12,0,556" Name="name" Width="37" Grid.Column="1" />
 
-        <Label Content="Firma: " Height="31" HorizontalAlignment="Left" Margin="12,0,0,528" Name="companyLabel" VerticalAlignment="Bottom" Width="42" Grid.Column="1" />
+        <Label Content="Firma: " Height="31" HorizontalAlignment="Left" Margin="12,0,0,508" Name="companyLabel" VerticalAlignment="Bottom" Width="42" Grid.Column="1" />
 
-        <Image Height="139" HorizontalAlignment="Left" Margin="12,78,0,0" Name="picture" Stretch="Fill" VerticalAlignment="Top" Width="147" ImageFailed="image1_ImageFailed" Source="/SIP Agent;component/Images/sample.gif" Grid.Column="1" />
+        <Image Height="139" HorizontalAlignment="Left" Margin="12,172,0,0" x:Name="clientPic" Stretch="Fill" VerticalAlignment="Top" Width="147" ImageFailed="image1_ImageFailed" Source="{Binding Path=clientPicture}" Grid.Column="1" />
         <Label Content="Eelnevad kõned: " Height="32" HorizontalAlignment="Left" Margin="172,12,0,0" Name="lastCallsLabel" VerticalAlignment="Top" Width="190" Grid.Column="1" Grid.ColumnSpan="2" />
         <DataGrid AutoGenerateColumns="False" Height="139" HorizontalAlignment="Left" Margin="0,41,0,0" Name="lastCallsData" VerticalAlignment="Top" Width="503" ItemsSource="{Binding}" Grid.Column="2">
             <DataGrid.Columns>
@@ -37,10 +37,14 @@
         <Separator Height="2" HorizontalAlignment="Left" Margin="-35,326,0,0" Name="botSeparator" VerticalAlignment="Top" Width="723" Grid.ColumnSpan="3" />
 
         <Label Content="Kõne kokkuvõte" Height="23" HorizontalAlignment="Left" Margin="12,334,0,0" Name="SummaryLabel" VerticalAlignment="Top" Width="133" Grid.Column="1" />
-        <TextBox Height="25" HorizontalAlignment="Left" Margin="10,355,0,0" Name="summary" VerticalAlignment="Top" Width="500" Grid.Column="1" Grid.ColumnSpan="2" />
+        <TextBox Text="{Binding Path=summaryBox}" x:Name="summaryBox" Height="25" HorizontalAlignment="Left" Margin="10,355,0,0" VerticalAlignment="Top" Width="500" Grid.Column="1" Grid.ColumnSpan="2" />
         <Label Content="Kõne detailid" Height="23" HorizontalAlignment="Left" Margin="12,387,0,0" Name="detailsLabel" VerticalAlignment="Top" Width="133" Grid.Column="1" />
-        <RichTextBox Height="144" HorizontalAlignment="Left" Margin="10,0,0,48" Name="details" VerticalAlignment="Bottom" Width="500" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Grid.Column="1" Grid.ColumnSpan="2" />
+        <TextBox Text="{Binding Path=detailsBox}" x:Name="detailsBox" Height="144" HorizontalAlignment="Left" Margin="10,0,0,48" VerticalAlignment="Bottom" Width="500" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Grid.Column="1" Grid.ColumnSpan="2" TextChanged="detailsBox_TextChanged" />
         <Label Content="Sissekanne #" Height="34" HorizontalAlignment="Left" Margin="360,355,0,0" Name="entryNrLabel" VerticalAlignment="Top" Width="78" Grid.Column="2" />
         <Button Content="Salvesta" Height="35" HorizontalAlignment="Left" Margin="361,517,0,0" Name="btn_saveData" VerticalAlignment="Top" Width="141" Click="SaveData_Click" Grid.Column="2" />
+        <TextBox Text="{Binding Path=userBox}" Grid.Column="1" Height="24" HorizontalAlignment="Left" Margin="12,33,0,0" x:Name="userBox" VerticalAlignment="Top" Width="147" />
+        <TextBox Text="{Binding Path=companyBox}" Grid.Column="1" Height="24" HorizontalAlignment="Left" Margin="12,82,0,0" x:Name="companyBox" VerticalAlignment="Top" Width="147" />
+        <TextBox PreviewTextInput="phonePreview" Text="{Binding Path=phoneBox}" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="12,0,0,442" x:Name="phoneBox" VerticalAlignment="Bottom" Width="147"/>
+        <Label Content="Telefon" Grid.Column="1" Height="31" HorizontalAlignment="Left" Margin="10,112,0,0" Name="phoneLabel" VerticalAlignment="Top" Width="54" />
     </Grid>
 </UserControl>

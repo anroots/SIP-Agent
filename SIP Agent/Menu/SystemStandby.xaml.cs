@@ -106,6 +106,7 @@ namespace SIP_Agent
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
             Switcher.Switch(new UserMain());
+           
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -146,7 +147,5 @@ namespace SIP_Agent
             }
 
         }
-
-
     }
 }

@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SIP_Agent.Menu;
+using System.Data.Objects.SqlClient;
 
 namespace SIP_Agent
 {
@@ -47,11 +49,71 @@ namespace SIP_Agent
 
         private void SaveData_Click(object sender, RoutedEventArgs e)
         {
-            
+            SaveCustomerInfo();
+        /*
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+                var query = (from x in db.persons
+                             where x.ID == change.id
+                             select x).FirstOrDefault();
+
+                query.first_name = change.Nimi;
+                query.last_name = change.Tehtud;
+                query.Tegija_ID = change.tegija.ID;
+                query.Prioriteet_ID = change.prioriteet.ID;
+                //lisab muudatused
+                db.SubmitChanges();
+
+        */
+
+               
+
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void SaveCustomerInfo()
         {
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+                persons per = new persons();
+                per.username = userBox.Text;
+
+                companies comp = new companies();
+                comp.name = companyBox.Text;
+
+                phoneBox phon = new phoneBox();
+                phon.phone = phoneBox.Text;
+
+                calls callInfo = new calls();
+                callInfo.summary = summaryBox.Text;
+
+                tasks callTask = new tasks();
+                callTask.details = detailsBox.Text;
+
+
+                //db.companies.InsertOnSubmit(comp);
+
+                try
+                {
+                    //db.persons.InsertOnSubmit(per);
+
+                    db.SubmitChanges();
+
+
+                    MessageBox.Show("Andmed baasi edukalt salvestatud");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Viga Salvestamisel");
+                }
+
+            }//Close db connection
+        }
+
+        private void phonePreview(object sender, TextCompositionEventArgs e)
+        {
+            foreach (char ch in e.Text)
+                if (!Char.IsDigit(ch))
+                    e.Handled = true;
         }
     }
 }
