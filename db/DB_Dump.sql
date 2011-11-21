@@ -1,4 +1,4 @@
-USE [sip-agent]
+USE [agent]
 GO
 /****** Object:  Table [dbo].[companies]    Script Date: 11/21/2011 11:45:04 ******/
 SET ANSI_NULLS ON

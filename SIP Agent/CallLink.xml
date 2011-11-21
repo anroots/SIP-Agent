@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<calls>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
   <call>
-  <call_id>21</call_id>
-  <url>http://projects.sqroot.eu/sip-agent/recordings/http://up.sqroot.eu/Music/Inside%20Of%20Me.mp3 </url>
-   <status>200</status>
+    <id>2145</id>
+    <url>http://up.sqroot.eu/Music/Gothic.mp3</url>
+    <status>200</status>
   </call>
-</calls>
+</rss>

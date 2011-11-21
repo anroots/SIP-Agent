@@ -27,14 +27,20 @@ namespace SIP_Agent
             private int test = 2;
             public static void getCallLink(int test)
             {
-                
-                    var link = XDocument.Load("http://projects.sqroot.eu/sip-agent/stub.xml");
 
-                    var setting = link.Root.Descendants.First(e => e.Element("key")).Value == "call";
-                    var call_id = setting.Element("url").Value;
-                    
-                
+                XDocument cl = XDocument.Load("CallLink.xml");
 
+                var calls = from call in cl.Descendants("call")
+                                select new
+                                {
+                                   url = call.Element("url").Value
+                                };
+                
+                foreach (var call in calls)
+                {
+                    Console.WriteLine("Call link: " + call.url);
+
+                }
             }
     }
 }
