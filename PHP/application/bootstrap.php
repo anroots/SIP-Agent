@@ -6,13 +6,13 @@
 require SYSPATH . 'classes/kohana/core' . EXT;
 
 if (is_file(APPPATH . 'classes/kohana' . EXT)) {
-    // Application extends the core
-    require APPPATH . 'classes/kohana' . EXT;
+	// Application extends the core
+	require APPPATH . 'classes/kohana' . EXT;
 }
 else
 {
-    // Load empty core extension
-    require SYSPATH . 'classes/kohana' . EXT;
+	// Load empty core extension
+	require SYSPATH . 'classes/kohana' . EXT;
 }
 
 /**
@@ -61,7 +61,7 @@ I18n::lang('et');
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
 if (isset($_SERVER['KOHANA_ENV'])) {
-    Kohana::$environment = constant('Kohana::' . strtoupper($_SERVER['KOHANA_ENV']));
+	Kohana::$environment = constant('Kohana::' . strtoupper($_SERVER['KOHANA_ENV']));
 }
 
 /**
@@ -79,34 +79,34 @@ if (isset($_SERVER['KOHANA_ENV'])) {
  */
 
 $config = array(
-    'base_url' => '/sip-agent/',
-    'profile' => FALSE,
-    'caching' => TRUE,
-    'errors' => FALSE,
-    'index_file' => FALSE
+	'base_url' => '/sip-agent/',
+	'profile' => FALSE,
+	'caching' => TRUE,
+	'errors' => FALSE,
+	'index_file' => FALSE
 );
 
 if (Kohana::$environment == Kohana::DEVELOPMENT) {
 
-    $config = array(
-        'base_url' => '/kohana/3.2/',
-        'profile' => TRUE,
-        'caching' => FALSE,
-        'errors' => TRUE,
-        'index_file' => FALSE
-    );
+	$config = array(
+		'base_url' => '/kohana/3.2/',
+		'profile' => TRUE,
+		'caching' => FALSE,
+		'errors' => TRUE,
+		'index_file' => FALSE
+	);
 }
 
 
 if (Kohana::$environment == Kohana::STAGING) {
 
-    $config = array(
-        'base_url' => '/kohana/',
-        'profile' => TRUE,
-        'caching' => FALSE,
-        'errors' => TRUE,
-        'index_file' => FALSE
-    );
+	$config = array(
+		'base_url' => '/kohana/',
+		'profile' => TRUE,
+		'caching' => FALSE,
+		'errors' => TRUE,
+		'index_file' => FALSE
+	);
 }
 
 Kohana::init($config);
@@ -131,10 +131,11 @@ Kohana::modules(array(
                      //'database' => MODPATH . 'database', // Database access
                      // 'image'      => MODPATH.'image',      // Image manipulation
                      //'orm' => MODPATH . 'orm', // Object Relationship Mapping
-                      //'unittest'   => MODPATH.'unittest',   // Unit testing
+                     //'unittest'   => MODPATH.'unittest',   // Unit testing
                      //'userguide' => MODPATH . 'userguide', // User guide and API documentation
                      //'notify' => MODPATH . 'notify',
-                     'commoneer' => MODPATH . 'commoneer-1.3'
+                     'commoneer' => MODPATH . 'commoneer-1.3',
+                     'kohana-xml' => MODPATH . 'kohana-xml',
                 ));
 
 /**
@@ -143,13 +144,13 @@ Kohana::modules(array(
  */
 
 Route::set('api1', 'api/(<directory>/(<controller>(/<action>(/<id>))))')
-        ->defaults(array(
-                        'controller' => 'call',
-                        'action' => 'index',
-                   ));
+		->defaults(array(
+		                'controller' => 'call',
+		                'action' => 'index',
+		           ));
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
-        ->defaults(array(
-                        'controller' => 'main',
-                        'action' => 'index',
-                   ));
+		->defaults(array(
+		                'controller' => 'main',
+		                'action' => 'index',
+		           ));
