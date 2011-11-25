@@ -5,20 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="700">
-    <Grid Height="600">
+    <Grid Height="600" DataContext="{Binding}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*" />
             <ColumnDefinition Width="173*" />
             <ColumnDefinition Width="527*" />
         </Grid.ColumnDefinitions>
-
-        <Label Content="Nimi: " HorizontalAlignment="Left" Margin="12,55,0,513" Name="name" Width="37" Grid.Column="1" />
-
-        <Label Content="Firma: " Height="31" HorizontalAlignment="Left" Margin="12,0,0,465" Name="companyLabel" VerticalAlignment="Bottom" Width="42" Grid.Column="1" />
-
-        <Image Height="139" HorizontalAlignment="Left" Margin="12,215,0,0" x:Name="clientPic" Stretch="Fill" VerticalAlignment="Top" Width="147" ImageFailed="image1_ImageFailed" Source="{Binding Path=clientPicture}" Grid.Column="1" />
-        <Label Content="Eelnevad kõned: " Height="32" HorizontalAlignment="Left" Margin="172,12,0,0" Name="lastCallsLabel" VerticalAlignment="Top" Width="190" Grid.Column="1" Grid.ColumnSpan="2" />
-        <DataGrid AutoGenerateColumns="False" Height="139" HorizontalAlignment="Left" Margin="0,41,0,0" Name="lastCallsData" VerticalAlignment="Top" Width="503" ItemsSource="{Binding}" Grid.Column="2">
+        <Image Height="139" HorizontalAlignment="Left" Margin="12,390,0,0" x:Name="clientPic" Stretch="Fill" VerticalAlignment="Top" Width="147" ImageFailed="image1_ImageFailed" Source="{Binding Path=clientPicture}" Grid.Column="1" />
+        <Label Content="Eelnevad kõned: " Height="32" HorizontalAlignment="Left" Margin="11,12,0,0" Name="lastCallsLabel" VerticalAlignment="Top" Width="190" Grid.Column="2" />
+        <DataGrid AutoGenerateColumns="False" Height="139" HorizontalAlignment="Left" Margin="12,41,0,0" Name="lastCallsData" VerticalAlignment="Top" Width="503" ItemsSource="{Binding}" Grid.Column="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" />
                 <DataGridTextColumn Header="Seotud tööd" />
@@ -27,22 +22,26 @@
                 <DataGridTextColumn Header="Kokkuvõte" />
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Seotud tööd" Height="29" HorizontalAlignment="Left" Margin="172,188,0,0" Name="lastEntryLabel" VerticalAlignment="Top" Width="143" Grid.Column="1" Grid.ColumnSpan="2" />
-        <DataGrid AutoGenerateColumns="False" Height="139" HorizontalAlignment="Left" Margin="0,215,0,0" Name="lastEntry" VerticalAlignment="Top" Width="503" Grid.Column="2">
+        <Label Content="Seotud tööd" Height="29" HorizontalAlignment="Left" Margin="11,188,0,0" Name="lastEntryLabel" VerticalAlignment="Top" Width="143" Grid.Column="2" />
+        <DataGrid AutoGenerateColumns="False" Height="139" HorizontalAlignment="Left" Margin="12,215,0,0" Name="lastEntry" VerticalAlignment="Top" Width="503" Grid.Column="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" />
                 <DataGridTextColumn Header="Kirjeldus" />
             </DataGrid.Columns>
         </DataGrid>
-        <Separator Height="2" HorizontalAlignment="Left" Margin="-35,326,0,0" Name="botSeparator" VerticalAlignment="Top" Width="723" Grid.ColumnSpan="3" />
-
-        <Label Content="Kõne kokkuvõte" Height="23" HorizontalAlignment="Left" Margin="12,379,0,0" Name="SummaryLabel" VerticalAlignment="Top" Width="133" Grid.Column="1" />
-        <TextBox Text="{Binding Path=detailsBox}" x:Name="detailsBox" Height="144" HorizontalAlignment="Left" Margin="10,0,0,48" VerticalAlignment="Bottom" Width="500" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Grid.Column="1" Grid.ColumnSpan="2"  />
-        <Label Content="Sissekanne #" Height="34" HorizontalAlignment="Left" Margin="12,12,0,0" Name="entryNrLabel" VerticalAlignment="Top" Width="78" Grid.Column="1" />
-        <Button Content="Salvesta" Height="35" HorizontalAlignment="Left" Margin="361,517,0,0" Name="btn_saveData" VerticalAlignment="Top" Width="141" Click="SaveData_Click" Grid.Column="2" />
-        <TextBox Text="{Binding Path=userBox}" Grid.Column="1" Height="24" HorizontalAlignment="Left" Margin="12,76,0,0" x:Name="userBox" VerticalAlignment="Top" Width="147" />
-        <TextBox Text="{Binding Path=companyBox}" Grid.Column="1" Height="24" HorizontalAlignment="Left" Margin="12,125,0,0" x:Name="companyBox" VerticalAlignment="Top" Width="147" />
-        <TextBox PreviewTextInput="phonePreview" Text="{Binding Path=phoneBox}" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="12,0,0,399" x:Name="phoneBox" VerticalAlignment="Bottom" Width="147"/>
-        <Label Content="Telefon" Grid.Column="1" Height="31" HorizontalAlignment="Left" Margin="10,155,0,0" Name="phoneLabel" VerticalAlignment="Top" Width="54" />
+        <Label Content="Kõne kokkuvõte" Height="23" HorizontalAlignment="Left" Margin="21,361,0,0" Name="SummaryLabel" VerticalAlignment="Top" Width="133" Grid.Column="2" />
+        <TextBox x:Name="summaryBox" Height="144" HorizontalAlignment="Left" Margin="15,0,0,66" VerticalAlignment="Bottom" Width="500" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Grid.Column="2" Text="" />
+        <Button Content="Salvesta" Height="35" HorizontalAlignment="Left" Margin="374,540,0,0" Name="btn_saveData" VerticalAlignment="Top" Width="141" Click="SaveData_Click" Grid.Column="2" />
+        <Label Content="???" Grid.Column="1" Height="32" HorizontalAlignment="Left" Margin="12,12,0,0" Name="lblCallID" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" FontFamily="Arial" Width="155" />
+        <GroupBox Grid.Column="1" Header="Helistaja" Height="267" HorizontalAlignment="Left" Margin="0,45,0,0" Name="Helistaja" VerticalAlignment="Top" Width="173">
+            <Grid>
+                <Label Content="Nimi: " HorizontalAlignment="Left" Margin="6,6,0,206" Name="name" Width="147" />
+                <TextBox Text="{Binding Path=userBox}" Height="24" HorizontalAlignment="Left" Margin="6,33,0,0" x:Name="userBox" VerticalAlignment="Top" Width="147" IsEnabled="False" />
+                <Label Content="Firma: " Height="31" HorizontalAlignment="Left" Margin="6,0,0,142" Name="companyLabel" VerticalAlignment="Bottom" Width="147" />
+                <TextBox Text="{Binding Path=companyBox}" Height="24" HorizontalAlignment="Left" Margin="6,97,0,0" x:Name="companyBox" VerticalAlignment="Top" Width="147" IsEnabled="False" />
+                <Label Content="Telefon" Height="31" HorizontalAlignment="Left" Margin="6,135,0,0" Name="phoneLabel" VerticalAlignment="Top" Width="54" />
+                <TextBox PreviewTextInput="phonePreview" Text="{Binding Path=phoneBox}" Height="25" HorizontalAlignment="Left" Margin="6,0,0,47" x:Name="phoneBox" VerticalAlignment="Bottom" Width="147" IsEnabled="False" />
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

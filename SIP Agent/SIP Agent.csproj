@@ -85,7 +85,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Data\calls.cs" />
+    <Compile Include="Model\Call.cs" />
     <Compile Include="Data\companies.cs" />
     <Compile Include="Data\phone.cs" />
     <Compile Include="Data\tasks.cs" />
@@ -117,6 +117,11 @@
     </Compile>
     <Compile Include="Menu\ClientInfo.xaml.cs">
       <DependentUpon>ClientInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="_sip_agentDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_sip_agentDataSet.xsd</DependentUpon>
     </Compile>
     <Page Include="Menu\Main\Help\About.xaml">
       <SubType>Designer</SubType>
@@ -177,6 +182,17 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="_sip_agentDataSet.xsc">
+      <DependentUpon>_sip_agentDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="_sip_agentDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_sip_agentDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_sip_agentDataSet.xss">
+      <DependentUpon>_sip_agentDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\sample.gif" />

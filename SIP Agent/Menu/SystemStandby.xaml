@@ -39,13 +39,15 @@
             </Grid>
         </GroupBox>
         <TabControl Grid.Column="1" Height="550" HorizontalAlignment="Left" Margin="15,39,0,0" Name="tabControl1" VerticalAlignment="Top" Width="533">
-            <TabItem Header="Töö #001" Name="tabItem1">
+            <TabItem Header="Tööd" Name="tabItem1" MinWidth="100">
+                <Grid>
+                    <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGrid1" VerticalAlignment="Top" Width="511" ItemsSource="{Binding}" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Kõned" Name="tabItem2" MinWidth="100">
                 <Grid />
             </TabItem>
-            <TabItem Header="Töö #002" Name="tabItem2">
-                <Grid />
-            </TabItem>
-            <TabItem Header="Töö #003" Name="tabItem3">
+            <TabItem Header="Logid" Name="tabItem3" MinWidth="100">
                 <Grid />
             </TabItem>
         </TabControl>

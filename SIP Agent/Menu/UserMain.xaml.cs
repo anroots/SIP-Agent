@@ -21,11 +21,27 @@ namespace SIP_Agent
     /// </summary>
     public partial class UserMain : UserControl, ISwitchable
     {
+
+        protected Model.Call Call;
+
         public UserMain()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Initialize the page by providing CALL ID to load
+        /// </summary>
+        /// <param name="callID">When given, open an already existing call</param>
+        public UserMain(int callID = 0)
+        {
+            InitializeComponent();
+            Call = new Model.Call(callID);
+            lblCallID.Content = callID.ToString();
+
+            this.summaryBox.DataContext = Call;
+            summaryBox.Text = Call.summary;
+        }
   
 
         #region ISwitchable Members
@@ -87,7 +103,7 @@ namespace SIP_Agent
                 //callInfo.summary = summaryBox.Text; // deprecated
 
                 tasks callTask = new tasks();
-                callTask.details = detailsBox.Text;
+                callTask.details = summaryBox.Text;
 
 
                 //db.companies.InsertOnSubmit(comp);
