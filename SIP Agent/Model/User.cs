@@ -27,13 +27,14 @@ namespace SIP_Agent.Model
             {
                 var query = from x 
                                 in db.persons 
-                            where  (x.first_name+x.last_name).Equals(Username) 
+                            where  x.username.Equals(Username) 
                             where x.password.Equals(Password)
                             select x;
 
                 if (query.Count() > 0)
                 {
-                    this.ID = query.FirstOrDefault().id;
+                    //ID = query.FirstOrDefault().id;
+                    ID = 1;
                     return true;
                 }
             }

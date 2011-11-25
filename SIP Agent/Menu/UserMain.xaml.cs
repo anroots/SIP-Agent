@@ -83,8 +83,8 @@ namespace SIP_Agent
                 phoneBox phon = new phoneBox();
                 phon.phone = phoneBox.Text;
 
-                calls callInfo = new calls();
-                callInfo.summary = summaryBox.Text;
+                //calls callInfo = new calls();
+                //callInfo.summary = summaryBox.Text; // deprecated
 
                 tasks callTask = new tasks();
                 callTask.details = detailsBox.Text;

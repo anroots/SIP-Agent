@@ -19,10 +19,10 @@
         </Grid.ColumnDefinitions>
         <Label Content="SIP Agent" Height="89" HorizontalAlignment="Center" Margin="90,65,0,0" Name="loginLabel" VerticalAlignment="Top" Width="270" Grid.Column="2" FontFamily="Arial" FontSize="48" BorderThickness="1" />
         <Label Content="Kasutaja" Height="35" HorizontalAlignment="Left" Margin="3,40,0,0" Name="userLabel" VerticalAlignment="Top" Width="55" Grid.Column="2" Grid.Row="1" />
-        <TextBox Height="35" HorizontalAlignment="Left" Margin="73,40,0,0" Name="txtUsername" VerticalAlignment="Top" Width="290" TextChanged="userBox_TextChanged" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" />
+        <TextBox Height="35" HorizontalAlignment="Left" Margin="73,40,0,0" Name="txtUsername" VerticalAlignment="Top" Width="290" TextChanged="userBox_TextChanged" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" FontSize="16" />
         <Label Content="Parool" Height="35" HorizontalAlignment="Left" Margin="3,81,0,0" Name="passwordLabel" VerticalAlignment="Top" Width="55" Grid.Column="2" Grid.Row="1" />
-        <PasswordBox Height="35" HorizontalAlignment="Left" Margin="73,81,0,0" Name="txtPassword" VerticalAlignment="Top" Width="290" PasswordChanged="passwordBox_PasswordChanged" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Password="" />
+        <PasswordBox Height="35" HorizontalAlignment="Left" Margin="73,81,0,0" Name="txtPassword" VerticalAlignment="Top" Width="290" PasswordChanged="passwordBox_PasswordChanged" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Password="" FontSize="16" />
         <Button Content="Sisene" Height="35" HorizontalAlignment="Left" Margin="263,132,0,0" Name="btn_login" VerticalAlignment="Top" Width="100" Click="btn_login_Click" IsDefault="True" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" />
-        <Label Content="Versioon 0.1" Grid.Column="2" Height="28" HorizontalAlignment="Left" Margin="157,126,0,0" Name="label1" VerticalAlignment="Top" Foreground="#AB000000" />
+        <Label Content="Versioon 1.2" Grid.Column="2" Height="28" HorizontalAlignment="Left" Margin="288,126,0,0" Name="label1" VerticalAlignment="Top" Foreground="#AB000000" />
     </Grid>
 </UserControl>

@@ -16,7 +16,7 @@
             <ColumnDefinition Width="360" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Menu Height="21" HorizontalAlignment="Left" Name="menu1" VerticalAlignment="Top" Width="920" Grid.ColumnSpan="4" DataContext="{Binding}" Background="#FFE8E8E8">
+        <Menu Height="21" HorizontalAlignment="Left" Name="menu1" VerticalAlignment="Top" Width="920" Grid.ColumnSpan="4" DataContext="{Binding}" Background="#FFE8E8E8" Visibility="Hidden">
             <MenuItem Header="Rakendus">
                 <MenuItem Command="ApplicationCommands.Close" Header="Quit"></MenuItem>
             </MenuItem>
@@ -33,7 +33,7 @@
                 <Button Content="Registreeri kõne" Height="35" HorizontalAlignment="Left" Margin="35,240,0,0" Name="btn_login" VerticalAlignment="Top" Width="100" Click="btn_login_Click" IsDefault="True" />
                 <Label Content="Nimi (autocomplete):" Height="28" HorizontalAlignment="Left" Margin="13,68,0,0" Name="label1" VerticalAlignment="Top" />
                 <Label Content="Telefoninumber (autocomplete)" Height="28" HorizontalAlignment="Left" Margin="13,143,0,0" Name="label2" VerticalAlignment="Top" />
-                <TextBox x:Name="phoneBox" Height="35" HorizontalAlignment="Left" Margin="13,177,0,0" VerticalAlignment="Top" Width="290" TextChanged="phoneBox_TextChanged" />
+                <TextBox x:Name="phoneBox" Height="35" HorizontalAlignment="Left" Margin="13,177,0,0" VerticalAlignment="Top" Width="290" />
                 <TextBlock Height="48" HorizontalAlignment="Left" Margin="13,14,0,0" Name="textBlock1" Text="Standby režiim: kirjuta helistaja nimi või telefoninumber kõne info sisestamiseks." VerticalAlignment="Top" TextWrapping="Wrap" Width="236" />
                 <ListBox x:Name="SuggestionBox" Height="2" HorizontalAlignment="Left" Margin="13,135,0,0" SelectionChanged="SuggestionBox_SelectionChanged" VerticalAlignment="Top" Width="290" />
             </Grid>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="agent" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\agent.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True" SettingsObjectName="SIP_Agent.Properties.Settings" SettingsPropertyName="agentConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DAVID-7;Initial Catalog=sip-agent;Integrated Security=True" SettingsObjectName="SIP_Agent.Properties.Settings" SettingsPropertyName="agentConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.persons" Member="persons">
     <Type Name="person">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />

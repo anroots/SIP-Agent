@@ -36,8 +36,7 @@ namespace SIP_Agent.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\agent.mdf;Integrated Se" +
-            "curity=True;Connect Timeout=30;User Instance=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DAVID-7;Initial Catalog=sip-agent;Integrated Security=True")]
         public string agentConnectionString1 {
             get {
                 return ((string)(this["agentConnectionString1"]));
