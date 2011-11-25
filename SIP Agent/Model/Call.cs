@@ -21,14 +21,37 @@ namespace SIP_Agent.Model
         public DateTime finished { get; set; }
         public int deleted { get; set; }
 
+        // Call has relation to caller
+        // Todo : find a more resource - friendly way
+        public Person Caller;
 
-        public Call(int ID)
+        /// <summary>
+        /// Create and load the model
+        /// </summary>
+        /// <param name="callID"></param>
+        public Call(int callID)
         {
 
             using (DatabaseDataContext db = new DatabaseDataContext())
             {
-                var q =from x in db.calls select x;
-                summary = q.FirstOrDefault().summary;
+                var q = from x in db.calls where x.id.Equals(callID) && x.deleted.Equals(0) select x;
+                if (q.Count() == 0)
+                {
+                    throw new Exception("Call with ID "+ callID.ToString()+" not found");
+                }
+
+                // Todo: refactor to bindings!
+                var row = q.FirstOrDefault();
+                id = row.id;
+                summary = row.summary;
+                caller_id = row.caller_id.Value;
+                clerk_id = row.clerk_id.Value;
+                received = row.received;
+                start = row.start.Value;
+                finished = row.finished.Value;
+                deleted = row.deleted;
+                Caller = new Person(caller_id);
+                
             }
         }
     }

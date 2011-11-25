@@ -36,11 +36,20 @@ namespace SIP_Agent
         public UserMain(int callID = 0)
         {
             InitializeComponent();
+
+            callID = 1; // stub until autocomplete is ready
+
+            // The XAML represents one call so create & load the model
             Call = new Model.Call(callID);
+
             lblCallID.Content = callID.ToString();
 
-            this.summaryBox.DataContext = Call;
+            //this.summaryBox.DataContext = Call;
+            userBox.Text = Call.Caller.first_name;
             summaryBox.Text = Call.summary;
+            companyBox.Text = Call.Caller.Company.name;
+            companyPic.Source = new BitmapImage(new Uri("pack://application:,,,/SIP Agent;component/Images/Avatars/"+Call.Caller.Company.id.ToString()+".gif"));
+
         }
   
 
@@ -90,10 +99,10 @@ namespace SIP_Agent
         {
             using (DatabaseDataContext db = new DatabaseDataContext())
             {
-                persons per = new persons();
+                Model.Person per = new Model.Person();
                 per.username = userBox.Text;
 
-                companies comp = new companies();
+                Model.Company comp = new Model.Company();
                 comp.name = companyBox.Text;
 
                 phoneBox phon = new phoneBox();

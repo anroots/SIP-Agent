@@ -86,7 +86,7 @@
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
     <Compile Include="Model\Call.cs" />
-    <Compile Include="Data\companies.cs" />
+    <Compile Include="Model\Company.cs" />
     <Compile Include="Data\phone.cs" />
     <Compile Include="Data\tasks.cs" />
     <Compile Include="ISwitchable.cs" />
@@ -97,13 +97,12 @@
     <Compile Include="Menu\Main\Help\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\persons.cs" />
     <Compile Include="Menu\SystemStandby.xaml.cs">
       <DependentUpon>SystemStandby.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\AutoComplete.cs" />
     <Compile Include="Model\AutoCompleteViewModel.cs" />
-    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\Person.cs" />
     <Compile Include="PageSwitcher.xaml.cs">
       <DependentUpon>PageSwitcher.xaml</DependentUpon>
     </Compile>
@@ -255,6 +254,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>agent.mdf</DependentUpon>
     </Content>
+    <Resource Include="Images\Avatars\1.gif" />
+    <Resource Include="Images\Avatars\2.gif" />
+    <Resource Include="Images\Avatars\3.gif" />
+    <Resource Include="Images\Avatars\4.gif" />
     <Resource Include="CallLink.xml">
       <SubType>Designer</SubType>
     </Resource>
