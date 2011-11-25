@@ -105,7 +105,7 @@ namespace SIP_Agent
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new UserMain(2));
+            Switcher.Switch(new CallView(2));
            
         }
 

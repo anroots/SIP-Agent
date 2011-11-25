@@ -43,7 +43,7 @@ namespace SIP_Agent
 
         private void btn_UserMain_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new UserMain());
+            Switcher.Switch(new CallView());
         }
 
     }

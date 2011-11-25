@@ -111,8 +111,8 @@
     <Compile Include="Menu\UserLogin.xaml.cs">
       <DependentUpon>UserLogin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Menu\UserMain.xaml.cs">
-      <DependentUpon>UserMain.xaml</DependentUpon>
+    <Compile Include="Menu\CallView.xaml.cs">
+      <DependentUpon>CallView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Menu\ClientInfo.xaml.cs">
       <DependentUpon>ClientInfo.xaml</DependentUpon>
@@ -138,7 +138,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Menu\UserMain.xaml">
+    <Page Include="Menu\CallView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
