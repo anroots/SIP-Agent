@@ -1,46 +1,55 @@
-﻿using System;   
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using System.Media;
 
 
 namespace SIP_Agent
 {
     class QueryCallID
     {
-        
-            public static void getCallID(int call)
+
+        private int test = 2;
+        public static string getCallLink(int test)
+        {
+
+            XDocument cl = XDocument.Load("http://projects.sqroot.eu/sip-agent/api/v2/call/recording/" + test);
+
+            try
             {
 
-                using (DatabaseDataContext db = new DatabaseDataContext())
+                var calls = (from call in cl.Descendants("call")
+                             select call).Take(1);
+
+                if ((calls.Count()) < 1)
                 {
-                    var query = from x in db.calls
-                                where (x.id).Equals(call)
-                                select x;
-
-                    Console.WriteLine(query);               
-    
-            }
-               
-        }
-            private int test = 2;
-            public static void getCallLink(int test)
-            {
-
-                XDocument cl = XDocument.Load("CallLink.xml");
-
-                var calls = from call in cl.Descendants("call")
-                                select new
-                                {
-                                   url = call.Element("url").Value
-                                };
-                
-                foreach (var call in calls)
-                {
-                    Console.WriteLine("Call link: " + call.url);
-
+                    return null;
                 }
+                return calls.FirstOrDefault().Element("url").Value;
+
+
+
             }
+            catch (Exception e)
+            {
+
+            }
+            return null;
+        }
+
+        public static void PlayBack(int callid)
+        {
+
+            System.Diagnostics.Process.Start(getCallLink(callid));
+
+
+            /*System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+
+            player.SoundLocation = @"C:\Users\Projekt\Documents\Visual Studio 2010\Projects\kõneidjaplayback\Time to funk.mp3";
+            player.Play();*/
+
+        }
     }
 }
