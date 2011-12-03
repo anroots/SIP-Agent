@@ -24,14 +24,13 @@ namespace SIP_Agent
         {
             InitializeComponent();
 
-            
         }
 
 
         #region Event For Child Window
         private void btn_login_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            
+
         }
 
 
@@ -49,68 +48,22 @@ namespace SIP_Agent
 
         #endregion
 
-        private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void userBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            userBox.TextChanged += new TextChangedEventHandler(userBox_TextChanged);
-
-            string typedString = userBox.Text;
-            List<AutoComplete> ACNameList = new List<AutoComplete>();
-            ACNameList.Clear();
-
-            //TODO fix commented list
-            List<string> PersonList = new List<string>();
-            
-            foreach (string item in PersonList)
-            {
-                if (!string.IsNullOrEmpty(userBox.Text))
-                {
-                    if (item.StartsWith(typedString))
-                    {
-                        //ACNameList.Add(item);
-                        
-                    }
-                }
-            }
-
-            
-            if (ACNameList.Count > 0)
-            {
-                SuggestionBox.ItemsSource = ACNameList;
-                SuggestionBox.Visibility = Visibility.Visible;
-            }
-            else if (userBox.Text.Equals(""))
-            {
-                SuggestionBox.Visibility = Visibility.Collapsed;
-                SuggestionBox.ItemsSource = null;
-            }
-            else
-            {
-                SuggestionBox.Visibility = Visibility.Collapsed;
-                SuggestionBox.ItemsSource = null;
-            }
-
-
-
-        }
-
-        private void btn_login_Click(object sender, RoutedEventArgs e)
-        {
-            Switcher.Switch(new CallView(2));
-           
-        }
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+
+                var clients = from obj in db.persons
+                              select new { id = obj.id, name = obj.first_name, last = obj.last_name };
+
+                cmbClient.ItemsSource = clients;
+                cmbClient.DisplayMemberPath = "name";
+                cmbClient.SelectedValuePath = "id";
+
+                sender = cmbClient.SelectedValuePath;
+
+
+            }
 
             // Do not load your data at design time.
             // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
@@ -132,20 +85,32 @@ namespace SIP_Agent
             about.Show();
         }
 
-
-        private void SuggestionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (SuggestionBox.ItemsSource != null)
+            using (DatabaseDataContext db = new DatabaseDataContext())
             {
-                SuggestionBox.Visibility = Visibility.Collapsed;
-                userBox.TextChanged -= new TextChangedEventHandler(userBox_TextChanged);
-                if (SuggestionBox.SelectedIndex != -1)
-                {
-                    userBox.Text = SuggestionBox.SelectedItem.ToString();
-                }
-                userBox.TextChanged += new TextChangedEventHandler(userBox_TextChanged);
+
+                var clients = from x in db.persons
+                              select new { id = x.id, name = x.first_name, last = x.last_name };
+
+                cmbClient.ItemsSource = clients;
+                cmbClient.DisplayMemberPath = "name";
+                cmbClient.SelectedValuePath = "id";
+
+                var clientID = (from x in db.persons
+                                select x.id).FirstOrDefault();
+
+                int callID = (int)clientID;
+
+                var clientFirst_name = (from x in db.persons
+                                        select x.first_name).FirstOrDefault();
+
+
+                Switcher.Switch(new CallView(callID));
+
             }
 
         }
     }
 }
+

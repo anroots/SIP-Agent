@@ -32,19 +32,47 @@ namespace SIP_Agent
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            
+
         }
         #endregion
 
         private void btn_sSaveData_Click(object sender, RoutedEventArgs e)
         {
-            
+            SaveCustomerInfo();
         }
 
-        private void btn_UserMain_Click(object sender, RoutedEventArgs e)
+        private void SaveCustomerInfo()
         {
-            Switcher.Switch(new CallView());
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+                person pers = new person();
+                pers.first_name = firstNameBox.Text;
+                pers.last_name = lastNameBox.Text;
+
+                db.persons.InsertOnSubmit(pers);
+
+
+                phonebook phone = new phonebook();
+                phone.phone = phoneBox.Text;
+                phone.email = mailBox.Text;
+
+                db.phonebooks.InsertOnSubmit(phone);
+
+                company com = new company();
+                com.name = companyBox.Text;
+
+                db.companies.InsertOnSubmit(com);
+
+                db.SubmitChanges();
+
+                MessageBox.Show("Kliendi info salvestatud");
+
+            }
+
+            Switcher.Switch(new SystemStandby());
+
         }
 
     }
 }
+
