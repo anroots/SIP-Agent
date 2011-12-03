@@ -160,7 +160,7 @@ namespace SIP_Agent.Model
         /// </summary>
         /// <param name="callId">The ID of the call to play</param>
         /// <returns>True on success, False on errors</returns>
-        public static bool PlayBack(int callId)
+        public static bool playback(int callId)
         {
             string callUrl = getCallLink(callId);
             if (callUrl == null)

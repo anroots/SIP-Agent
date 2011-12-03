@@ -87,5 +87,17 @@ namespace SIP_Agent
                 if (!Char.IsDigit(ch))
                     e.Handled = true;
         }
+
+        /// <summary>
+        /// Open call .mp3 in external player
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPlayback_Click(object sender, RoutedEventArgs e)
+        {
+            Model.Call.playback(Call.id);
+        }
+
+       
     }
 }

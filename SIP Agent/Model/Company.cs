@@ -10,9 +10,10 @@ namespace SIP_Agent.Model
     [Table(Name = "Companies")]
     public class Company
     {
-        [Column(IsPrimaryKey = true)]
+        [Column(IsPrimaryKey = true, IsDbGenerated=true)]
         public int id { get; set; }
         public string name { get; set; }
+        [Column(IsDbGenerated=true)]
         public DateTime created { get; set; }
         public string address { get; set; }
         public int deleted { get; set; }

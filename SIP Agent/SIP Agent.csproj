@@ -193,9 +193,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\sample.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
@@ -253,11 +250,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>agent.mdf</DependentUpon>
     </Content>
+    <SplashScreen Include="Images\splash.png" />
+    <Resource Include="Images\radio.png" />
     <Resource Include="Images\Avatars\1.gif" />
     <Resource Include="Images\Avatars\2.gif" />
     <Resource Include="Images\Avatars\3.gif" />
     <Resource Include="Images\Avatars\4.gif" />
-    <Resource Include="CallLink.xml">
+    <Resource Include="Test\CallLink.xml">
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
