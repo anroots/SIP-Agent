@@ -55,6 +55,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
@@ -100,14 +101,11 @@
     <Compile Include="Menu\SystemStandby.xaml.cs">
       <DependentUpon>SystemStandby.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\AutoComplete.cs" />
-    <Compile Include="Model\AutoCompleteViewModel.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="PageSwitcher.xaml.cs">
       <DependentUpon>PageSwitcher.xaml</DependentUpon>
     </Compile>
-    <Compile Include="getCallID.cs" />
     <Compile Include="Switcher.cs" />
     <Compile Include="Menu\UserLogin.xaml.cs">
       <DependentUpon>UserLogin.xaml</DependentUpon>
