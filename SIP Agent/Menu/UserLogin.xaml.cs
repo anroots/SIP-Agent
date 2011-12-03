@@ -78,5 +78,18 @@ namespace SIP_Agent
             App.CurrentUser.Login("ando", "ando");  // stub
             Switcher.Switch(new SystemStandby()); // stub
         }
+
+        /// <summary>
+        /// Show the About window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            Menu.Main.Help.About about = new Menu.Main.Help.About();
+            about.Show();
+        }
+
+      
     }
 }

@@ -69,27 +69,25 @@ namespace SIP_Agent
             }
         }
 
-        /// <summary>
-        /// Show the About window on menu click
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Help_About_Click(object sender, RoutedEventArgs e)
-        {
-            Menu.Main.Help.About about = new Menu.Main.Help.About();
-            about.Show();
-        }
+
+
 
         /// <summary>
         /// Switch to call info screen
-        /// Activated when a caller is selected
+        /// Call is loaded with the selected person's info (as caller)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cbClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void button2_Click(object sender, RoutedEventArgs e)
         {
+            // Caller has to be selected
+            if (cmbClient.SelectedValue == null)
+            {
+                return;
+            }
+
             // Get the selected person ID
-            int callerID = Int32.Parse(((ComboBox)sender).SelectedValue.ToString());
+            int callerID = Int32.Parse(cmbClient.SelectedValue.ToString());
 
             Call current = new Model.Call();
             current.caller_id = callerID;

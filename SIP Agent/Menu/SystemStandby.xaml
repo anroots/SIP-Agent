@@ -21,7 +21,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Content="Nimi: " Height="28" HorizontalAlignment="Left" Margin="13,68,0,0" Name="label1" VerticalAlignment="Top" />
+                <Label Content="Isik:" Height="28" HorizontalAlignment="Left" Margin="13,68,0,0" Name="label1" VerticalAlignment="Top" />
 
                 <ComboBox x:Name="cmbClient" 
                           Height="34"
@@ -30,11 +30,12 @@
                           VerticalAlignment="Top" 
                           Width="290" 
                           IsEditable="True"
-                          
-                          SelectionChanged="cbClient_SelectionChanged" />
+                           />
 
-                <TextBlock Height="48" HorizontalAlignment="Left" Margin="13,14,0,0" Name="textBlock1" Text="Standby režiim: Vali rippmenüüst helistaja nimi." VerticalAlignment="Top" TextWrapping="Wrap" Width="273" />
-                <Button Content="Lisa uus klient" Height="34" HorizontalAlignment="Left" Margin="13,232,0,0" Name="button1" VerticalAlignment="Top" Width="95" />
+                <TextBlock Height="48" HorizontalAlignment="Left" Margin="13,14,0,0" Name="textBlock1" Text="Jõudeolek. Uue kõne saabumisel valige rippmenüüst helistaja nimi." VerticalAlignment="Top" TextWrapping="Wrap" Width="273" />
+                <Button Content="Kliendi andmete muutmine" Height="34" HorizontalAlignment="Left" Margin="16,0,0,171" Name="button1" VerticalAlignment="Bottom" Width="290" />
+                <Label Content="Isiku andmete muutmiseks" Height="28" HorizontalAlignment="Left" Margin="16,153,0,0" Name="label2" VerticalAlignment="Top" />
+                <Button Content="Loo uus kõne" Height="34" HorizontalAlignment="Left" Margin="16,187,0,0" Name="button2" VerticalAlignment="Top" Width="290" Click="button2_Click" />
             </Grid>
         </GroupBox>
         <TabControl Grid.Column="1" Height="550" HorizontalAlignment="Left" Margin="15,39,0,0" Name="tabControl1" VerticalAlignment="Top" Width="533">
