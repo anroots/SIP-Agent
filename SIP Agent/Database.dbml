@@ -1,17 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="sip-agent" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=DAVID-7;Initial Catalog=sip-agent;Integrated Security=True" SettingsObjectName="SIP_Agent.Properties.Settings" SettingsPropertyName="agentConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.tasks_calls" Member="tasks_calls">
-    <Type Name="tasks_call">
-      <Column Name="call_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="task_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="call_tasks_call" Member="call" ThisKey="call_id" OtherKey="id" Type="call" IsForeignKey="true" />
-      <Association Name="task_tasks_call" Member="task" ThisKey="task_id" OtherKey="id" Type="task" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.calls" Member="calls">
     <Type Name="call">
-      <Column Name="id" AutoSync="Always" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="summary" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="caller_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="clerk_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -21,6 +12,15 @@
       <Column Name="deleted" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Association Name="call_tasks_call" Member="tasks_calls" ThisKey="id" OtherKey="call_id" Type="tasks_call" />
       <Association Name="person_call" Member="person" ThisKey="clerk_id" OtherKey="id" Type="person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tasks_calls" Member="tasks_calls">
+    <Type Name="tasks_call">
+      <Column Name="call_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="task_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="call_tasks_call" Member="call" ThisKey="call_id" OtherKey="id" Type="call" IsForeignKey="true" />
+      <Association Name="task_tasks_call" Member="task" ThisKey="task_id" OtherKey="id" Type="task" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.companies" Member="companies">

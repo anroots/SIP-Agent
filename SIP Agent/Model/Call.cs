@@ -18,7 +18,7 @@ namespace SIP_Agent.Model
         public int clerk_id { get; set; }
         public DateTime received { get; set; }
         public DateTime start { get; set; }
-        public DateTime finished { get; set; }
+        public DateTime? finished { get; set; }
         public int deleted { get; set; }
 
         // Call has relation to caller
@@ -47,7 +47,7 @@ namespace SIP_Agent.Model
                 clerk_id = row.clerk_id.Value;
                 received = row.received;
                 start = row.start.Value;
-                finished = row.finished.Value;
+                finished = row.finished;
                 deleted = row.deleted;
                 Caller = new Person(caller_id);
                 
