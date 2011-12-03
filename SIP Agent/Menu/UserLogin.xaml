@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="920">
+             d:DesignHeight="600" d:DesignWidth="920" Loaded="UserControl_Loaded">
     <Grid Height="600">
         <Grid.RowDefinitions>
             <RowDefinition Height="200*" />
@@ -23,6 +23,6 @@
         <Label Content="Parool" Height="35" HorizontalAlignment="Left" Margin="3,81,0,0" Name="passwordLabel" VerticalAlignment="Top" Width="55" Grid.Column="2" Grid.Row="1" />
         <PasswordBox Height="35" HorizontalAlignment="Left" Margin="73,81,0,0" Name="txtPassword" VerticalAlignment="Top" Width="290" PasswordChanged="passwordBox_PasswordChanged" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Password="" FontSize="16" />
         <Button Content="Sisene" Height="35" HorizontalAlignment="Left" Margin="263,132,0,0" Name="btn_login" VerticalAlignment="Top" Width="100" Click="btn_login_Click" IsDefault="True" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" />
-        <Label Content="Versioon 1.2" Grid.Column="2" Height="28" HorizontalAlignment="Left" Margin="288,126,0,0" Name="LabelVersion" VerticalAlignment="Top" Foreground="#AB000000" />
+        <Label Content="Versioon 1.3" Grid.Column="2" Height="28" HorizontalAlignment="Left" Margin="288,126,0,0" Name="LabelVersion" VerticalAlignment="Top" Foreground="#AB000000" />
     </Grid>
 </UserControl>

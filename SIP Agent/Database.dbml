@@ -11,7 +11,7 @@
   </Table>
   <Table Name="dbo.calls" Member="calls">
     <Type Name="call">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" AutoSync="Always" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="summary" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="caller_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="clerk_id" Type="System.Int32" DbType="Int" CanBeNull="true" />

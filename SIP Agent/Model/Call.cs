@@ -11,7 +11,7 @@ namespace SIP_Agent.Model
     [Table(Name = "Calls")]
     public class Call
     {
-        [Column(IsPrimaryKey = true)]
+        [Column(IsPrimaryKey = true, IsDbGenerated = true)]
         public int id { get; set; }
         public string summary { get; set; }
         public int caller_id { get; set; }
@@ -29,9 +29,12 @@ namespace SIP_Agent.Model
         /// Create and load the model
         /// </summary>
         /// <param name="callID"></param>
-        public Call(int callID)
+        public Call(int callID = 0)
         {
-
+            if (callID == 0)
+            {
+                return;
+            }
             using (DatabaseDataContext db = new DatabaseDataContext())
             {
                 var row = Get(db, callID);
@@ -57,17 +60,16 @@ namespace SIP_Agent.Model
         /// <param name="db"></param>
         /// <param name="callID"></param>
         /// <returns></returns>
-        public call Get(DatabaseDataContext db, int callID) {
-            
+        public call Get(DatabaseDataContext db, int callID = 0) {
+
                 var q = from x in db.calls where x.id.Equals(callID) && x.deleted.Equals(0) select x;
-                if (q.Count() == 0)
+                /*if (q.Count() == 0)
                 {
                     throw new Exception("Call with ID "+ callID.ToString()+" not found");
-                }
+                }*/
 
                 // Todo: refactor to bindings!
-                var row = q.FirstOrDefault();
-                return row;
+                return q.FirstOrDefault();
             }
         
 
@@ -78,6 +80,11 @@ namespace SIP_Agent.Model
         public int Save() {
             using (DatabaseDataContext db = new DatabaseDataContext())
             {
+                if (id == 0)
+                {
+                    db.SubmitChanges();
+                    return id;
+                }
                 var row = Get(db, id);
                 row.summary = summary;
                try
@@ -89,6 +96,27 @@ namespace SIP_Agent.Model
                 {
                     return 0;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Create a new call
+        /// </summary>
+        /// <returns></returns>
+        public int New()
+        {
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+                call current = new call { 
+                    caller_id = caller_id,
+                    clerk_id = App.CurrentUser.id,
+                    received = DateTime.Now,
+                    start = DateTime.Now,
+                    finished = null,
+                };
+                db.calls.InsertOnSubmit(current);
+                db.SubmitChanges();
+                return current.id;
             }
         }
     }

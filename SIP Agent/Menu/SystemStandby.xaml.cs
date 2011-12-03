@@ -85,30 +85,27 @@ namespace SIP_Agent
             about.Show();
         }
 
+        /// <summary>
+        /// Switch to call info screen
+        /// Activated when a caller is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            using (DatabaseDataContext db = new DatabaseDataContext())
-            {
+            // Get the selected person ID
+            int callerID = Int32.Parse(((ComboBox)sender).SelectedValue.ToString());
 
-                var clients = from x in db.persons
-                              select new { id = x.id, name = x.first_name, last = x.last_name };
+            Call current = new Model.Call();
+            current.caller_id = callerID;
+            int callID = current.New();
 
-                cmbClient.ItemsSource = clients;
-                cmbClient.DisplayMemberPath = "name";
-                cmbClient.SelectedValuePath = "id";
+            // Switch to a new view (pass on selected person ID)
+            Switcher.Switch(new CallView(callID));
+        }
 
-                var clientID = (from x in db.persons
-                                select x.id).FirstOrDefault();
-
-                int callID = (int)clientID;
-
-                var clientFirst_name = (from x in db.persons
-                                        select x.first_name).FirstOrDefault();
-
-
-                Switcher.Switch(new CallView(callID));
-
-            }
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

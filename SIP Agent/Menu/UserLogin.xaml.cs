@@ -69,5 +69,11 @@ namespace SIP_Agent
                 MessageBox.Show("Login Failed!");
             }   
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.CurrentUser.Login("ando", "ando");  // stub
+            Switcher.Switch(new SystemStandby()); // stub
+        }
     }
 }

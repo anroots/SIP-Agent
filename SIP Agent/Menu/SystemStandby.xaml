@@ -41,7 +41,7 @@
                           
                           SelectionChanged="cbClient_SelectionChanged" />
 
-                <TextBlock Height="48" HorizontalAlignment="Left" Margin="13,14,0,0" Name="textBlock1" Text="Standby režiim: kirjuta helistaja nimi või telefoninumber kõne info sisestamiseks." VerticalAlignment="Top" TextWrapping="Wrap" Width="236" />
+                <TextBlock Height="48" HorizontalAlignment="Left" Margin="13,14,0,0" Name="textBlock1" Text="Standby režiim: Vali rippmenüüst helistaja nimi." VerticalAlignment="Top" TextWrapping="Wrap" Width="273" />
                 <Button Content="Lisa uus klient" Height="34" HorizontalAlignment="Left" Margin="13,232,0,0" Name="button1" VerticalAlignment="Top" Width="95" />
             </Grid>
         </GroupBox>

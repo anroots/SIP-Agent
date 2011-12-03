@@ -37,8 +37,6 @@ namespace SIP_Agent
         {
             InitializeComponent();
 
-            callID = 1; // todo : stub until autocomplete is ready
-
             // The XAML represents one call so create & load the model
             Call = new Model.Call(callID);
 
