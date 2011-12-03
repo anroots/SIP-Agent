@@ -33,7 +33,7 @@
                            />
 
                 <TextBlock Height="48" HorizontalAlignment="Left" Margin="13,14,0,0" Name="textBlock1" Text="Jõudeolek. Uue kõne saabumisel valige rippmenüüst helistaja nimi." VerticalAlignment="Top" TextWrapping="Wrap" Width="273" />
-                <Button Content="Kliendi andmete muutmine" Height="34" HorizontalAlignment="Left" Margin="16,0,0,171" Name="button1" VerticalAlignment="Bottom" Width="290" />
+                <Button Content="Kliendi andmete muutmine" Height="34" HorizontalAlignment="Left" Margin="16,0,0,171" Name="btnChangePerson" VerticalAlignment="Bottom" Width="290" Click="btnChangePerson_Click" />
                 <Label Content="Isiku andmete muutmiseks" Height="28" HorizontalAlignment="Left" Margin="16,153,0,0" Name="label2" VerticalAlignment="Top" />
                 <Button Content="Loo uus kõne" Height="34" HorizontalAlignment="Left" Margin="16,187,0,0" Name="button2" VerticalAlignment="Top" Width="290" Click="button2_Click" />
             </Grid>

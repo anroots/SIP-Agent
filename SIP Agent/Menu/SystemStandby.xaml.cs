@@ -58,8 +58,8 @@ namespace SIP_Agent
             using (DatabaseDataContext db = new DatabaseDataContext())
             {
 
-                var clients = from obj in db.persons
-                              select new { id = obj.id, name = obj.first_name, last = obj.last_name };
+                var clients = from row in db.persons
+                              select new { id = row.id, name = row.first_name.Trim() + " " + row.last_name.Trim() };
 
                 cmbClient.ItemsSource = clients;
                 cmbClient.DisplayMemberPath = "name";
@@ -80,14 +80,12 @@ namespace SIP_Agent
         /// <param name="e"></param>
         private void button2_Click(object sender, RoutedEventArgs e)
         {
+            int callerID = SelectedPerson();
             // Caller has to be selected
-            if (cmbClient.SelectedValue == null)
+            if (callerID == 0)
             {
                 return;
             }
-
-            // Get the selected person ID
-            int callerID = Int32.Parse(cmbClient.SelectedValue.ToString());
 
             Call current = new Model.Call();
             current.caller_id = callerID;
@@ -97,6 +95,32 @@ namespace SIP_Agent
             Switcher.Switch(new CallView(callID));
         }
 
-    }
+        /// <summary>
+        /// Get the ID of the selected person
+        /// </summary>
+        /// <returns></returns>
+        private int SelectedPerson()
+        {
+            // Caller has to be selected
+            if (cmbClient.SelectedValue == null)
+            {
+                return 0;
+            }
+
+            // Get the selected person ID
+            return Int32.Parse(cmbClient.SelectedValue.ToString());
+        }
+
+        /// <summary>
+        /// Switch to person info edit screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnChangePerson_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new PersonInfo(SelectedPerson()));
+        }
+
+    } // end of class
 }
 

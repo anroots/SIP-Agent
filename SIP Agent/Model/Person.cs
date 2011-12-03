@@ -38,10 +38,10 @@ namespace SIP_Agent.Model
                 // Todo : Refactor to bindings!
                 var row = q.FirstOrDefault();
                 id = row.id;
-                first_name = row.first_name;
-                last_name = row.last_name;
-                username = row.username;
-                password = row.username;
+                first_name = row.first_name.Trim();
+                last_name = row.last_name.Trim();
+                username = row.username.Trim();
+                password = row.password.Trim();
                 company_id = row.company_id.Value;
                 created = row.created.Value;
                 deleted = row.deleted;
