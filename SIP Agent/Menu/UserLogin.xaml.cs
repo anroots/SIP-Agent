@@ -62,16 +62,19 @@ namespace SIP_Agent
 
             if (App.CurrentUser.Login(txtUsername.Text, txtPassword.Password))
             {
+                Model.Log.New("Successful authentication for user " + txtUsername.Text);
                 Switcher.Switch(new SystemStandby());
             }
             else
             {
                 MessageBox.Show("Login Failed!");
+                Model.Log.New("Failed authentication for user "+txtUsername.Text);
             }   
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            Model.Log.New("Initialized.");
             App.CurrentUser.Login("ando", "ando");  // stub
             Switcher.Switch(new SystemStandby()); // stub
         }

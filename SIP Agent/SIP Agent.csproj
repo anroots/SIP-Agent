@@ -102,6 +102,7 @@
     </Compile>
     <Compile Include="Model\AutoComplete.cs" />
     <Compile Include="Model\AutoCompleteViewModel.cs" />
+    <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="PageSwitcher.xaml.cs">
       <DependentUpon>PageSwitcher.xaml</DependentUpon>
