@@ -86,6 +86,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Menu\TaskView.xaml.cs">
+      <DependentUpon>TaskView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Call.cs" />
     <Compile Include="Model\Company.cs" />
     <Compile Include="Data\phone.cs" />
@@ -121,6 +124,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_sip_agentDataSet.xsd</DependentUpon>
     </Compile>
+    <Page Include="Menu\TaskView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Menu\Main\Help\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

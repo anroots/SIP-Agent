@@ -121,6 +121,11 @@ namespace SIP_Agent
             Switcher.Switch(new PersonInfo(SelectedPerson()));
         }
 
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new TaskView(1));
+        }
+
     } // end of class
 }
 

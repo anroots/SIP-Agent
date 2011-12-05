@@ -51,6 +51,7 @@
                 <Grid />
             </TabItem>
         </TabControl>
+        <Button Content="Open task" Height="23" HorizontalAlignment="Left" Margin="109,393,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
     </Grid>
 </UserControl>
 
