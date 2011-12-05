@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="920">
+             d:DesignHeight="600" d:DesignWidth="920" DataContext="{Binding}">
     <Grid Height="600">
         <Grid.RowDefinitions>
             <RowDefinition Height="200*" />
@@ -17,6 +17,31 @@
             <ColumnDefinition Width="360*" />
             <ColumnDefinition Width="178*" />
         </Grid.ColumnDefinitions>
-        <Label Content="Kasutaja" Height="35" HorizontalAlignment="Left" Margin="3,40,0,0" Name="userLabel" VerticalAlignment="Top" Width="55" Grid.Column="2" Grid.Row="1" />
+        <GroupBox Grid.Column="1" Header="Olek" Height="181" HorizontalAlignment="Left" Margin="10,65,0,0" Name="groupBox1" VerticalAlignment="Top" Width="201" Grid.RowSpan="2">
+            <Grid>
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,50,0,0" Name="cmbStatus" VerticalAlignment="Top" Width="177" ItemsSource="{Binding}" />
+                <Label Content="Staatus" Height="28" HorizontalAlignment="Left" Margin="6,27,0,0" Name="label1" VerticalAlignment="Top" Width="138" />
+                <Label Content="Lahendaja" Height="28" HorizontalAlignment="Left" Margin="6,79,0,0" Name="label2" VerticalAlignment="Top" />
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,104,0,0" Name="cmbAssignee" VerticalAlignment="Top" Width="177" />
+            </Grid>
+        </GroupBox>
+        <TabControl Grid.Column="2" Height="345" HorizontalAlignment="Left" Margin="6,55,0,0" Name="tabControl1" VerticalAlignment="Top" Width="689" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <TabItem Header="Kirjeldus" Name="tabItem1">
+                <Grid>
+                    <RichTextBox Height="301" HorizontalAlignment="Left" Margin="6,6,0,0" Name="richTextBox1" VerticalAlignment="Top" Width="667" />
+                </Grid>
+            </TabItem>
+            <TabItem Name="tabItem2" Header="Info">
+                <Grid />
+            </TabItem>
+            <TabItem Header="Kõned" Name="tabItem3">
+                <Grid>
+                    <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="False" Height="301" HorizontalAlignment="Left" Margin="6,6,0,0" Name="gridCalls" VerticalAlignment="Top" Width="667" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <TextBox Grid.Column="1" Height="23" HorizontalAlignment="Left" Margin="11,12,0,0" Name="txtTitle" VerticalAlignment="Top" Width="891" Grid.ColumnSpan="3" Text="{Binding Path=title}" />
+        <Button Content="Salvesta" Grid.Column="3" Grid.Row="2" Height="39" HorizontalAlignment="Left" Margin="94,52,0,0" Name="btnSave" VerticalAlignment="Top" Width="123" Click="btnSave_Click" />
+        <Button Content="Tagasi" Grid.Column="2" Height="39" HorizontalAlignment="Left" Margin="11,52,0,0" Name="btnBack" VerticalAlignment="Top" Width="123" Grid.Row="2" Click="btnBack_Click" />
     </Grid>
 </UserControl>

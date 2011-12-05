@@ -91,8 +91,7 @@
     </Compile>
     <Compile Include="Model\Call.cs" />
     <Compile Include="Model\Company.cs" />
-    <Compile Include="Data\phone.cs" />
-    <Compile Include="Data\tasks.cs" />
+    <Compile Include="Model\Task.cs" />
     <Compile Include="ISwitchable.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
