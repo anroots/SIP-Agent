@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SIP_Agent
+namespace SIP_Agent.View
 {
     /// <summary>
     /// Interaction logic for PersonInfo.xaml
@@ -86,7 +86,7 @@ namespace SIP_Agent
 
             }
 
-            Switcher.Switch(new SystemStandby());
+            Switcher.Switch(new View.SystemStandby());
 
         }
 
@@ -97,7 +97,7 @@ namespace SIP_Agent
         /// <param name="e"></param>
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new SystemStandby());
+            Switcher.Switch(new View.SystemStandby());
         }
 
     }

@@ -1,9 +1,0 @@
-﻿<Window x:Class="SIP_Agent.Menu.Main.Help.About"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="About" Height="300" Width="300">
-    <Grid>
-        <TextBlock Height="23" HorizontalAlignment="Left" Margin="50,53,0,0" Name="textBlock1" Text="TODO" VerticalAlignment="Top" />
-        <Button Content="Ok" Height="23" HorizontalAlignment="Left" Margin="108,158,0,0" Name="btnClose" VerticalAlignment="Top" Width="75" Click="btnClose_Click" />
-    </Grid>
-</Window>

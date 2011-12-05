@@ -23,7 +23,7 @@ namespace SIP_Agent
         {
             InitializeComponent();
             Switcher.pageSwitcher = this;
-            Switcher.Switch(new UserLogin());
+            Switcher.Switch(new View.UserLogin());
         }
 
         public void Navigate(UserControl nextPage)

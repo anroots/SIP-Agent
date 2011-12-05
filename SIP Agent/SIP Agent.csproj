@@ -86,7 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Menu\TaskView.xaml.cs">
+    <Compile Include="View\TaskView.xaml.cs">
       <DependentUpon>TaskView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Call.cs" />
@@ -98,10 +98,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Menu\Main\Help\About.xaml.cs">
+    <Compile Include="View\Main\Help\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Menu\SystemStandby.xaml.cs">
+    <Compile Include="View\SystemStandby.xaml.cs">
       <DependentUpon>SystemStandby.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Log.cs" />
@@ -110,13 +110,13 @@
       <DependentUpon>PageSwitcher.xaml</DependentUpon>
     </Compile>
     <Compile Include="Switcher.cs" />
-    <Compile Include="Menu\UserLogin.xaml.cs">
+    <Compile Include="View\UserLogin.xaml.cs">
       <DependentUpon>UserLogin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Menu\CallView.xaml.cs">
+    <Compile Include="View\CallView.xaml.cs">
       <DependentUpon>CallView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Menu\PersonInfo.xaml.cs">
+    <Compile Include="View\PersonInfo.xaml.cs">
       <DependentUpon>PersonInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="_sip_agentDataSet.Designer.cs">
@@ -124,15 +124,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_sip_agentDataSet.xsd</DependentUpon>
     </Compile>
-    <Page Include="Menu\TaskView.xaml">
+    <Page Include="View\TaskView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Menu\Main\Help\About.xaml">
+    <Page Include="View\Main\Help\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Menu\SystemStandby.xaml">
+    <Page Include="View\SystemStandby.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -140,15 +140,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Menu\UserLogin.xaml">
+    <Page Include="View\UserLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Menu\CallView.xaml">
+    <Page Include="View\CallView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Menu\PersonInfo.xaml">
+    <Page Include="View\PersonInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

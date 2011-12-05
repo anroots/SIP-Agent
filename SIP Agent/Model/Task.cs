@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SIP_Agent
+namespace SIP_Agent.Model
 {
-    public struct tasks
+    public class Task
     {
         public int id { get; set; }
         public int parent_id { get; set; }

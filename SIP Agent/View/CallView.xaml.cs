@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using SIP_Agent.Menu;
 using System.Data.Objects.SqlClient;
 
-namespace SIP_Agent
+namespace SIP_Agent.View
 {
     /// <summary>
     /// Interaction logic for CallView.xaml
