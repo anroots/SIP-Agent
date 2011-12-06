@@ -40,7 +40,8 @@ namespace SIP_Agent
         {
 
             txtTitle.DataContext = CurrentTask; // Title
-
+            txtDetails.DataContext = CurrentTask;
+            
             // Select data sources from DB
             using (DatabaseDataContext db = new DatabaseDataContext())
             {
@@ -103,7 +104,14 @@ namespace SIP_Agent
         /// <param name="e"></param>
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            // todo!
+            if (CurrentTask.Save() > -1)
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Salvestamine ebaõnnestus.");
+            }
         }
 
 

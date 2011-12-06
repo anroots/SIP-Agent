@@ -27,6 +27,16 @@ namespace SIP_Agent.Model
         // Todo : find a more resource - friendly way
         public Person Caller;
 
+
+        /// <summary>
+        /// Check whether the model is loaded
+        /// </summary>
+        /// <returns></returns>
+        public bool Loaded()
+        {
+            return id != null;
+        }
+
         /// <summary>
         /// Create and load the model
         /// </summary>
@@ -171,6 +181,45 @@ namespace SIP_Agent.Model
             {
                 System.Diagnostics.Process.Start(callUrl);
                 return true;
+            }
+        }
+
+        /// <summary>
+        /// Bind a call with a task
+        /// </summary>
+        /// <param name="TaskId"></param>
+        /// <returns></returns>
+        public bool BindTask(int TaskId)
+        {
+            if (Loaded()) // Check that the model is loaded
+            {
+                using (DatabaseDataContext db = new DatabaseDataContext())
+                {
+                    var row = from x in db.tasks_calls where x.call_id == id && x.task_id == TaskId select id;
+                    if (row.Count() == 0) // Check that there exists no identical binding
+                    {
+                        // todo: insert new row to tasks_calls
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Wrapper for BindTask(int TaskId)
+        /// </summary>
+        /// <param name="TaskId"></param>
+        /// <returns></returns>
+        public bool BindTask(string TaskId)
+        {
+            try
+            {
+                return BindTask(Int32.Parse(TaskId));
+            }
+            catch (FormatException e)
+            {
+                return false;
             }
         }
     }

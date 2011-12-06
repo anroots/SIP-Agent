@@ -28,11 +28,13 @@
         <TabControl Grid.Column="2" Height="345" HorizontalAlignment="Left" Margin="6,55,0,0" Name="tabControl1" VerticalAlignment="Top" Width="689" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <TabItem Header="Kirjeldus" Name="tabItem1">
                 <Grid>
-                    <RichTextBox Height="301" HorizontalAlignment="Left" Margin="6,6,0,0" Name="richTextBox1" VerticalAlignment="Top" Width="667" />
+                    <TextBox Text="{Binding Path=details}" Height="307" HorizontalAlignment="Left" Margin="6,6,0,0" Name="txtDetails" VerticalAlignment="Top" Width="667" />
                 </Grid>
             </TabItem>
             <TabItem Name="tabItem2" Header="Info">
-                <Grid />
+                <Grid>
+                    <Label Content="Todo: loodud, muudetud jne" Height="28" HorizontalAlignment="Left" Margin="141,70,0,0" Name="label3" VerticalAlignment="Top" />
+                </Grid>
             </TabItem>
             <TabItem Header="Kõned" Name="tabItem3">
                 <Grid>

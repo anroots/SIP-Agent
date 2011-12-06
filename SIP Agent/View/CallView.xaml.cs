@@ -22,7 +22,7 @@ namespace SIP_Agent.View
     public partial class CallView : UserControl, ISwitchable
     {
 
-        protected Model.Call Call;
+        protected Model.Call CurrentCall;
 
         public CallView()
         {
@@ -38,14 +38,14 @@ namespace SIP_Agent.View
             InitializeComponent();
 
             // The XAML represents one call so create & load the model
-            Call = new Model.Call(callID);
+            CurrentCall = new Model.Call(callID);
 
             LabelCallID.Content = callID.ToString(); // Call ID label
 
-            userBox.Text = Call.Caller.first_name;
-            summaryBox.Text = Call.summary;
-            companyBox.Text = Call.Caller.Company.name;
-            companyPic.Source = new BitmapImage(new Uri("pack://application:,,,/SIP Agent;component/Images/Avatars/" + Call.Caller.Company.id.ToString() + ".gif"));
+            userBox.Text = CurrentCall.Caller.first_name;
+            summaryBox.Text = CurrentCall.summary;
+            companyBox.Text = CurrentCall.Caller.Company.name;
+            companyPic.Source = new BitmapImage(new Uri("pack://application:,,,/SIP Agent;component/Images/Avatars/" + CurrentCall.Caller.Company.id.ToString() + ".gif"));
         }
 
 
@@ -67,8 +67,8 @@ namespace SIP_Agent.View
 
         private void SaveData_Click(object sender, RoutedEventArgs e)
         {
-            Call.summary = summaryBox.Text;
-            if (Call.Save() != 0)
+            CurrentCall.summary = summaryBox.Text;
+            if (CurrentCall.Save() != 0)
             {
                 MessageBox.Show("Andmed baasi edukalt salvestatud");
             }
@@ -95,7 +95,19 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void btnPlayback_Click(object sender, RoutedEventArgs e)
         {
-            Model.Call.playback(Call.id);
+            Model.Call.playback(CurrentCall.id);
+        }
+
+        private void btnBindTask_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentCall.BindTask(txtBindTaskId.Text))
+            {
+                txtBindTaskId.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Sidumine ebaõnnestus: töö ID formaat on vigane või on kõne selle tööga juba seotud.");
+            }
         }
 
        

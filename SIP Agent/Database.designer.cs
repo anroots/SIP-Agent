@@ -33,9 +33,9 @@ namespace SIP_Agent
     partial void Insertcall(call instance);
     partial void Updatecall(call instance);
     partial void Deletecall(call instance);
-    partial void Inserttasks_call(tasks_call instance);
-    partial void Updatetasks_call(tasks_call instance);
-    partial void Deletetasks_call(tasks_call instance);
+    partial void Inserttasks_calls(tasks_calls instance);
+    partial void Updatetasks_calls(tasks_calls instance);
+    partial void Deletetasks_calls(tasks_calls instance);
     partial void Insertcompany(company instance);
     partial void Updatecompany(company instance);
     partial void Deletecompany(company instance);
@@ -97,11 +97,11 @@ namespace SIP_Agent
 			}
 		}
 		
-		public System.Data.Linq.Table<tasks_call> tasks_calls
+		public System.Data.Linq.Table<tasks_calls> tasks_calls
 		{
 			get
 			{
-				return this.GetTable<tasks_call>();
+				return this.GetTable<tasks_calls>();
 			}
 		}
 		
@@ -184,7 +184,7 @@ namespace SIP_Agent
 		
 		private byte _deleted;
 		
-		private EntitySet<tasks_call> _tasks_calls;
+		private EntitySet<tasks_calls> _tasks_calls;
 		
 		private EntityRef<person> _person;
 		
@@ -212,7 +212,7 @@ namespace SIP_Agent
 		
 		public call()
 		{
-			this._tasks_calls = new EntitySet<tasks_call>(new Action<tasks_call>(this.attach_tasks_calls), new Action<tasks_call>(this.detach_tasks_calls));
+			this._tasks_calls = new EntitySet<tasks_calls>(new Action<tasks_calls>(this.attach_tasks_calls), new Action<tasks_calls>(this.detach_tasks_calls));
 			this._person = default(EntityRef<person>);
 			OnCreated();
 		}
@@ -382,7 +382,7 @@ namespace SIP_Agent
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="call_tasks_call", Storage="_tasks_calls", ThisKey="id", OtherKey="call_id")]
-		public EntitySet<tasks_call> tasks_calls
+		public EntitySet<tasks_calls> tasks_calls
 		{
 			get
 			{
@@ -448,13 +448,13 @@ namespace SIP_Agent
 			}
 		}
 		
-		private void attach_tasks_calls(tasks_call entity)
+		private void attach_tasks_calls(tasks_calls entity)
 		{
 			this.SendPropertyChanging();
 			entity.call = this;
 		}
 		
-		private void detach_tasks_calls(tasks_call entity)
+		private void detach_tasks_calls(tasks_calls entity)
 		{
 			this.SendPropertyChanging();
 			entity.call = null;
@@ -462,7 +462,7 @@ namespace SIP_Agent
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tasks_calls")]
-	public partial class tasks_call : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class tasks_calls : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -489,7 +489,7 @@ namespace SIP_Agent
     partial void OnidChanged();
     #endregion
 		
-		public tasks_call()
+		public tasks_calls()
 		{
 			this._call = default(EntityRef<call>);
 			this._task = default(EntityRef<task>);
@@ -2047,7 +2047,7 @@ namespace SIP_Agent
 		
 		private byte _deleted;
 		
-		private EntitySet<tasks_call> _tasks_calls;
+		private EntitySet<tasks_calls> _tasks_calls;
 		
 		private EntitySet<task> _tasks;
 		
@@ -2093,7 +2093,7 @@ namespace SIP_Agent
 		
 		public task()
 		{
-			this._tasks_calls = new EntitySet<tasks_call>(new Action<tasks_call>(this.attach_tasks_calls), new Action<tasks_call>(this.detach_tasks_calls));
+			this._tasks_calls = new EntitySet<tasks_calls>(new Action<tasks_calls>(this.attach_tasks_calls), new Action<tasks_calls>(this.detach_tasks_calls));
 			this._tasks = new EntitySet<task>(new Action<task>(this.attach_tasks), new Action<task>(this.detach_tasks));
 			this._person = default(EntityRef<person>);
 			this._task_category = default(EntityRef<task_category>);
@@ -2364,7 +2364,7 @@ namespace SIP_Agent
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_tasks_call", Storage="_tasks_calls", ThisKey="id", OtherKey="task_id")]
-		public EntitySet<tasks_call> tasks_calls
+		public EntitySet<tasks_calls> tasks_calls
 		{
 			get
 			{
@@ -2579,13 +2579,13 @@ namespace SIP_Agent
 			}
 		}
 		
-		private void attach_tasks_calls(tasks_call entity)
+		private void attach_tasks_calls(tasks_calls entity)
 		{
 			this.SendPropertyChanging();
 			entity.task = this;
 		}
 		
-		private void detach_tasks_calls(tasks_call entity)
+		private void detach_tasks_calls(tasks_calls entity)
 		{
 			this.SendPropertyChanging();
 			entity.task = null;
