@@ -9,13 +9,13 @@
       <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="received" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="finished" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="deleted" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Association Name="call_tasks_call" Member="tasks_calls" ThisKey="id" OtherKey="call_id" Type="tasks_calls" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="call_tasks_call" Member="tasks_calls" ThisKey="id" OtherKey="call_id" Type="tasks_call" />
       <Association Name="person_call" Member="person" ThisKey="clerk_id" OtherKey="id" Type="person" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tasks_calls" Member="tasks_calls">
-    <Type Name="tasks_calls">
+    <Type Name="tasks_call">
       <Column Name="call_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="task_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -29,7 +29,7 @@
       <Column Name="name" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
       <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="address" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="deleted" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="company_person" Member="persons" ThisKey="id" OtherKey="company_id" Type="person" />
     </Type>
   </Table>
@@ -51,7 +51,7 @@
       <Column Name="password" Type="System.String" DbType="NChar(32)" CanBeNull="true" />
       <Column Name="created" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="company_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="deleted" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="person_call" Member="calls" ThisKey="id" OtherKey="clerk_id" Type="call" />
       <Association Name="person_log" Member="logs" ThisKey="id" OtherKey="person_id" Type="log" />
       <Association Name="person_task" Member="tasks" ThisKey="id" OtherKey="assignee_id" Type="task" />
@@ -65,7 +65,7 @@
       <Column Name="phone" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
       <Column Name="email" Type="System.String" DbType="NChar(40)" CanBeNull="true" />
       <Column Name="person_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="deleted" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.task_categories" Member="task_categories">
@@ -73,7 +73,7 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
       <Column Name="parent_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="deleted" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="task_category_task_category" Member="task_categories" ThisKey="id" OtherKey="parent_id" Type="task_category" />
       <Association Name="task_category_task" Member="tasks" ThisKey="id" OtherKey="category_id" Type="task" />
       <Association Name="task_category_task_category" Member="task_category1" ThisKey="parent_id" OtherKey="id" Type="task_category" IsForeignKey="true" />
@@ -83,7 +83,7 @@
     <Type Name="task_statuse">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="deleted" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="parent_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="task_statuse_task_statuse" Member="task_statuses" ThisKey="id" OtherKey="parent_id" Type="task_statuse" />
       <Association Name="task_statuse_task" Member="tasks" ThisKey="id" OtherKey="status_id" Type="task" />
@@ -103,8 +103,8 @@
       <Column Name="clerk_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="category_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="deleted" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Association Name="task_tasks_call" Member="tasks_calls" ThisKey="id" OtherKey="task_id" Type="tasks_calls" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="task_tasks_call" Member="tasks_calls" ThisKey="id" OtherKey="task_id" Type="tasks_call" />
       <Association Name="task_task" Member="tasks" ThisKey="id" OtherKey="parent_id" Type="task" />
       <Association Name="person_task" Member="person" ThisKey="assignee_id" OtherKey="id" Type="person" IsForeignKey="true" />
       <Association Name="task_category_task" Member="task_category" ThisKey="category_id" OtherKey="id" Type="task_category" IsForeignKey="true" />

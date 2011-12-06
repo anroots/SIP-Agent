@@ -33,9 +33,9 @@ namespace SIP_Agent
     partial void Insertcall(call instance);
     partial void Updatecall(call instance);
     partial void Deletecall(call instance);
-    partial void Inserttasks_calls(tasks_calls instance);
-    partial void Updatetasks_calls(tasks_calls instance);
-    partial void Deletetasks_calls(tasks_calls instance);
+    partial void Inserttasks_call(tasks_call instance);
+    partial void Updatetasks_call(tasks_call instance);
+    partial void Deletetasks_call(tasks_call instance);
     partial void Insertcompany(company instance);
     partial void Updatecompany(company instance);
     partial void Deletecompany(company instance);
@@ -97,11 +97,11 @@ namespace SIP_Agent
 			}
 		}
 		
-		public System.Data.Linq.Table<tasks_calls> tasks_calls
+		public System.Data.Linq.Table<tasks_call> tasks_calls
 		{
 			get
 			{
-				return this.GetTable<tasks_calls>();
+				return this.GetTable<tasks_call>();
 			}
 		}
 		
@@ -182,9 +182,9 @@ namespace SIP_Agent
 		
 		private System.Nullable<System.DateTime> _finished;
 		
-		private byte _deleted;
+		private bool _deleted;
 		
-		private EntitySet<tasks_calls> _tasks_calls;
+		private EntitySet<tasks_call> _tasks_calls;
 		
 		private EntityRef<person> _person;
 		
@@ -206,13 +206,13 @@ namespace SIP_Agent
     partial void OnreceivedChanged();
     partial void OnfinishedChanging(System.Nullable<System.DateTime> value);
     partial void OnfinishedChanged();
-    partial void OndeletedChanging(byte value);
+    partial void OndeletedChanging(bool value);
     partial void OndeletedChanged();
     #endregion
 		
 		public call()
 		{
-			this._tasks_calls = new EntitySet<tasks_calls>(new Action<tasks_calls>(this.attach_tasks_calls), new Action<tasks_calls>(this.detach_tasks_calls));
+			this._tasks_calls = new EntitySet<tasks_call>(new Action<tasks_call>(this.attach_tasks_calls), new Action<tasks_call>(this.detach_tasks_calls));
 			this._person = default(EntityRef<person>);
 			OnCreated();
 		}
@@ -361,8 +361,8 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="TinyInt NOT NULL")]
-		public byte deleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit NOT NULL")]
+		public bool deleted
 		{
 			get
 			{
@@ -382,7 +382,7 @@ namespace SIP_Agent
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="call_tasks_call", Storage="_tasks_calls", ThisKey="id", OtherKey="call_id")]
-		public EntitySet<tasks_calls> tasks_calls
+		public EntitySet<tasks_call> tasks_calls
 		{
 			get
 			{
@@ -448,13 +448,13 @@ namespace SIP_Agent
 			}
 		}
 		
-		private void attach_tasks_calls(tasks_calls entity)
+		private void attach_tasks_calls(tasks_call entity)
 		{
 			this.SendPropertyChanging();
 			entity.call = this;
 		}
 		
-		private void detach_tasks_calls(tasks_calls entity)
+		private void detach_tasks_calls(tasks_call entity)
 		{
 			this.SendPropertyChanging();
 			entity.call = null;
@@ -462,7 +462,7 @@ namespace SIP_Agent
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tasks_calls")]
-	public partial class tasks_calls : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class tasks_call : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -489,7 +489,7 @@ namespace SIP_Agent
     partial void OnidChanged();
     #endregion
 		
-		public tasks_calls()
+		public tasks_call()
 		{
 			this._call = default(EntityRef<call>);
 			this._task = default(EntityRef<task>);
@@ -667,7 +667,7 @@ namespace SIP_Agent
 		
 		private string _address;
 		
-		private byte _deleted;
+		private bool _deleted;
 		
 		private EntitySet<person> _persons;
 		
@@ -683,7 +683,7 @@ namespace SIP_Agent
     partial void OncreatedChanged();
     partial void OnaddressChanging(string value);
     partial void OnaddressChanged();
-    partial void OndeletedChanging(byte value);
+    partial void OndeletedChanging(bool value);
     partial void OndeletedChanged();
     #endregion
 		
@@ -773,8 +773,8 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="TinyInt NOT NULL")]
-		public byte deleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit NOT NULL")]
+		public bool deleted
 		{
 			get
 			{
@@ -1034,7 +1034,7 @@ namespace SIP_Agent
 		
 		private System.Nullable<int> _company_id;
 		
-		private byte _deleted;
+		private bool _deleted;
 		
 		private EntitySet<call> _calls;
 		
@@ -1064,7 +1064,7 @@ namespace SIP_Agent
     partial void OncreatedChanged();
     partial void Oncompany_idChanging(System.Nullable<int> value);
     partial void Oncompany_idChanged();
-    partial void OndeletedChanging(byte value);
+    partial void OndeletedChanging(bool value);
     partial void OndeletedChanged();
     #endregion
 		
@@ -1222,8 +1222,8 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="TinyInt NOT NULL")]
-		public byte deleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit NOT NULL")]
+		public bool deleted
 		{
 			get
 			{
@@ -1411,7 +1411,7 @@ namespace SIP_Agent
 		
 		private System.Nullable<int> _person_id;
 		
-		private byte _deleted;
+		private bool _deleted;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1425,7 +1425,7 @@ namespace SIP_Agent
     partial void OnemailChanged();
     partial void Onperson_idChanging(System.Nullable<int> value);
     partial void Onperson_idChanged();
-    partial void OndeletedChanging(byte value);
+    partial void OndeletedChanging(bool value);
     partial void OndeletedChanged();
     #endregion
 		
@@ -1514,8 +1514,8 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="TinyInt NOT NULL")]
-		public byte deleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit NOT NULL")]
+		public bool deleted
 		{
 			get
 			{
@@ -1567,7 +1567,7 @@ namespace SIP_Agent
 		
 		private System.Nullable<int> _parent_id;
 		
-		private byte _deleted;
+		private bool _deleted;
 		
 		private EntitySet<task_category> _task_categories;
 		
@@ -1585,7 +1585,7 @@ namespace SIP_Agent
     partial void OnnameChanged();
     partial void Onparent_idChanging(System.Nullable<int> value);
     partial void Onparent_idChanged();
-    partial void OndeletedChanging(byte value);
+    partial void OndeletedChanging(bool value);
     partial void OndeletedChanged();
     #endregion
 		
@@ -1661,8 +1661,8 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="TinyInt NOT NULL")]
-		public byte deleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit NOT NULL")]
+		public bool deleted
 		{
 			get
 			{
@@ -1796,7 +1796,7 @@ namespace SIP_Agent
 		
 		private string _name;
 		
-		private System.Nullable<byte> _deleted;
+		private System.Nullable<bool> _deleted;
 		
 		private System.Nullable<int> _parent_id;
 		
@@ -1814,7 +1814,7 @@ namespace SIP_Agent
     partial void OnidChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
-    partial void OndeletedChanging(System.Nullable<byte> value);
+    partial void OndeletedChanging(System.Nullable<bool> value);
     partial void OndeletedChanged();
     partial void Onparent_idChanging(System.Nullable<int> value);
     partial void Onparent_idChanged();
@@ -1868,8 +1868,8 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="TinyInt")]
-		public System.Nullable<byte> deleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit")]
+		public System.Nullable<bool> deleted
 		{
 			get
 			{
@@ -2045,9 +2045,9 @@ namespace SIP_Agent
 		
 		private int _category_id;
 		
-		private byte _deleted;
+		private bool _deleted;
 		
-		private EntitySet<tasks_calls> _tasks_calls;
+		private EntitySet<tasks_call> _tasks_calls;
 		
 		private EntitySet<task> _tasks;
 		
@@ -2087,13 +2087,13 @@ namespace SIP_Agent
     partial void Onstatus_idChanged();
     partial void Oncategory_idChanging(int value);
     partial void Oncategory_idChanged();
-    partial void OndeletedChanging(byte value);
+    partial void OndeletedChanging(bool value);
     partial void OndeletedChanged();
     #endregion
 		
 		public task()
 		{
-			this._tasks_calls = new EntitySet<tasks_calls>(new Action<tasks_calls>(this.attach_tasks_calls), new Action<tasks_calls>(this.detach_tasks_calls));
+			this._tasks_calls = new EntitySet<tasks_call>(new Action<tasks_call>(this.attach_tasks_calls), new Action<tasks_call>(this.detach_tasks_calls));
 			this._tasks = new EntitySet<task>(new Action<task>(this.attach_tasks), new Action<task>(this.detach_tasks));
 			this._person = default(EntityRef<person>);
 			this._task_category = default(EntityRef<task_category>);
@@ -2343,8 +2343,8 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="TinyInt NOT NULL")]
-		public byte deleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit NOT NULL")]
+		public bool deleted
 		{
 			get
 			{
@@ -2364,7 +2364,7 @@ namespace SIP_Agent
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_tasks_call", Storage="_tasks_calls", ThisKey="id", OtherKey="task_id")]
-		public EntitySet<tasks_calls> tasks_calls
+		public EntitySet<tasks_call> tasks_calls
 		{
 			get
 			{
@@ -2579,13 +2579,13 @@ namespace SIP_Agent
 			}
 		}
 		
-		private void attach_tasks_calls(tasks_calls entity)
+		private void attach_tasks_calls(tasks_call entity)
 		{
 			this.SendPropertyChanging();
 			entity.task = this;
 		}
 		
-		private void detach_tasks_calls(tasks_calls entity)
+		private void detach_tasks_calls(tasks_call entity)
 		{
 			this.SendPropertyChanging();
 			entity.task = null;

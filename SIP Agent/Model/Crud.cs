@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.Linq.Mapping;
 
 namespace SIP_Agent.Model
 {
@@ -11,8 +12,9 @@ namespace SIP_Agent.Model
     public abstract class Crud : ICrud
     {
 
-        public int id;
-        public int deleted;
+        [Column(IsPrimaryKey = true, IsDbGenerated = true)]
+        public int id {get {return CurrentRow.id;}}
+        public bool deleted { get { return CurrentRow.deleted; } set { CurrentRow.deleted = value; } }
 
         protected task CurrentRow; // todo: How to specify anonymous type?
 
@@ -30,11 +32,8 @@ namespace SIP_Agent.Model
         /// </summary>
         /// <param name="Id">The ID of the row in the database</param>
         /// <returns>True on success, False on failure</returns>
-        public bool Load(int Id)
-        {
-            // todo
-            return false;
-        }
+        abstract public bool Load(int Id);
+
 
 
         /// <summary>
