@@ -18,7 +18,7 @@ namespace SIP_Agent.Model
         public string password { get; set; }
         public int company_id { get; set; }
         public DateTime created { get; set; }
-        public int deleted { get; set; }
+        public bool deleted { get; set; }
 
         public Model.Company Company;
 

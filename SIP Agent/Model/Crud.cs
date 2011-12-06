@@ -11,12 +11,23 @@ namespace SIP_Agent.Model
     /// </summary>
     public abstract class Crud : ICrud
     {
-
-        [Column(IsPrimaryKey = true, IsDbGenerated = true)]
-        public int id {get {return CurrentRow.id;}}
+        // Define common columns
+        [Column(IsPrimaryKey = true, IsDbGenerated = true)] // Defines as the primary key. DbGenerated columns should not have a setter.
+        public int id { get { return CurrentRow.id; } }
         public bool deleted { get { return CurrentRow.deleted; } set { CurrentRow.deleted = value; } }
 
+        /// <summary>
+        /// Holds the current row
+        /// </summary>
         protected task CurrentRow; // todo: How to specify anonymous type?
+
+        /// <summary>
+        /// Stores the current database connection.
+        /// In order for SubmitChanges to work the connection must stay open.
+        /// The connection can be released by the Unload method.
+        /// </summary>
+        protected DatabaseDataContext CurrentConnection;
+
 
         /// <summary>
         /// Check if the model is loaded
@@ -47,19 +58,27 @@ namespace SIP_Agent.Model
             {
                 return -1;
             }
-
-            using (DatabaseDataContext db = new DatabaseDataContext())
-            {
                 // Try saving the model
                 try
                 {
-                    db.SubmitChanges();
+                    CurrentConnection.SubmitChanges();
                     return id;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return -1;
                 }
+        }
+
+        /// <summary>
+        /// Releases the current database connection and unloads the current row
+        /// </summary>
+        public void Unload()
+        {
+            if (Loaded())
+            {
+                CurrentConnection.Dispose();
+                CurrentRow = null;
             }
         }
 
@@ -72,7 +91,7 @@ namespace SIP_Agent.Model
         {
             if (!Loaded())
             {
-                deleted = 1;
+                deleted = true;
                 if (Save() != -1)
                 {
                     return true;

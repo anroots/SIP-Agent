@@ -36,5 +36,10 @@ namespace SIP_Agent.Model
         /// <param name="Id">The ID of the row to load</param>
         /// <returns>True on success, False on failure</returns>
         bool Load(int Id);
+
+         /// <summary>
+        /// Releases the current database connection and unloads the current row
+        /// </summary>
+        void Unload();
     }
 }

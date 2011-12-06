@@ -21,7 +21,7 @@ namespace SIP_Agent.Model
         public DateTime received { get; set; }
         public DateTime start { get; set; }
         public DateTime? finished { get; set; }
-        public int deleted { get; set; }
+        public bool deleted { get; set; }
 
         // Call has relation to caller
         // Todo : find a more resource - friendly way

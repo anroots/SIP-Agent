@@ -16,7 +16,7 @@ namespace SIP_Agent.Model
         [Column(IsDbGenerated=true)]
         public DateTime created { get; set; }
         public string address { get; set; }
-        public int deleted { get; set; }
+        public bool deleted { get; set; }
 
 
         public Company()

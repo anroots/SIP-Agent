@@ -10,16 +10,16 @@ namespace SIP_Agent.Model
     public class Task : Crud
     {
 
-        public int parent_id { get { return CurrentRow.id; } }
-        public DateTime created { get; set; }
-        public DateTime updated { get; set; }
-        public string title { get; set; }
-        public string details { get; set; }
-        public int notifier_id { get; set; }
-        public int? assignee_id { get; set; }
-        public int clerk_id { get; set; }
-        public int status_id { get; set; }
-        public int category_id { get; set; }
+        public int? parent_id { get { return CurrentRow.parent_id; } set { CurrentRow.parent_id = value; } }
+        public DateTime created { get { return CurrentRow.created; }}
+        public DateTime? updated { get { return CurrentRow.updated; } set { CurrentRow.updated = value; } }
+        public string title { get { return CurrentRow.title; } set { CurrentRow.title = value; } }
+        public string details { get { return CurrentRow.details; } set { CurrentRow.details = value; } }
+        public int? notifier_id { get { return CurrentRow.notifier_id; } set { CurrentRow.notifier_id = value; } }
+        public int? assignee_id { get { return CurrentRow.assignee_id; } set { CurrentRow.assignee_id = value; } }
+        public int clerk_id { get { return CurrentRow.clerk_id; } set { CurrentRow.clerk_id = value; } }
+        public int status_id { get { return CurrentRow.status_id; } set { CurrentRow.status_id = value; } }
+        public int category_id { get { return CurrentRow.category_id; } set { CurrentRow.category_id = value; } }
 
         public Task(int TaskId)
         {
@@ -33,18 +33,10 @@ namespace SIP_Agent.Model
         /// <returns>True on success, False on failure</returns>
         override public bool Load(int TaskId)
         {
-            using (DatabaseDataContext db = new DatabaseDataContext())
-            {
-                var q = from x in db.tasks where x.id.Equals(TaskId) && x.deleted.Equals(0) select x;
-                CurrentRow = q.FirstOrDefault();
-
-                id = CurrentRow.id;
-                title = CurrentRow.title;
-                status_id = CurrentRow.status_id;
-                assignee_id = CurrentRow.assignee_id;
-                details = CurrentRow.details;
-                return true;
-            }
+            CurrentConnection = new DatabaseDataContext();
+            var q = from x in CurrentConnection.tasks where x.id.Equals(TaskId) && x.deleted.Equals(0) select x;
+            CurrentRow = q.FirstOrDefault();
+            return true;
         }
 
     }

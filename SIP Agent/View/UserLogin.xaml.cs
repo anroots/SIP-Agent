@@ -76,7 +76,7 @@ namespace SIP_Agent.View
         {
             Model.Log.New("Initialized.");
             App.CurrentUser.Login("ando", "ando");  // stub
-            Switcher.Switch(new SystemStandby()); // stub
+            Switcher.Switch(new TaskView(1)); // stub
         }
 
         /// <summary>
