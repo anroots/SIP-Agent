@@ -65,6 +65,8 @@ namespace SIP_Agent.View
                 person pers = new person();
                 pers.first_name = firstNameBox.Text;
                 pers.last_name = lastNameBox.Text;
+                pers.username = userNameBox.Text;
+                pers.password = passWordBox.Text;
 
                 db.persons.InsertOnSubmit(pers);
 
@@ -99,6 +101,35 @@ namespace SIP_Agent.View
         {
             Switcher.Switch(new View.SystemStandby());
         }
+
+        private void companyBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+
+                var companies = from x in db.companies
+                                select new { name = x.name };
+
+                companyBox.ItemsSource = companies;
+            }
+        }
+
+        private void checkBox1_Checked(object sender, RoutedEventArgs e)
+        {
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+                person pers = new person();
+                pers.username = userNameBox.Text;
+                pers.password = passWordBox.Text;
+
+                db.persons.DeleteOnSubmit(pers);
+
+                db.SubmitChanges();
+
+                MessageBox.Show("Kasutaja info kustutatud");
+            }
+        }
+
 
     }
 }
