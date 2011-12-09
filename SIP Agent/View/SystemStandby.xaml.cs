@@ -84,7 +84,6 @@ namespace SIP_Agent.View
             // Caller has to be selected
             if (callerID == 0)
             {
-                Model.Log.Write("text");
                 return;
             }
 

@@ -29,19 +29,25 @@ namespace SIP_Agent.Helper
         /// Flash an UI element to give visual feedback on action result.
         /// An example would be flashing the Save button red after an unsuccessful save.
         /// </summary>
-        /// <param name="sender"></param>
-        public static void flash(object sender)
+        /// <param name="sender">The target object (button)</param>
+        /// <param name="color">The Brush to paint the object with</param>
+        /// <param name="duration">How long to flash</param>
+        public static void flash(object sender, Brush color = null, int duration = 4000)
         {
+            if (color == null) {
+                color = Brushes.LimeGreen;
+            }
+
             // Save the original object
             flashObject = sender;
             Button b = (Button)sender;
 
             // Change background
             flashBackground = b.Background;
-            b.Background = Brushes.LimeGreen;
+            b.Background = color;
 
             // Activate the timer to re-set the original background
-            Timer timer = new Timer(3000);
+            Timer timer = new Timer(duration);
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Start();
 

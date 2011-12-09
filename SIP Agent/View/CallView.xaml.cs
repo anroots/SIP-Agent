@@ -107,9 +107,11 @@ namespace SIP_Agent.View
             if (CurrentCall.BindTask(txtBindTaskId.Text))
             {
                 txtBindTaskId.Clear();
+                Helper.UI.flash(sender);
             }
             else
             {
+                Helper.UI.flash(sender, Brushes.PaleVioletRed);
                 MessageBox.Show("Sidumine ebaõnnestus: töö ID formaat on vigane või on kõne selle tööga juba seotud.");
             }
         }

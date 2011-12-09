@@ -14,15 +14,6 @@
       <Association Name="person_call" Member="person" ThisKey="clerk_id" OtherKey="id" Type="person" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tasks_calls" Member="tasks_calls">
-    <Type Name="tasks_call">
-      <Column Name="call_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="task_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="call_tasks_call" Member="call" ThisKey="call_id" OtherKey="id" Type="call" IsForeignKey="true" />
-      <Association Name="task_tasks_call" Member="task" ThisKey="task_id" OtherKey="id" Type="task" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.companies" Member="companies">
     <Type Name="company">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -95,8 +86,8 @@
       <Column Name="status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="category_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="task_tasks_call" Member="tasks_calls" ThisKey="id" OtherKey="task_id" Type="tasks_call" />
       <Association Name="task_task" Member="tasks" ThisKey="id" OtherKey="parent_id" Type="task" />
+      <Association Name="task_tasks_call" Member="tasks_calls" ThisKey="id" OtherKey="task_id" Type="tasks_call" />
       <Association Name="person_task" Member="person" ThisKey="assignee_id" OtherKey="id" Type="person" IsForeignKey="true" />
       <Association Name="task_category_task" Member="task_category" ThisKey="category_id" OtherKey="id" Type="task_category" IsForeignKey="true" />
       <Association Name="person_task1" Member="person1" ThisKey="clerk_id" OtherKey="id" Type="person" IsForeignKey="true" />
@@ -112,6 +103,15 @@
       <Column Name="text" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="person_log" Member="person" ThisKey="person_id" OtherKey="id" Type="person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tasks_calls" Member="tasks_calls">
+    <Type Name="tasks_call">
+      <Column Name="call_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="task_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="call_tasks_call" Member="call" ThisKey="call_id" OtherKey="id" Type="call" IsForeignKey="true" />
+      <Association Name="task_tasks_call" Member="task" ThisKey="task_id" OtherKey="id" Type="task" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
