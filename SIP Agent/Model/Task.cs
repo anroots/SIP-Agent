@@ -28,7 +28,7 @@ namespace SIP_Agent.Model
         protected task CurrentRow { get; set; } // todo: How to specify anonymous type?
 
         /// <summary>
-        /// 
+        /// Unload the current row
         /// </summary>
         public void Unload()
         {
@@ -58,9 +58,9 @@ namespace SIP_Agent.Model
         }
 
         /// <summary>
-        /// 
+        /// Creates a new entry in the database
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The insert ID of the new entry</returns>
         override public int New()
         {
             base.New();

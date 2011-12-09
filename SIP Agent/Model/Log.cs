@@ -7,40 +7,89 @@ using System.Data.Linq.Mapping;
 namespace SIP_Agent.Model
 {
 
-
+    /// <summary>
+    /// Class for logging system activity
+    /// </summary>
     [Table(Name = "Logs")]
-    public class Log
+    public class Log : Crud, ICrud
     {
         [Column(IsPrimaryKey = true, IsDbGenerated = true)]
-        public int id { get; set; }
-        public string text { get; set; }
-        
-        public int person_id { get; set; }
+        override public int id { get { return CurrentRow == null ? 0 : CurrentRow.id; } }
+        public string text { get { return CurrentRow.text; } set { CurrentRow.text = value; } }
+        public int person_id { get { return CurrentRow.person_id.Value; } set { CurrentRow.person_id = value; } }
         [Column(IsDbGenerated=true)]
-        public DateTime created { get; set; }
+        public DateTime created { get { return CurrentRow.created; } set { CurrentRow.created = value; } }
 
         public Person Person;
 
+        protected log CurrentRow;
+
         /// <summary>
-        /// Create a new log
+        /// The log class should only have 1 instance at any time.
+        /// This is called the singleton pattern.
         /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public static int New(string text = null)
+        private static Model.Log LogInstance;
+
+        /// <summary>
+        /// Unload the current row
+        /// </summary>
+        public void Unload()
         {
-            using (DatabaseDataContext db = new DatabaseDataContext())
-            {
-                log current = new log
-                {
-                    person_id = App.CurrentUser.id > 0 ? App.CurrentUser.id : 1,
-                    created = DateTime.Now,
-                    text = text
-                };
-                db.logs.InsertOnSubmit(current);
-                db.SubmitChanges();
-                return current.id;
-            }
+            CurrentRow = null;
         }
+
+        /// <summary>
+        /// Load the model with the specified ID
+        /// </summary>
+        /// <param name="LogId">The ID of the row in the database</param>
+        /// <returns>True on success, False on failure</returns>
+        override public bool Load(int LogId)
+        {
+            CurrentConnection = new DatabaseDataContext();
+            var q = from x in CurrentConnection.logs where x.id.Equals(LogId) && x.deleted.Equals(0) select x;
+            CurrentRow = q.FirstOrDefault();
+            return true;
+        }
+
+        /// <summary>
+        /// Write a new log message to the database
+        /// </summary>
+        /// <param name="text">The text of the log message</param>
+        /// <returns>The insert ID of the new log row</returns>
+        public static int Write(string text)
+        {
+            // Check if an instance exists
+            if (LogInstance == null)
+            {
+                LogInstance = new Model.Log();
+            }
+
+            // Create a new log entry
+            LogInstance.New();
+            LogInstance.text = text;
+            LogInstance.Save();
+
+            return LogInstance.id;
+        }
+
+        /// <summary>
+        /// Creates a new row in the database
+        /// </summary>
+        /// <returns>Insert ID of the new row</returns>
+        override public int New()
+        {
+            base.New();
+
+            CurrentRow = new log();
+            CurrentRow.created = DateTime.Now;
+            CurrentRow.person_id = App.CurrentUser.id > 0 ? App.CurrentUser.id : Model.Person.ANONYMOUS;
+
+            CurrentConnection.logs.InsertOnSubmit(CurrentRow);
+            CurrentConnection.SubmitChanges();
+            
+            return Save();
+        }
+
     }
 
 }

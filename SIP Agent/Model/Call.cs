@@ -67,9 +67,9 @@ namespace SIP_Agent.Model
         }
 
         /// <summary>
-        /// 
+        /// Creates a new row in the database
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Insert ID of the new row</returns>
         override public int New()
         {
             base.New();
@@ -78,10 +78,12 @@ namespace SIP_Agent.Model
             CurrentConnection.calls.InsertOnSubmit(CurrentRow);
             CurrentConnection.SubmitChanges();
             int InsertId = Save();
-            Load(InsertId);
             return id;
         }
 
+        /// <summary>
+        /// Unload the current row
+        /// </summary>
         public void Unload()
         {
             CurrentRow = null;
