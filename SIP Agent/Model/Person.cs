@@ -107,6 +107,14 @@ namespace SIP_Agent.Model
             return false;
         }
 
+        /// <summary>
+        /// Log the user out
+        /// </summary>
+        public void Logout()
+        {
+            App.CurrentUser = null;
+        }
+
         public Person()
         {
             // TODO: Complete member initialization

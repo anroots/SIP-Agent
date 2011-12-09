@@ -128,6 +128,17 @@ namespace SIP_Agent.View
             Switcher.Switch(new TaskView(1));
         }
 
+        /// <summary>
+        /// Logout
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            App.CurrentUser.Logout();
+            Switcher.Switch(new UserLogin());
+        }
+
     } // end of class
 }
 

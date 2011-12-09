@@ -63,5 +63,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <Button Content="Tagasi" Grid.Column="2" Height="35" HorizontalAlignment="Left" Margin="15,540,0,0" Name="btnBack" VerticalAlignment="Top" Width="141" Click="btnBack_Click" />
     </Grid>
 </UserControl>

@@ -82,7 +82,7 @@ namespace SIP_Agent.Model
 
             CurrentRow = new log();
             CurrentRow.created = DateTime.Now;
-            CurrentRow.person_id = App.CurrentUser.id > 0 ? App.CurrentUser.id : Model.Person.ANONYMOUS;
+            CurrentRow.person_id = App.CurrentUser != null && App.CurrentUser.id > 0 ? App.CurrentUser.id : Model.Person.ANONYMOUS;
 
             CurrentConnection.logs.InsertOnSubmit(CurrentRow);
             CurrentConnection.SubmitChanges();
