@@ -74,7 +74,7 @@ namespace SIP_Agent.View
             CurrentCall.summary = summaryBox.Text;
             if (CurrentCall.Save() != 0)
             {
-                Helper.UI.flash(btn_saveData);
+                Helper.UI.flash(btn_saveData); 
             }
             else
             {
