@@ -20,7 +20,35 @@ namespace SIP_Agent.Model
         public DateTime created { get; set; }
         public bool deleted { get; set; }
 
-        public Model.Company Company;
+        /// <summary>
+        /// Acts as the storage for Company
+        /// </summary>
+        private Model.Company company;
+
+        /// <summary>
+        /// Holds the Persons Company object.
+        /// Lazy loading is used meaning the Company model is not loaded
+        /// before it's first accessed.
+        /// </summary>
+        public Model.Company Company
+        {
+            get
+            {
+                if (company == null)
+                {
+                    // Returns the Anonymous company instead of null
+                    company = new Model.Company(company_id > 0 ? company_id : Model.Company.ANONYMOUS);
+                    return company;
+                }
+                return company;
+            }
+            set { company = value; }
+        }
+
+        /// <summary>
+        /// The ID of the Anonymous user
+        /// </summary>
+        public const int ANONYMOUS = 1;
 
         /// <summary>
         /// Create and load the model
@@ -28,10 +56,12 @@ namespace SIP_Agent.Model
         /// <param name="personID"></param>
         public Person(int personID)
         {
+
             using (DatabaseDataContext db = new DatabaseDataContext())
             {
                 var q = from x in db.persons where x.id.Equals(personID) && x.deleted.Equals(0) select x;
-                if (q.Count() == 0) {
+                if (q.Count() == 0)
+                {
                     throw new Exception("Person with ID " + personID + " not found.");
                 }
 
@@ -45,8 +75,8 @@ namespace SIP_Agent.Model
                 company_id = row.company_id.Value;
                 created = row.created.Value;
                 deleted = row.deleted;
-
-                Company = new Model.Company(company_id);
+                string sss = "CID:" + (company_id > 0 ? company_id : Model.Company.ANONYMOUS); throw new Exception(sss);
+                Company = new Model.Company(company_id > 0 ? company_id : Model.Company.ANONYMOUS);
             }
         }
 
@@ -61,16 +91,16 @@ namespace SIP_Agent.Model
 
             using (DatabaseDataContext db = new DatabaseDataContext())
             {
-                var query = from x 
-                                in db.persons 
-                            where  x.username.Equals(Username) 
+                var query = from x
+                                in db.persons
+                            where x.username.Equals(Username)
                             where x.password.Equals(Password)
                             select x;
 
                 if (query.Count() > 0)
                 {
                     id = query.FirstOrDefault().id;
-                    
+
                     return true;
                 }
             }

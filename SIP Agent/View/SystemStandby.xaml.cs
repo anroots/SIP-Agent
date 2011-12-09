@@ -88,11 +88,13 @@ namespace SIP_Agent.View
             }
 
             Call current = new Model.Call();
+            int CallId = current.New();
+
             current.caller_id = callerID;
-            int callID = current.New();
+            current.Save();
 
             // Switch to a new view (pass on selected person ID)
-            Switcher.Switch(new CallView(callID));
+            Switcher.Switch(new CallView(CallId));
         }
 
         /// <summary>

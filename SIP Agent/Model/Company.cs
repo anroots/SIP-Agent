@@ -18,6 +18,10 @@ namespace SIP_Agent.Model
         public string address { get; set; }
         public bool deleted { get; set; }
 
+        /// <summary>
+        /// The ID of the Anonymous company
+        /// </summary>
+        public const int ANONYMOUS = 5;
 
         public Company()
         {

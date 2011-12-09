@@ -11,128 +11,80 @@ namespace SIP_Agent.Model
 
 
     [Table(Name = "Calls")]
-    public class Call
+    public class Call : Crud, ICrud
     {
         [Column(IsPrimaryKey = true, IsDbGenerated = true)]
-        public int id { get; set; }
-        public string summary { get; set; }
-        public int caller_id { get; set; }
-        public int clerk_id { get; set; }
-        public DateTime received { get; set; }
-        public DateTime start { get; set; }
-        public DateTime? finished { get; set; }
-        public bool deleted { get; set; }
+        override public int id { get { return CurrentRow == null ? 0 : CurrentRow.id; } }
+        public string summary { get { return CurrentRow.summary; } set { CurrentRow.summary = value; } }
+        public int? caller_id { get { return CurrentRow == null ? null : CurrentRow.caller_id; } set { CurrentRow.caller_id = value; } }
+        public int? clerk_id { get { return CurrentRow.clerk_id; } set { CurrentRow.clerk_id = value; } }
+        public DateTime received { get { return CurrentRow.received; } set { CurrentRow.received = value; } }
+        public DateTime? start { get { return start == null ? null : CurrentRow.start; } set { CurrentRow.start = value; } }
+        public DateTime? finished { get { return finished == null ? null : CurrentRow.finished; } set { CurrentRow.finished = value; } }
+        override public bool deleted { get { return CurrentRow.deleted; } }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected call CurrentRow;
 
         // Call has relation to caller
         // Todo : find a more resource - friendly way
         public Person Caller;
 
-
-        /// <summary>
-        /// Check whether the model is loaded
-        /// </summary>
-        /// <returns></returns>
-        public bool Loaded()
-        {
-            return id != null;
-        }
+   
 
         /// <summary>
         /// Create and load the model
         /// </summary>
-        /// <param name="callID"></param>
-        public Call(int callID = 0)
+        /// <param name="callId"></param>
+        public Call(int callId = 0)
         {
-            if (callID == 0)
+            if (callId == 0)
             {
-                return;
+                New();
             }
-            using (DatabaseDataContext db = new DatabaseDataContext())
+            else
             {
-                var row = Get(db, callID);
-
-                // Todo: refactor to bindings!
-
-                id = row.id;
-                summary = row.summary;
-                caller_id = row.caller_id.Value;
-                clerk_id = row.clerk_id.Value;
-                received = row.received;
-                start = row.start.Value;
-                finished = row.finished;
-                deleted = row.deleted;
-                Caller = new Person(caller_id);
-
+                Load(callId);
             }
         }
 
         /// <summary>
-        /// Get row resource by ID
+        /// 
         /// </summary>
-        /// <param name="db"></param>
-        /// <param name="callID"></param>
+        /// <param name="CallId"></param>
         /// <returns></returns>
-        public call Get(DatabaseDataContext db, int callID = 0)
+        override public bool Load(int CallId)
         {
+            CurrentConnection = new DatabaseDataContext();
+            var q = from x in CurrentConnection.calls where x.id.Equals(CallId) && x.deleted.Equals(0) select x;
+            CurrentRow = q.FirstOrDefault();
 
-            var q = from x in db.calls where x.id.Equals(callID) && x.deleted.Equals(0) select x;
-            /*if (q.Count() == 0)
-            {
-                throw new Exception("Call with ID "+ callID.ToString()+" not found");
-            }*/
+            Caller = new Model.Person(caller_id > 0 ? caller_id : Model.Person.ANONYMOUS);
 
-            // Todo: refactor to bindings!
-            return q.FirstOrDefault();
-        }
-
-
-        /// <summary>
-        /// Save record back to the database
-        /// </summary>
-        /// <returns></returns>
-        public int Save()
-        {
-            using (DatabaseDataContext db = new DatabaseDataContext())
-            {
-                if (id == 0)
-                {
-                    db.SubmitChanges();
-                    return id;
-                }
-                var row = Get(db, id);
-                row.summary = summary;
-                try
-                {
-                    db.SubmitChanges();
-                    return id;
-                }
-                catch (Exception e)
-                {
-                    return 0;
-                }
-            }
+            return true;
         }
 
         /// <summary>
-        /// Create a new call
+        /// 
         /// </summary>
         /// <returns></returns>
-        public int New()
+        override public int New()
         {
-            using (DatabaseDataContext db = new DatabaseDataContext())
-            {
-                call current = new call
-                {
-                    caller_id = caller_id,
-                    clerk_id = App.CurrentUser.id,
-                    received = DateTime.Now,
-                    start = DateTime.Now,
-                    finished = null,
-                };
-                db.calls.InsertOnSubmit(current);
-                db.SubmitChanges();
-                return current.id;
-            }
+            base.New();
+            CurrentRow = new call();
+            received = DateTime.Now;
+            CurrentConnection.calls.InsertOnSubmit(CurrentRow);
+            CurrentConnection.SubmitChanges();
+            int InsertId = Save();
+            Load(InsertId);
+            return id;
+        }
+
+        public void Unload()
+        {
+            CurrentRow = null;
         }
 
         /// <summary>
@@ -158,7 +110,7 @@ namespace SIP_Agent.Model
                 return calls.FirstOrDefault().Element("url").Value;
             }
             // Return null on errors
-            catch (Exception e)
+            catch (Exception)
             {
             }
             return null;

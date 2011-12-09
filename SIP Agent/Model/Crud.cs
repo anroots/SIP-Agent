@@ -9,17 +9,13 @@ namespace SIP_Agent.Model
     /// <summary>
     /// Abstract class for all CRUD models
     /// </summary>
-    public abstract class Crud : ICrud
+    public abstract class Crud
     {
         // Define common columns
-        [Column(IsPrimaryKey = true, IsDbGenerated = true)] // Defines as the primary key. DbGenerated columns should not have a setter.
-        public int id { get { return CurrentRow.id; } }
-        public bool deleted { get { return CurrentRow.deleted; } set { CurrentRow.deleted = value; } }
+        [Column(IsPrimaryKey = true, IsDbGenerated = true)] // Defines as the primary key.
+        abstract public int id { get; }
+        virtual public bool deleted { get; set; }
 
-        /// <summary>
-        /// Holds the current row
-        /// </summary>
-        protected task CurrentRow; // todo: How to specify anonymous type?
 
         /// <summary>
         /// Stores the current database connection.
@@ -35,7 +31,7 @@ namespace SIP_Agent.Model
         /// <returns></returns>
         public bool Loaded()
         {
-            return id != null;
+            return id > 0;
         }
 
         /// <summary>
@@ -58,28 +54,30 @@ namespace SIP_Agent.Model
             {
                 return -1;
             }
-                // Try saving the model
-                try
-                {
-                    CurrentConnection.SubmitChanges();
-                    return id;
-                }
-                catch (Exception)
-                {
-                    return -1;
-                }
+            // Try saving the model
+            try
+            {
+                CurrentConnection.SubmitChanges();
+                return id;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
         }
 
+
         /// <summary>
-        /// Releases the current database connection and unloads the current row
+        /// 
         /// </summary>
-        public void Unload()
+        /// <returns></returns>
+        virtual public int New()
         {
-            if (Loaded())
+            if (CurrentConnection == null)
             {
-                CurrentConnection.Dispose();
-                CurrentRow = null;
+                CurrentConnection = new DatabaseDataContext();
             }
+            return 0;
         }
 
 
@@ -96,7 +94,6 @@ namespace SIP_Agent.Model
                 {
                     return true;
                 }
-
             }
             return false;
         }

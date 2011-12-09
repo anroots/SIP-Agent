@@ -32,15 +32,19 @@ namespace SIP_Agent.View
         /// <summary>
         /// Initialize the page by providing CALL ID to load
         /// </summary>
-        /// <param name="callID">When given, open an already existing call</param>
-        public CallView(int callID = 0)
+        /// <param name="callId">When given, open an already existing call</param>
+        public CallView(int callId = 0)
         {
             InitializeComponent();
 
             // The XAML represents one call so create & load the model
-            CurrentCall = new Model.Call(callID);
+            CurrentCall = new Model.Call(callId);
+            if (!CurrentCall.Loaded())
+            {
+                throw new NullReferenceException("No call with such ID found.");
+            }
 
-            LabelCallID.Content = callID.ToString(); // Call ID label
+            LabelCallID.Content = callId.ToString(); // Call ID label
 
             userBox.Text = CurrentCall.Caller.first_name;
             summaryBox.Text = CurrentCall.summary;
@@ -70,7 +74,7 @@ namespace SIP_Agent.View
             CurrentCall.summary = summaryBox.Text;
             if (CurrentCall.Save() != 0)
             {
-                MessageBox.Show("Andmed baasi edukalt salvestatud");
+                Helper.UI.flash(btn_saveData);
             }
             else
             {

@@ -259,6 +259,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>agent.mdf</DependentUpon>
     </Content>
+    <Resource Include="Images\Avatars\5.gif" />
     <SplashScreen Include="Images\splash.png" />
     <Resource Include="Images\radio.png" />
     <Resource Include="Images\Avatars\1.gif" />

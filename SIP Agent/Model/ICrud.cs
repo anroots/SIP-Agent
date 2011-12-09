@@ -41,5 +41,11 @@ namespace SIP_Agent.Model
         /// Releases the current database connection and unloads the current row
         /// </summary>
         void Unload();
+
+        /// <summary>
+        /// Create a new record in the DB and return the ID
+        /// </summary>
+        /// <returns></returns>
+        int New();
     }
 }
