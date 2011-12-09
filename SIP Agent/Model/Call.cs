@@ -51,7 +51,7 @@ namespace SIP_Agent.Model
         }
 
         /// <summary>
-        /// 
+        /// Load the model with data (row from the DB)
         /// </summary>
         /// <param name="CallId"></param>
         /// <returns></returns>
@@ -61,7 +61,7 @@ namespace SIP_Agent.Model
             var q = from x in CurrentConnection.calls where x.id.Equals(CallId) && x.deleted.Equals(0) select x;
             CurrentRow = q.FirstOrDefault();
 
-            Caller = new Model.Person(caller_id > 0 ? caller_id : Model.Person.ANONYMOUS);
+            Caller = new Model.Person(caller_id > 0 ? (int)caller_id : Model.Person.ANONYMOUS);
 
             return true;
         }

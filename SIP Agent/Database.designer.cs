@@ -36,9 +36,6 @@ namespace SIP_Agent
     partial void Insertcompany(company instance);
     partial void Updatecompany(company instance);
     partial void Deletecompany(company instance);
-    partial void Insertperson(person instance);
-    partial void Updateperson(person instance);
-    partial void Deleteperson(person instance);
     partial void Insertphonebook(phonebook instance);
     partial void Updatephonebook(phonebook instance);
     partial void Deletephonebook(phonebook instance);
@@ -57,6 +54,9 @@ namespace SIP_Agent
     partial void Inserttasks_call(tasks_call instance);
     partial void Updatetasks_call(tasks_call instance);
     partial void Deletetasks_call(tasks_call instance);
+    partial void Insertperson(person instance);
+    partial void Updateperson(person instance);
+    partial void Deleteperson(person instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -105,14 +105,6 @@ namespace SIP_Agent
 			}
 		}
 		
-		public System.Data.Linq.Table<person> persons
-		{
-			get
-			{
-				return this.GetTable<person>();
-			}
-		}
-		
 		public System.Data.Linq.Table<phonebook> phonebooks
 		{
 			get
@@ -158,6 +150,14 @@ namespace SIP_Agent
 			get
 			{
 				return this.GetTable<tasks_call>();
+			}
+		}
+		
+		public System.Data.Linq.Table<person> persons
+		{
+			get
+			{
+				return this.GetTable<person>();
 			}
 		}
 	}
@@ -644,389 +644,6 @@ namespace SIP_Agent
 		{
 			this.SendPropertyChanging();
 			entity.company = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.persons")]
-	public partial class person : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _first_name;
-		
-		private string _last_name;
-		
-		private string _username;
-		
-		private string _password;
-		
-		private System.Nullable<System.DateTime> _created;
-		
-		private System.Nullable<int> _company_id;
-		
-		private bool _deleted;
-		
-		private EntitySet<call> _calls;
-		
-		private EntitySet<task> _tasks;
-		
-		private EntitySet<task> _tasks1;
-		
-		private EntitySet<log> _logs;
-		
-		private EntityRef<company> _company;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void Onfirst_nameChanging(string value);
-    partial void Onfirst_nameChanged();
-    partial void Onlast_nameChanging(string value);
-    partial void Onlast_nameChanged();
-    partial void OnusernameChanging(string value);
-    partial void OnusernameChanged();
-    partial void OnpasswordChanging(string value);
-    partial void OnpasswordChanged();
-    partial void OncreatedChanging(System.Nullable<System.DateTime> value);
-    partial void OncreatedChanged();
-    partial void Oncompany_idChanging(System.Nullable<int> value);
-    partial void Oncompany_idChanged();
-    partial void OndeletedChanging(bool value);
-    partial void OndeletedChanged();
-    #endregion
-		
-		public person()
-		{
-			this._calls = new EntitySet<call>(new Action<call>(this.attach_calls), new Action<call>(this.detach_calls));
-			this._tasks = new EntitySet<task>(new Action<task>(this.attach_tasks), new Action<task>(this.detach_tasks));
-			this._tasks1 = new EntitySet<task>(new Action<task>(this.attach_tasks1), new Action<task>(this.detach_tasks1));
-			this._logs = new EntitySet<log>(new Action<log>(this.attach_logs), new Action<log>(this.detach_logs));
-			this._company = default(EntityRef<company>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_first_name", DbType="NChar(64)")]
-		public string first_name
-		{
-			get
-			{
-				return this._first_name;
-			}
-			set
-			{
-				if ((this._first_name != value))
-				{
-					this.Onfirst_nameChanging(value);
-					this.SendPropertyChanging();
-					this._first_name = value;
-					this.SendPropertyChanged("first_name");
-					this.Onfirst_nameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_name", DbType="NChar(64)")]
-		public string last_name
-		{
-			get
-			{
-				return this._last_name;
-			}
-			set
-			{
-				if ((this._last_name != value))
-				{
-					this.Onlast_nameChanging(value);
-					this.SendPropertyChanging();
-					this._last_name = value;
-					this.SendPropertyChanged("last_name");
-					this.Onlast_nameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="NChar(32)")]
-		public string username
-		{
-			get
-			{
-				return this._username;
-			}
-			set
-			{
-				if ((this._username != value))
-				{
-					this.OnusernameChanging(value);
-					this.SendPropertyChanging();
-					this._username = value;
-					this.SendPropertyChanged("username");
-					this.OnusernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NChar(32)")]
-		public string password
-		{
-			get
-			{
-				return this._password;
-			}
-			set
-			{
-				if ((this._password != value))
-				{
-					this.OnpasswordChanging(value);
-					this.SendPropertyChanging();
-					this._password = value;
-					this.SendPropertyChanged("password");
-					this.OnpasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime")]
-		public System.Nullable<System.DateTime> created
-		{
-			get
-			{
-				return this._created;
-			}
-			set
-			{
-				if ((this._created != value))
-				{
-					this.OncreatedChanging(value);
-					this.SendPropertyChanging();
-					this._created = value;
-					this.SendPropertyChanged("created");
-					this.OncreatedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_company_id", DbType="Int")]
-		public System.Nullable<int> company_id
-		{
-			get
-			{
-				return this._company_id;
-			}
-			set
-			{
-				if ((this._company_id != value))
-				{
-					if (this._company.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Oncompany_idChanging(value);
-					this.SendPropertyChanging();
-					this._company_id = value;
-					this.SendPropertyChanged("company_id");
-					this.Oncompany_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit NOT NULL")]
-		public bool deleted
-		{
-			get
-			{
-				return this._deleted;
-			}
-			set
-			{
-				if ((this._deleted != value))
-				{
-					this.OndeletedChanging(value);
-					this.SendPropertyChanging();
-					this._deleted = value;
-					this.SendPropertyChanged("deleted");
-					this.OndeletedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_call", Storage="_calls", ThisKey="id", OtherKey="clerk_id")]
-		public EntitySet<call> calls
-		{
-			get
-			{
-				return this._calls;
-			}
-			set
-			{
-				this._calls.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_task", Storage="_tasks", ThisKey="id", OtherKey="assignee_id")]
-		public EntitySet<task> tasks
-		{
-			get
-			{
-				return this._tasks;
-			}
-			set
-			{
-				this._tasks.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_task1", Storage="_tasks1", ThisKey="id", OtherKey="clerk_id")]
-		public EntitySet<task> tasks1
-		{
-			get
-			{
-				return this._tasks1;
-			}
-			set
-			{
-				this._tasks1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_log", Storage="_logs", ThisKey="id", OtherKey="person_id")]
-		public EntitySet<log> logs
-		{
-			get
-			{
-				return this._logs;
-			}
-			set
-			{
-				this._logs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="company_person", Storage="_company", ThisKey="company_id", OtherKey="id", IsForeignKey=true)]
-		public company company
-		{
-			get
-			{
-				return this._company.Entity;
-			}
-			set
-			{
-				company previousValue = this._company.Entity;
-				if (((previousValue != value) 
-							|| (this._company.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._company.Entity = null;
-						previousValue.persons.Remove(this);
-					}
-					this._company.Entity = value;
-					if ((value != null))
-					{
-						value.persons.Add(this);
-						this._company_id = value.id;
-					}
-					else
-					{
-						this._company_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("company");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_calls(call entity)
-		{
-			this.SendPropertyChanging();
-			entity.person = this;
-		}
-		
-		private void detach_calls(call entity)
-		{
-			this.SendPropertyChanging();
-			entity.person = null;
-		}
-		
-		private void attach_tasks(task entity)
-		{
-			this.SendPropertyChanging();
-			entity.person = this;
-		}
-		
-		private void detach_tasks(task entity)
-		{
-			this.SendPropertyChanging();
-			entity.person = null;
-		}
-		
-		private void attach_tasks1(task entity)
-		{
-			this.SendPropertyChanging();
-			entity.person1 = this;
-		}
-		
-		private void detach_tasks1(task entity)
-		{
-			this.SendPropertyChanging();
-			entity.person1 = null;
-		}
-		
-		private void attach_logs(log entity)
-		{
-			this.SendPropertyChanging();
-			entity.person = this;
-		}
-		
-		private void detach_logs(log entity)
-		{
-			this.SendPropertyChanging();
-			entity.person = null;
 		}
 	}
 	
@@ -1684,15 +1301,15 @@ namespace SIP_Agent
 		
 		private EntitySet<tasks_call> _tasks_calls;
 		
-		private EntityRef<person> _person;
-		
 		private EntityRef<task_category> _task_category;
-		
-		private EntityRef<person> _person1;
 		
 		private EntityRef<task> _task1;
 		
 		private EntityRef<task_statuse> _task_statuse;
+		
+		private EntityRef<person> _person;
+		
+		private EntityRef<person> _person1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1728,11 +1345,11 @@ namespace SIP_Agent
 		{
 			this._tasks = new EntitySet<task>(new Action<task>(this.attach_tasks), new Action<task>(this.detach_tasks));
 			this._tasks_calls = new EntitySet<tasks_call>(new Action<tasks_call>(this.attach_tasks_calls), new Action<tasks_call>(this.detach_tasks_calls));
-			this._person = default(EntityRef<person>);
 			this._task_category = default(EntityRef<task_category>);
-			this._person1 = default(EntityRef<person>);
 			this._task1 = default(EntityRef<task>);
 			this._task_statuse = default(EntityRef<task_statuse>);
+			this._person = default(EntityRef<person>);
+			this._person1 = default(EntityRef<person>);
 			OnCreated();
 		}
 		
@@ -2022,40 +1639,6 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_task", Storage="_person", ThisKey="assignee_id", OtherKey="id", IsForeignKey=true)]
-		public person person
-		{
-			get
-			{
-				return this._person.Entity;
-			}
-			set
-			{
-				person previousValue = this._person.Entity;
-				if (((previousValue != value) 
-							|| (this._person.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._person.Entity = null;
-						previousValue.tasks.Remove(this);
-					}
-					this._person.Entity = value;
-					if ((value != null))
-					{
-						value.tasks.Add(this);
-						this._assignee_id = value.id;
-					}
-					else
-					{
-						this._assignee_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("person");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_category_task", Storage="_task_category", ThisKey="category_id", OtherKey="id", IsForeignKey=true)]
 		public task_category task_category
 		{
@@ -2086,40 +1669,6 @@ namespace SIP_Agent
 						this._category_id = default(int);
 					}
 					this.SendPropertyChanged("task_category");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_task1", Storage="_person1", ThisKey="clerk_id", OtherKey="id", IsForeignKey=true)]
-		public person person1
-		{
-			get
-			{
-				return this._person1.Entity;
-			}
-			set
-			{
-				person previousValue = this._person1.Entity;
-				if (((previousValue != value) 
-							|| (this._person1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._person1.Entity = null;
-						previousValue.tasks1.Remove(this);
-					}
-					this._person1.Entity = value;
-					if ((value != null))
-					{
-						value.tasks1.Add(this);
-						this._clerk_id = value.id;
-					}
-					else
-					{
-						this._clerk_id = default(int);
-					}
-					this.SendPropertyChanged("person1");
 				}
 			}
 		}
@@ -2188,6 +1737,74 @@ namespace SIP_Agent
 						this._status_id = default(int);
 					}
 					this.SendPropertyChanged("task_statuse");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_task", Storage="_person", ThisKey="assignee_id", OtherKey="id", IsForeignKey=true)]
+		public person person
+		{
+			get
+			{
+				return this._person.Entity;
+			}
+			set
+			{
+				person previousValue = this._person.Entity;
+				if (((previousValue != value) 
+							|| (this._person.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._person.Entity = null;
+						previousValue.tasks.Remove(this);
+					}
+					this._person.Entity = value;
+					if ((value != null))
+					{
+						value.tasks.Add(this);
+						this._assignee_id = value.id;
+					}
+					else
+					{
+						this._assignee_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("person");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_task1", Storage="_person1", ThisKey="clerk_id", OtherKey="id", IsForeignKey=true)]
+		public person person1
+		{
+			get
+			{
+				return this._person1.Entity;
+			}
+			set
+			{
+				person previousValue = this._person1.Entity;
+				if (((previousValue != value) 
+							|| (this._person1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._person1.Entity = null;
+						previousValue.tasks1.Remove(this);
+					}
+					this._person1.Entity = value;
+					if ((value != null))
+					{
+						value.tasks1.Add(this);
+						this._clerk_id = value.id;
+					}
+					else
+					{
+						this._clerk_id = default(int);
+					}
+					this.SendPropertyChanged("person1");
 				}
 			}
 		}
@@ -2625,6 +2242,389 @@ namespace SIP_Agent
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.persons")]
+	public partial class person : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _first_name;
+		
+		private string _last_name;
+		
+		private string _username;
+		
+		private string _password;
+		
+		private System.DateTime _created;
+		
+		private System.Nullable<int> _company_id;
+		
+		private bool _deleted;
+		
+		private EntitySet<call> _calls;
+		
+		private EntitySet<task> _tasks;
+		
+		private EntitySet<task> _tasks1;
+		
+		private EntitySet<log> _logs;
+		
+		private EntityRef<company> _company;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onfirst_nameChanging(string value);
+    partial void Onfirst_nameChanged();
+    partial void Onlast_nameChanging(string value);
+    partial void Onlast_nameChanged();
+    partial void OnusernameChanging(string value);
+    partial void OnusernameChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
+    partial void OncreatedChanging(System.DateTime value);
+    partial void OncreatedChanged();
+    partial void Oncompany_idChanging(System.Nullable<int> value);
+    partial void Oncompany_idChanged();
+    partial void OndeletedChanging(bool value);
+    partial void OndeletedChanged();
+    #endregion
+		
+		public person()
+		{
+			this._calls = new EntitySet<call>(new Action<call>(this.attach_calls), new Action<call>(this.detach_calls));
+			this._tasks = new EntitySet<task>(new Action<task>(this.attach_tasks), new Action<task>(this.detach_tasks));
+			this._tasks1 = new EntitySet<task>(new Action<task>(this.attach_tasks1), new Action<task>(this.detach_tasks1));
+			this._logs = new EntitySet<log>(new Action<log>(this.attach_logs), new Action<log>(this.detach_logs));
+			this._company = default(EntityRef<company>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_first_name", DbType="NChar(64)")]
+		public string first_name
+		{
+			get
+			{
+				return this._first_name;
+			}
+			set
+			{
+				if ((this._first_name != value))
+				{
+					this.Onfirst_nameChanging(value);
+					this.SendPropertyChanging();
+					this._first_name = value;
+					this.SendPropertyChanged("first_name");
+					this.Onfirst_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_name", DbType="NChar(64)")]
+		public string last_name
+		{
+			get
+			{
+				return this._last_name;
+			}
+			set
+			{
+				if ((this._last_name != value))
+				{
+					this.Onlast_nameChanging(value);
+					this.SendPropertyChanging();
+					this._last_name = value;
+					this.SendPropertyChanged("last_name");
+					this.Onlast_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="NChar(32)")]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this.OnusernameChanging(value);
+					this.SendPropertyChanging();
+					this._username = value;
+					this.SendPropertyChanged("username");
+					this.OnusernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NChar(32)")]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
+		public System.DateTime created
+		{
+			get
+			{
+				return this._created;
+			}
+			set
+			{
+				if ((this._created != value))
+				{
+					this.OncreatedChanging(value);
+					this.SendPropertyChanging();
+					this._created = value;
+					this.SendPropertyChanged("created");
+					this.OncreatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_company_id", DbType="Int")]
+		public System.Nullable<int> company_id
+		{
+			get
+			{
+				return this._company_id;
+			}
+			set
+			{
+				if ((this._company_id != value))
+				{
+					if (this._company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oncompany_idChanging(value);
+					this.SendPropertyChanging();
+					this._company_id = value;
+					this.SendPropertyChanged("company_id");
+					this.Oncompany_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit NOT NULL")]
+		public bool deleted
+		{
+			get
+			{
+				return this._deleted;
+			}
+			set
+			{
+				if ((this._deleted != value))
+				{
+					this.OndeletedChanging(value);
+					this.SendPropertyChanging();
+					this._deleted = value;
+					this.SendPropertyChanged("deleted");
+					this.OndeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_call", Storage="_calls", ThisKey="id", OtherKey="clerk_id")]
+		public EntitySet<call> calls
+		{
+			get
+			{
+				return this._calls;
+			}
+			set
+			{
+				this._calls.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_task", Storage="_tasks", ThisKey="id", OtherKey="assignee_id")]
+		public EntitySet<task> tasks
+		{
+			get
+			{
+				return this._tasks;
+			}
+			set
+			{
+				this._tasks.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_task1", Storage="_tasks1", ThisKey="id", OtherKey="clerk_id")]
+		public EntitySet<task> tasks1
+		{
+			get
+			{
+				return this._tasks1;
+			}
+			set
+			{
+				this._tasks1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_log", Storage="_logs", ThisKey="id", OtherKey="person_id")]
+		public EntitySet<log> logs
+		{
+			get
+			{
+				return this._logs;
+			}
+			set
+			{
+				this._logs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="company_person", Storage="_company", ThisKey="company_id", OtherKey="id", IsForeignKey=true)]
+		public company company
+		{
+			get
+			{
+				return this._company.Entity;
+			}
+			set
+			{
+				company previousValue = this._company.Entity;
+				if (((previousValue != value) 
+							|| (this._company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._company.Entity = null;
+						previousValue.persons.Remove(this);
+					}
+					this._company.Entity = value;
+					if ((value != null))
+					{
+						value.persons.Add(this);
+						this._company_id = value.id;
+					}
+					else
+					{
+						this._company_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("company");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_calls(call entity)
+		{
+			this.SendPropertyChanging();
+			entity.person = this;
+		}
+		
+		private void detach_calls(call entity)
+		{
+			this.SendPropertyChanging();
+			entity.person = null;
+		}
+		
+		private void attach_tasks(task entity)
+		{
+			this.SendPropertyChanging();
+			entity.person = this;
+		}
+		
+		private void detach_tasks(task entity)
+		{
+			this.SendPropertyChanging();
+			entity.person = null;
+		}
+		
+		private void attach_tasks1(task entity)
+		{
+			this.SendPropertyChanging();
+			entity.person1 = this;
+		}
+		
+		private void detach_tasks1(task entity)
+		{
+			this.SendPropertyChanging();
+			entity.person1 = null;
+		}
+		
+		private void attach_logs(log entity)
+		{
+			this.SendPropertyChanging();
+			entity.person = this;
+		}
+		
+		private void detach_logs(log entity)
+		{
+			this.SendPropertyChanging();
+			entity.person = null;
 		}
 	}
 }

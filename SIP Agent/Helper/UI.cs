@@ -24,6 +24,15 @@ namespace SIP_Agent.Helper
         /// </summary>
         public static Brush flashBackground;
 
+        /// <summary>
+        /// The brush used when painting objects on errors
+        /// </summary>
+        public static Brush ERROR_BRUSH = Brushes.PaleVioletRed;
+
+        /// <summary>
+        /// The brush used when painting objects on success
+        /// </summary>
+        public static Brush SUCCESS_BRUSH = Brushes.LimeGreen;
 
         /// <summary>
         /// Flash an UI element to give visual feedback on action result.
@@ -35,7 +44,7 @@ namespace SIP_Agent.Helper
         public static void flash(object sender, Brush color = null, int duration = 4000)
         {
             if (color == null) {
-                color = Brushes.LimeGreen;
+                color = UI.SUCCESS_BRUSH;
             }
 
             // Save the original object

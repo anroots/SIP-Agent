@@ -8,48 +8,84 @@ using System.Data.Linq.Mapping;
 namespace SIP_Agent.Model
 {
     [Table(Name = "Companies")]
-    public class Company
+    public class Company : Crud, ICrud
     {
-        [Column(IsPrimaryKey = true, IsDbGenerated=true)]
-        public int id { get; set; }
-        public string name { get; set; }
-        [Column(IsDbGenerated=true)]
-        public DateTime created { get; set; }
-        public string address { get; set; }
-        public bool deleted { get; set; }
+        [Column(IsPrimaryKey = true, IsDbGenerated = true)]
+        override public int id { get { return CurrentRow.id; } }
+        public string name { get { return CurrentRow.name; } set { CurrentRow.name = value; } }
+        [Column(IsDbGenerated = true)]
+        public DateTime created { get { return CurrentRow.created; } }
+        public string address { get { return CurrentRow.address; } set { CurrentRow.address = value; } }
+        override public bool deleted { get { return CurrentRow.deleted; } }
+
+        /// <summary>
+        /// Holds the currently loaded row
+        /// </summary>
+        private company CurrentRow;
 
         /// <summary>
         /// The ID of the Anonymous company
         /// </summary>
         public const int ANONYMOUS = 5;
 
+        /// <summary>
+        /// Empty constructor
+        /// </summary>
         public Company()
         {
-            // ?? 
+
         }
 
         /// <summary>
         /// Create and load the model
         /// </summary>
-        /// <param name="companyID"></param>
-        public Company(int companyID)
+        /// <param name="callId"></param>
+        public Company(int companyId = 0)
         {
-            using (DatabaseDataContext db = new DatabaseDataContext())
+            if (companyId == 0)
             {
-                var q = from x in db.companies where x.id.Equals(companyID) && x.deleted.Equals(0) select x;
-                if (q.Count() == 0)
-                {
-                    throw new Exception("Company with ID " + companyID + " not found.");
-                }
-
-                // Very banal approace. Todo: bindings!
-                var row = q.FirstOrDefault();
-                id = row.id;
-                name = row.name;
-                created = row.created;
-                address = row.address;
-                deleted = row.deleted;
+                New();
+            }
+            else
+            {
+                Load(companyId);
             }
         }
+
+        /// <summary>
+        /// Load the model with data (row from the DB)
+        /// </summary>
+        /// <param name="CompanyId"></param>
+        /// <returns></returns>
+        override public bool Load(int CompanyId)
+        {
+            CurrentConnection = new DatabaseDataContext();
+            var q = from x in CurrentConnection.companies where x.id.Equals(CompanyId) && x.deleted.Equals(0) select x;
+            CurrentRow = q.FirstOrDefault();
+
+            return true;
+        }
+
+        /// <summary>
+        /// Creates a new row in the database
+        /// </summary>
+        /// <returns>Insert ID of the new row</returns>
+        override public int New()
+        {
+            base.New();
+            CurrentRow = new company();
+            CurrentConnection.companies.InsertOnSubmit(CurrentRow);
+            CurrentConnection.SubmitChanges();
+            return Save();
+        }
+
+        /// <summary>
+        /// Unload the current row
+        /// </summary>
+        public void Unload()
+        {
+            CurrentRow = null;
+        }
+
     }
 }

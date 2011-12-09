@@ -78,6 +78,7 @@ namespace SIP_Agent.View
             }
             else
             {
+                Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
                 MessageBox.Show("Viga Salvestamisel");
             }
 
@@ -111,7 +112,7 @@ namespace SIP_Agent.View
             }
             else
             {
-                Helper.UI.flash(sender, Brushes.PaleVioletRed);
+                Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
                 MessageBox.Show("Sidumine ebaõnnestus: töö ID formaat on vigane või on kõne selle tööga juba seotud.");
             }
         }

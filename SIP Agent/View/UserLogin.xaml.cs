@@ -47,15 +47,6 @@ namespace SIP_Agent.View
 
         #endregion
 
-        private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void userBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
@@ -67,6 +58,7 @@ namespace SIP_Agent.View
             }
             else
             {
+                Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
                 MessageBox.Show("Login Failed!");
                 Model.Log.Write("Failed authentication for user "+txtUsername.Text);
             }   
@@ -75,8 +67,8 @@ namespace SIP_Agent.View
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Model.Log.Write("Initialized login screen.");
-            App.CurrentUser.Login("ando", "ando");  // stub
-            Switcher.Switch(new TaskView(1)); // stub
+            //App.CurrentUser.Login("ando", "ando");  // stub
+            //Switcher.Switch(new TaskView(1)); // stub
         }
 
         /// <summary>
