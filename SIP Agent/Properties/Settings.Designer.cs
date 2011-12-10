@@ -42,5 +42,15 @@ namespace SIP_Agent.Properties {
                 return ((string)(this["agentConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TÕNIS-PC\\SIPAGENT;Initial Catalog=sip-agent;Integrated Security=True")]
+        public string sip_agentConnectionString {
+            get {
+                return ((string)(this["sip_agentConnectionString"]));
+            }
+        }
     }
 }

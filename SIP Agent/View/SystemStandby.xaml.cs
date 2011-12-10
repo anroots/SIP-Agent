@@ -124,7 +124,7 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void btnChangePerson_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new PersonInfo(SelectedPerson()));
+            Switcher.Switch(new PersonInfo(SelectedPerson())); //When using SelectedPerson, it won't work.
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
