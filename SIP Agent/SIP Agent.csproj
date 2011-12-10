@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helper\I18n\Est.cs" />
     <Compile Include="Database.cs">
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
@@ -92,6 +93,8 @@
     <Compile Include="Model\Crud.cs" />
     <Compile Include="Model\TaskStatus.cs" />
     <Compile Include="Model\TaskCall.cs" />
+    <Compile Include="Helper\Translate.cs" />
+    <Compile Include="Helper\SarcasmException.cs" />
     <Compile Include="View\TaskView.xaml.cs">
       <DependentUpon>TaskView.xaml</DependentUpon>
     </Compile>
