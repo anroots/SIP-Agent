@@ -22,21 +22,13 @@ namespace SIP_Agent.Model
 
         public Person Person;
 
-        protected log CurrentRow;
+        protected new log CurrentRow { get; set; }
 
         /// <summary>
         /// The log class should only have 1 instance at any time.
         /// This is called the singleton pattern.
         /// </summary>
         private static Model.Log LogInstance;
-
-        /// <summary>
-        /// Unload the current row
-        /// </summary>
-        public void Unload()
-        {
-            CurrentRow = null;
-        }
 
         /// <summary>
         /// Load the model with the specified ID

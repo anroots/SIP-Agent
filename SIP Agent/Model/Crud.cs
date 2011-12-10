@@ -24,6 +24,22 @@ namespace SIP_Agent.Model
         /// </summary>
         protected DatabaseDataContext CurrentConnection;
 
+        /// <summary>
+        /// Default constructor - create a new DatabaseDataContext
+        /// </summary>
+        public Crud()
+        {
+            CurrentConnection = new DatabaseDataContext();
+        }
+
+        /// <summary>
+        /// Destructor - clean up DatabaseDataContext
+        /// </summary>
+        ~Crud()
+        {
+            CurrentConnection.Dispose();
+            CurrentConnection = null;
+        }
 
         /// <summary>
         /// Check if the model is loaded
@@ -41,7 +57,11 @@ namespace SIP_Agent.Model
         /// <returns>True on success, False on failure</returns>
         abstract public bool Load(int Id);
 
+        virtual protected ICrud CurrentRow {get; set;}
 
+        virtual public void Unload() {
+            CurrentRow = null;
+        }
 
         /// <summary>
         /// Save the currently loaded model

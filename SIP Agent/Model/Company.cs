@@ -21,7 +21,7 @@ namespace SIP_Agent.Model
         /// <summary>
         /// Holds the currently loaded row
         /// </summary>
-        private company CurrentRow;
+        protected new company CurrentRow { get; set; }
 
         /// <summary>
         /// The ID of the Anonymous company
@@ -79,13 +79,6 @@ namespace SIP_Agent.Model
             return Save();
         }
 
-        /// <summary>
-        /// Unload the current row
-        /// </summary>
-        public void Unload()
-        {
-            CurrentRow = null;
-        }
 
     }
 }

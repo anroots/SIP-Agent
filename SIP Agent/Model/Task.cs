@@ -26,15 +26,8 @@ namespace SIP_Agent.Model
         /// <summary>
         /// Holds the current row
         /// </summary>
-        protected task CurrentRow { get; set; } // todo: How to specify anonymous type?
+        protected new task CurrentRow { get; set; }
 
-        /// <summary>
-        /// Unload the current row
-        /// </summary>
-        public void Unload()
-        {
-            CurrentRow = null;
-        }
 
         /// <summary>
         /// 
@@ -52,7 +45,6 @@ namespace SIP_Agent.Model
         /// <returns>True on success, False on failure</returns>
         override public bool Load(int TaskId)
         {
-            CurrentConnection = new DatabaseDataContext();
             var q = from x in CurrentConnection.tasks where x.id.Equals(TaskId) && x.deleted.Equals(0) select x;
             CurrentRow = q.FirstOrDefault();
             return true;

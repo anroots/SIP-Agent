@@ -15,7 +15,7 @@ namespace SIP_Agent.Model
         public string name { get { return CurrentRow.name; } set { CurrentRow.name = value; } }
         override public bool deleted { get { return CurrentRow.deleted; } }
 
-        protected task_status CurrentRow;
+        protected new task_status CurrentRow { get; set; }
 
         /// <summary>
         /// Load the model with the specified ID
@@ -24,19 +24,11 @@ namespace SIP_Agent.Model
         /// <returns>True on success, False on failure</returns>
         override public bool Load(int StatusId)
         {
-            CurrentConnection = new DatabaseDataContext();
             var q = from x in CurrentConnection.task_status where x.id.Equals(StatusId) && x.deleted.Equals(0) select x;
             CurrentRow = q.FirstOrDefault();
             return true;
         }
 
-        /// <summary>
-        /// Unload the current row
-        /// </summary>
-        public void Unload()
-        {
-            CurrentRow = null;
-        }
 
         /// <summary>
         /// Creates a new entry in the database

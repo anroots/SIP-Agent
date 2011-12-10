@@ -21,7 +21,7 @@ namespace SIP_Agent.Model
         /// <summary>
         /// Represents the currently loaded row
         /// </summary>
-        protected tasks_call CurrentRow;
+        protected new tasks_call CurrentRow { get; set; }
 
        
         override public bool Load(int RowId)
@@ -71,16 +71,6 @@ namespace SIP_Agent.Model
 
             return Save();
         }
-
-        /// <summary>
-        /// Unload the current row
-        /// </summary>
-        public void Unload()
-        {
-            CurrentRow = null;
-        }
-
-
        
     }
 }

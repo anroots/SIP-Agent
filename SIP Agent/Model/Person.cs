@@ -24,7 +24,7 @@ namespace SIP_Agent.Model
         /// <summary>
         /// Holds the current loaded row
         /// </summary>
-        protected person CurrentRow;
+        protected new person CurrentRow { get; set; }
 
         /// <summary>
         /// Acts as the storage for Company
@@ -32,8 +32,14 @@ namespace SIP_Agent.Model
         private Model.Company company;
 
         /// <summary>
+        /// The ID of the Anonymous user
+        /// </summary>
+        public const int ANONYMOUS = 1;
+
+
+        /// <summary>
         /// Holds the Persons Company object.
-        /// Lazy loading is used meaning the Company model is not loaded
+        /// Lazy loading is used, meaning the Company model is not loaded
         /// before it's first accessed.
         /// </summary>
         public Model.Company Company
@@ -51,10 +57,6 @@ namespace SIP_Agent.Model
             set { company = value; }
         }
 
-        /// <summary>
-        /// The ID of the Anonymous user
-        /// </summary>
-        public const int ANONYMOUS = 1;
 
         /// <summary>
         /// Create and load the model
@@ -86,7 +88,6 @@ namespace SIP_Agent.Model
         /// <returns></returns>
         override public bool Load(int PersonId)
         {
-            CurrentConnection = new DatabaseDataContext();
             var q = from x in CurrentConnection.persons where x.id.Equals(PersonId) && x.deleted.Equals(0) select x;
             CurrentRow = q.FirstOrDefault();
 
@@ -107,13 +108,6 @@ namespace SIP_Agent.Model
             return Save();
         }
 
-        /// <summary>
-        /// Unload the current row
-        /// </summary>
-        public void Unload()
-        {
-            CurrentRow = null;
-        }
 
 
         /// <summary>

@@ -24,9 +24,9 @@ namespace SIP_Agent.Model
         override public bool deleted { get { return CurrentRow.deleted; } }
 
         /// <summary>
-        /// 
+        /// Holds the current record
         /// </summary>
-        protected call CurrentRow;
+        protected new call CurrentRow { get; set; }
 
         // Call has relation to caller
         // Todo : find a more resource - friendly way
@@ -78,14 +78,6 @@ namespace SIP_Agent.Model
             CurrentConnection.calls.InsertOnSubmit(CurrentRow);
             CurrentConnection.SubmitChanges();
             return Save();
-        }
-
-        /// <summary>
-        /// Unload the current row
-        /// </summary>
-        public void Unload()
-        {
-            CurrentRow = null;
         }
 
         /// <summary>
