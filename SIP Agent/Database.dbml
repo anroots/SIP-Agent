@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="sip-agent" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DAVID-7;Initial Catalog=sip-agent;Integrated Security=True" SettingsObjectName="SIP_Agent.Properties.Settings" SettingsPropertyName="agentConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=TÕNIS-PC\SIPAGENT;Initial Catalog=sip-agent;Integrated Security=True" SettingsObjectName="SIP_Agent.Properties.Settings" SettingsPropertyName="sip_agentConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.calls" Member="calls">
     <Type Name="call">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -24,6 +24,33 @@
       <Association Name="company_person" Member="persons" ThisKey="id" OtherKey="company_id" Type="person" />
     </Type>
   </Table>
+  <Table Name="dbo.logs" Member="logs">
+    <Type Name="log">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="person_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="text" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="person_log" Member="person" ThisKey="person_id" OtherKey="id" Type="person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.persons" Member="persons">
+    <Type Name="person">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="NChar(64)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="NChar(64)" CanBeNull="true" />
+      <Column Name="username" Type="System.String" DbType="NChar(32)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="NChar(32)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="company_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="person_call" Member="calls" ThisKey="id" OtherKey="clerk_id" Type="call" />
+      <Association Name="person_log" Member="logs" ThisKey="id" OtherKey="person_id" Type="log" />
+      <Association Name="person_task" Member="tasks" ThisKey="id" OtherKey="assignee_id" Type="task" />
+      <Association Name="person_task1" Member="tasks1" ThisKey="id" OtherKey="clerk_id" Type="task" />
+      <Association Name="company_person" Member="company" ThisKey="company_id" OtherKey="id" Type="company" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.phonebook" Member="phonebooks">
     <Type Name="phonebook">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -44,6 +71,17 @@
       <Association Name="task_category_task_category" Member="task_category1" ThisKey="parent_id" OtherKey="id" Type="task_category" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.task_statuses" Member="task_statuses">
+    <Type Name="task_statuses">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="parent_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="task_statuse_task_statuse" Member="task_statuses1" ThisKey="id" OtherKey="parent_id" Type="task_statuses" />
+      <Association Name="task_statuse_task" Member="tasks" ThisKey="id" OtherKey="status_id" Type="task" />
+      <Association Name="task_statuse_task_statuse" Member="task_statuse1" ThisKey="parent_id" OtherKey="id" Type="task_statuses" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.tasks" Member="tasks">
     <Type Name="task">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -60,21 +98,11 @@
       <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="task_task" Member="tasks" ThisKey="id" OtherKey="parent_id" Type="task" />
       <Association Name="task_tasks_call" Member="tasks_calls" ThisKey="id" OtherKey="task_id" Type="tasks_call" />
-      <Association Name="task_category_task" Member="task_category" ThisKey="category_id" OtherKey="id" Type="task_category" IsForeignKey="true" />
-      <Association Name="task_task" Member="task1" ThisKey="parent_id" OtherKey="id" Type="task" IsForeignKey="true" />
       <Association Name="person_task" Member="person" ThisKey="assignee_id" OtherKey="id" Type="person" IsForeignKey="true" />
+      <Association Name="task_category_task" Member="task_category" ThisKey="category_id" OtherKey="id" Type="task_category" IsForeignKey="true" />
       <Association Name="person_task1" Member="person1" ThisKey="clerk_id" OtherKey="id" Type="person" IsForeignKey="true" />
-      <Association Name="task_status_task" Member="task_status" Storage="_task_statuses" ThisKey="status_id" OtherKey="id" Type="task_status" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.logs" Member="logs">
-    <Type Name="log">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="person_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="text" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="person_log" Member="person" ThisKey="person_id" OtherKey="id" Type="person" IsForeignKey="true" />
+      <Association Name="task_task" Member="task1" ThisKey="parent_id" OtherKey="id" Type="task" IsForeignKey="true" />
+      <Association Name="task_statuse_task" Member="task_statuses" ThisKey="status_id" OtherKey="id" Type="task_statuses" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tasks_calls" Member="tasks_calls">
@@ -84,34 +112,6 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Association Name="call_tasks_call" Member="call" ThisKey="call_id" OtherKey="id" Type="call" IsForeignKey="true" />
       <Association Name="task_tasks_call" Member="task" ThisKey="task_id" OtherKey="id" Type="task" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.persons" Member="persons">
-    <Type Name="person">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="first_name" Type="System.String" DbType="NChar(64)" CanBeNull="true" />
-      <Column Name="last_name" Type="System.String" DbType="NChar(64)" CanBeNull="true" />
-      <Column Name="username" Type="System.String" DbType="NChar(32)" CanBeNull="true" />
-      <Column Name="password" Type="System.String" DbType="NChar(32)" CanBeNull="true" />
-      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="company_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="person_call" Member="calls" ThisKey="id" OtherKey="clerk_id" Type="call" />
-      <Association Name="person_task" Member="tasks" ThisKey="id" OtherKey="assignee_id" Type="task" />
-      <Association Name="person_task1" Member="tasks1" ThisKey="id" OtherKey="clerk_id" Type="task" />
-      <Association Name="person_log" Member="logs" ThisKey="id" OtherKey="person_id" Type="log" />
-      <Association Name="company_person" Member="company" ThisKey="company_id" OtherKey="id" Type="company" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.task_statuses" Member="task_status">
-    <Type Name="task_status">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="deleted" Type="System.Boolean" DbType="Bit" CanBeNull="false" />
-      <Column Name="parent_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="task_status_task" Member="tasks" ThisKey="id" OtherKey="status_id" Type="task" />
-      <Association Name="task_status_task_status" Member="task_statuses1" ThisKey="id" OtherKey="parent_id" Type="task_status" />
-      <Association Name="task_status_task_status" Member="task_statuse1" ThisKey="parent_id" OtherKey="id" Type="task_status" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

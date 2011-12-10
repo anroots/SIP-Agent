@@ -91,6 +91,7 @@
     <Compile Include="Helper\UI.cs" />
     <Compile Include="Model\ICrud.cs" />
     <Compile Include="Model\Crud.cs" />
+    <Compile Include="Model\Phonebook.cs" />
     <Compile Include="Model\TaskStatus.cs" />
     <Compile Include="Model\TaskCall.cs" />
     <Compile Include="Helper\Translate.cs" />

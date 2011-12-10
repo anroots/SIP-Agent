@@ -62,29 +62,30 @@ namespace SIP_Agent.View
         {
             using (DatabaseDataContext db = new DatabaseDataContext())
             {
-                person pers = new person();
+
+                Model.Person pers = new Model.Person();
                 pers.first_name = firstNameBox.Text;
                 pers.last_name = lastNameBox.Text;
                 pers.username = userNameBox.Text;
                 pers.password = passWordBox.Text;
+                pers.Save();
 
-                db.persons.InsertOnSubmit(pers);
+                Model.Company c = new Model.Company();
+                c.New();
+                c.name = companyBox.Text;
+                c.Save();
 
+                
+                //Phonebook class not complete.
 
-                phonebook phone = new phonebook();
-                phone.phone = phoneBox.Text;
-                phone.email = mailBox.Text;
-
-                db.phonebooks.InsertOnSubmit(phone);
-
-                company com = new company();
-                com.name = companyBox.Text;
-
-                db.companies.InsertOnSubmit(com);
-
-                db.SubmitChanges();
+                /*Model.Phonebook p = new Model.Phonebook();
+                p.New();
+                p.phone = phoneBox.Text;
+                p.email = mailBox.Text;
+                p.Save();*/
 
                 MessageBox.Show("Kliendi info salvestatud");
+                
 
             }
 
@@ -114,6 +115,28 @@ namespace SIP_Agent.View
             }
         }
 
+        private void companyBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+                {
+                    // Companies dropdown
+                    var companies = from row in db.companies
+                                   select new { name = row.name.Trim() };
+
+                    companyBox.ItemsSource = companies;
+                    companyBox.DisplayMemberPath = "name";
+                    
+                }
+
+            }
+            
+            if (!IsInitialized) return;
+
+            ComboBoxItem item = companyBox.SelectedItem as ComboBoxItem;
+        }
+
         private void checkBox1_Checked(object sender, RoutedEventArgs e)
         {
             using (DatabaseDataContext db = new DatabaseDataContext())
@@ -129,7 +152,7 @@ namespace SIP_Agent.View
                 MessageBox.Show("Kasutaja info kustutatud");
             }
         }
-
+    
 
     }
 }
