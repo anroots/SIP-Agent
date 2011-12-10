@@ -97,5 +97,18 @@ namespace SIP_Agent.Model
             }
             return false;
         }
+
+        /// <summary>
+        /// Find all rows
+        /// </summary>
+        /// <returns></returns>
+        virtual public IQueryable FindAll()
+        {
+            if (CurrentConnection == null)
+            {
+                CurrentConnection = new DatabaseDataContext();
+            }
+            return null;
+        }
     }
 }

@@ -68,8 +68,9 @@ namespace SIP_Agent.View
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Model.Log.Write("Initialized login screen.");
-            //App.CurrentUser.Login("ando", "ando");  // stub
-            //Switcher.Switch(new TaskView(1)); // stub
+            App.CurrentUser = new Model.Person();
+            App.CurrentUser.Login("ando", "ando");  // stub
+            Switcher.Switch(new SystemStandby()); // stub
         }
 
         /// <summary>

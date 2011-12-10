@@ -42,9 +42,6 @@ namespace SIP_Agent
     partial void Inserttask_category(task_category instance);
     partial void Updatetask_category(task_category instance);
     partial void Deletetask_category(task_category instance);
-    partial void Inserttask_statuse(task_statuse instance);
-    partial void Updatetask_statuse(task_statuse instance);
-    partial void Deletetask_statuse(task_statuse instance);
     partial void Inserttask(task instance);
     partial void Updatetask(task instance);
     partial void Deletetask(task instance);
@@ -57,6 +54,9 @@ namespace SIP_Agent
     partial void Insertperson(person instance);
     partial void Updateperson(person instance);
     partial void Deleteperson(person instance);
+    partial void Inserttask_status(task_status instance);
+    partial void Updatetask_status(task_status instance);
+    partial void Deletetask_status(task_status instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -121,14 +121,6 @@ namespace SIP_Agent
 			}
 		}
 		
-		public System.Data.Linq.Table<task_statuse> task_statuses
-		{
-			get
-			{
-				return this.GetTable<task_statuse>();
-			}
-		}
-		
 		public System.Data.Linq.Table<task> tasks
 		{
 			get
@@ -158,6 +150,14 @@ namespace SIP_Agent
 			get
 			{
 				return this.GetTable<person>();
+			}
+		}
+		
+		public System.Data.Linq.Table<task_status> task_status
+		{
+			get
+			{
+				return this.GetTable<task_status>();
 			}
 		}
 	}
@@ -1036,237 +1036,6 @@ namespace SIP_Agent
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.task_statuses")]
-	public partial class task_statuse : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _name;
-		
-		private System.Nullable<bool> _deleted;
-		
-		private System.Nullable<int> _parent_id;
-		
-		private EntitySet<task_statuse> _task_statuses;
-		
-		private EntitySet<task> _tasks;
-		
-		private EntityRef<task_statuse> _task_statuse1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OndeletedChanging(System.Nullable<bool> value);
-    partial void OndeletedChanged();
-    partial void Onparent_idChanging(System.Nullable<int> value);
-    partial void Onparent_idChanged();
-    #endregion
-		
-		public task_statuse()
-		{
-			this._task_statuses = new EntitySet<task_statuse>(new Action<task_statuse>(this.attach_task_statuses), new Action<task_statuse>(this.detach_task_statuses));
-			this._tasks = new EntitySet<task>(new Action<task>(this.attach_tasks), new Action<task>(this.detach_tasks));
-			this._task_statuse1 = default(EntityRef<task_statuse>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(10) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit")]
-		public System.Nullable<bool> deleted
-		{
-			get
-			{
-				return this._deleted;
-			}
-			set
-			{
-				if ((this._deleted != value))
-				{
-					this.OndeletedChanging(value);
-					this.SendPropertyChanging();
-					this._deleted = value;
-					this.SendPropertyChanged("deleted");
-					this.OndeletedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_parent_id", DbType="Int")]
-		public System.Nullable<int> parent_id
-		{
-			get
-			{
-				return this._parent_id;
-			}
-			set
-			{
-				if ((this._parent_id != value))
-				{
-					if (this._task_statuse1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onparent_idChanging(value);
-					this.SendPropertyChanging();
-					this._parent_id = value;
-					this.SendPropertyChanged("parent_id");
-					this.Onparent_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_statuse_task_statuse", Storage="_task_statuses", ThisKey="id", OtherKey="parent_id")]
-		public EntitySet<task_statuse> task_statuses
-		{
-			get
-			{
-				return this._task_statuses;
-			}
-			set
-			{
-				this._task_statuses.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_statuse_task", Storage="_tasks", ThisKey="id", OtherKey="status_id")]
-		public EntitySet<task> tasks
-		{
-			get
-			{
-				return this._tasks;
-			}
-			set
-			{
-				this._tasks.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_statuse_task_statuse", Storage="_task_statuse1", ThisKey="parent_id", OtherKey="id", IsForeignKey=true)]
-		public task_statuse task_statuse1
-		{
-			get
-			{
-				return this._task_statuse1.Entity;
-			}
-			set
-			{
-				task_statuse previousValue = this._task_statuse1.Entity;
-				if (((previousValue != value) 
-							|| (this._task_statuse1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._task_statuse1.Entity = null;
-						previousValue.task_statuses.Remove(this);
-					}
-					this._task_statuse1.Entity = value;
-					if ((value != null))
-					{
-						value.task_statuses.Add(this);
-						this._parent_id = value.id;
-					}
-					else
-					{
-						this._parent_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("task_statuse1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_task_statuses(task_statuse entity)
-		{
-			this.SendPropertyChanging();
-			entity.task_statuse1 = this;
-		}
-		
-		private void detach_task_statuses(task_statuse entity)
-		{
-			this.SendPropertyChanging();
-			entity.task_statuse1 = null;
-		}
-		
-		private void attach_tasks(task entity)
-		{
-			this.SendPropertyChanging();
-			entity.task_statuse = this;
-		}
-		
-		private void detach_tasks(task entity)
-		{
-			this.SendPropertyChanging();
-			entity.task_statuse = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tasks")]
 	public partial class task : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1305,11 +1074,11 @@ namespace SIP_Agent
 		
 		private EntityRef<task> _task1;
 		
-		private EntityRef<task_statuse> _task_statuse;
-		
 		private EntityRef<person> _person;
 		
 		private EntityRef<person> _person1;
+		
+		private EntityRef<task_status> _task_statuses;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1347,9 +1116,9 @@ namespace SIP_Agent
 			this._tasks_calls = new EntitySet<tasks_call>(new Action<tasks_call>(this.attach_tasks_calls), new Action<tasks_call>(this.detach_tasks_calls));
 			this._task_category = default(EntityRef<task_category>);
 			this._task1 = default(EntityRef<task>);
-			this._task_statuse = default(EntityRef<task_statuse>);
 			this._person = default(EntityRef<person>);
 			this._person1 = default(EntityRef<person>);
+			this._task_statuses = default(EntityRef<task_status>);
 			OnCreated();
 		}
 		
@@ -1556,7 +1325,7 @@ namespace SIP_Agent
 			{
 				if ((this._status_id != value))
 				{
-					if (this._task_statuse.HasLoadedOrAssignedValue)
+					if (this._task_statuses.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1707,40 +1476,6 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_statuse_task", Storage="_task_statuse", ThisKey="status_id", OtherKey="id", IsForeignKey=true)]
-		public task_statuse task_statuse
-		{
-			get
-			{
-				return this._task_statuse.Entity;
-			}
-			set
-			{
-				task_statuse previousValue = this._task_statuse.Entity;
-				if (((previousValue != value) 
-							|| (this._task_statuse.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._task_statuse.Entity = null;
-						previousValue.tasks.Remove(this);
-					}
-					this._task_statuse.Entity = value;
-					if ((value != null))
-					{
-						value.tasks.Add(this);
-						this._status_id = value.id;
-					}
-					else
-					{
-						this._status_id = default(int);
-					}
-					this.SendPropertyChanged("task_statuse");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_task", Storage="_person", ThisKey="assignee_id", OtherKey="id", IsForeignKey=true)]
 		public person person
 		{
@@ -1805,6 +1540,40 @@ namespace SIP_Agent
 						this._clerk_id = default(int);
 					}
 					this.SendPropertyChanged("person1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_status_task", Storage="_task_statuses", ThisKey="status_id", OtherKey="id", IsForeignKey=true)]
+		public task_status task_status
+		{
+			get
+			{
+				return this._task_statuses.Entity;
+			}
+			set
+			{
+				task_status previousValue = this._task_statuses.Entity;
+				if (((previousValue != value) 
+							|| (this._task_statuses.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._task_statuses.Entity = null;
+						previousValue.tasks.Remove(this);
+					}
+					this._task_statuses.Entity = value;
+					if ((value != null))
+					{
+						value.tasks.Add(this);
+						this._status_id = value.id;
+					}
+					else
+					{
+						this._status_id = default(int);
+					}
+					this.SendPropertyChanged("task_status");
 				}
 			}
 		}
@@ -2625,6 +2394,237 @@ namespace SIP_Agent
 		{
 			this.SendPropertyChanging();
 			entity.person = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.task_statuses")]
+	public partial class task_status : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _name;
+		
+		private bool _deleted;
+		
+		private System.Nullable<int> _parent_id;
+		
+		private EntitySet<task> _tasks;
+		
+		private EntitySet<task_status> _task_statuses1;
+		
+		private EntityRef<task_status> _task_statuse1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OndeletedChanging(bool value);
+    partial void OndeletedChanged();
+    partial void Onparent_idChanging(System.Nullable<int> value);
+    partial void Onparent_idChanged();
+    #endregion
+		
+		public task_status()
+		{
+			this._tasks = new EntitySet<task>(new Action<task>(this.attach_tasks), new Action<task>(this.detach_tasks));
+			this._task_statuses1 = new EntitySet<task_status>(new Action<task_status>(this.attach_task_statuses1), new Action<task_status>(this.detach_task_statuses1));
+			this._task_statuse1 = default(EntityRef<task_status>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit")]
+		public bool deleted
+		{
+			get
+			{
+				return this._deleted;
+			}
+			set
+			{
+				if ((this._deleted != value))
+				{
+					this.OndeletedChanging(value);
+					this.SendPropertyChanging();
+					this._deleted = value;
+					this.SendPropertyChanged("deleted");
+					this.OndeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_parent_id", DbType="Int")]
+		public System.Nullable<int> parent_id
+		{
+			get
+			{
+				return this._parent_id;
+			}
+			set
+			{
+				if ((this._parent_id != value))
+				{
+					if (this._task_statuse1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onparent_idChanging(value);
+					this.SendPropertyChanging();
+					this._parent_id = value;
+					this.SendPropertyChanged("parent_id");
+					this.Onparent_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_status_task", Storage="_tasks", ThisKey="id", OtherKey="status_id")]
+		public EntitySet<task> tasks
+		{
+			get
+			{
+				return this._tasks;
+			}
+			set
+			{
+				this._tasks.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_status_task_status", Storage="_task_statuses1", ThisKey="id", OtherKey="parent_id")]
+		public EntitySet<task_status> task_statuses1
+		{
+			get
+			{
+				return this._task_statuses1;
+			}
+			set
+			{
+				this._task_statuses1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_status_task_status", Storage="_task_statuse1", ThisKey="parent_id", OtherKey="id", IsForeignKey=true)]
+		public task_status task_statuse1
+		{
+			get
+			{
+				return this._task_statuse1.Entity;
+			}
+			set
+			{
+				task_status previousValue = this._task_statuse1.Entity;
+				if (((previousValue != value) 
+							|| (this._task_statuse1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._task_statuse1.Entity = null;
+						previousValue.task_statuses1.Remove(this);
+					}
+					this._task_statuse1.Entity = value;
+					if ((value != null))
+					{
+						value.task_statuses1.Add(this);
+						this._parent_id = value.id;
+					}
+					else
+					{
+						this._parent_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("task_statuse1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tasks(task entity)
+		{
+			this.SendPropertyChanging();
+			entity.task_status = this;
+		}
+		
+		private void detach_tasks(task entity)
+		{
+			this.SendPropertyChanging();
+			entity.task_status = null;
+		}
+		
+		private void attach_task_statuses1(task_status entity)
+		{
+			this.SendPropertyChanging();
+			entity.task_statuse1 = this;
+		}
+		
+		private void detach_task_statuses1(task_status entity)
+		{
+			this.SendPropertyChanging();
+			entity.task_statuse1 = null;
 		}
 	}
 }

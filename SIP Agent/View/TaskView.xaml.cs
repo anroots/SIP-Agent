@@ -41,17 +41,16 @@ namespace SIP_Agent
         {
 
             txtTitle.DataContext = CurrentTask; // Title
-            txtDetails.DataContext = CurrentTask;
-
+            txtDetails.DataContext = CurrentTask; // Details
 
             // Status dropdown
-            cmbStatus.ItemsSource = Model.Status.FindAll();
+            cmbStatus.ItemsSource = new Model.TaskStatus().FindAll();
             cmbStatus.DisplayMemberPath = "name";
             cmbStatus.SelectedValuePath = "id";
             cmbStatus.SelectedIndex = CurrentTask.status_id;
 
             // Assignee dropdown
-            cmbAssignee.ItemsSource = Model.Person.FindAll();
+            cmbAssignee.ItemsSource = new Model.Person().FindAll();
             cmbAssignee.DisplayMemberPath = "name";
             cmbAssignee.SelectedValuePath = "id";
 

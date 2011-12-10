@@ -44,17 +44,6 @@
       <Association Name="task_category_task_category" Member="task_category1" ThisKey="parent_id" OtherKey="id" Type="task_category" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.task_statuses" Member="task_statuses">
-    <Type Name="task_statuse">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="parent_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="task_statuse_task_statuse" Member="task_statuses" ThisKey="id" OtherKey="parent_id" Type="task_statuse" />
-      <Association Name="task_statuse_task" Member="tasks" ThisKey="id" OtherKey="status_id" Type="task" />
-      <Association Name="task_statuse_task_statuse" Member="task_statuse1" ThisKey="parent_id" OtherKey="id" Type="task_statuse" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.tasks" Member="tasks">
     <Type Name="task">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -73,9 +62,9 @@
       <Association Name="task_tasks_call" Member="tasks_calls" ThisKey="id" OtherKey="task_id" Type="tasks_call" />
       <Association Name="task_category_task" Member="task_category" ThisKey="category_id" OtherKey="id" Type="task_category" IsForeignKey="true" />
       <Association Name="task_task" Member="task1" ThisKey="parent_id" OtherKey="id" Type="task" IsForeignKey="true" />
-      <Association Name="task_statuse_task" Member="task_statuse" ThisKey="status_id" OtherKey="id" Type="task_statuse" IsForeignKey="true" />
       <Association Name="person_task" Member="person" ThisKey="assignee_id" OtherKey="id" Type="person" IsForeignKey="true" />
       <Association Name="person_task1" Member="person1" ThisKey="clerk_id" OtherKey="id" Type="person" IsForeignKey="true" />
+      <Association Name="task_status_task" Member="task_status" Storage="_task_statuses" ThisKey="status_id" OtherKey="id" Type="task_status" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.logs" Member="logs">
@@ -112,6 +101,17 @@
       <Association Name="person_task1" Member="tasks1" ThisKey="id" OtherKey="clerk_id" Type="task" />
       <Association Name="person_log" Member="logs" ThisKey="id" OtherKey="person_id" Type="log" />
       <Association Name="company_person" Member="company" ThisKey="company_id" OtherKey="id" Type="company" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.task_statuses" Member="task_status">
+    <Type Name="task_status">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit" CanBeNull="false" />
+      <Column Name="parent_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="task_status_task" Member="tasks" ThisKey="id" OtherKey="status_id" Type="task" />
+      <Association Name="task_status_task_status" Member="task_statuses1" ThisKey="id" OtherKey="parent_id" Type="task_status" />
+      <Association Name="task_status_task_status" Member="task_statuse1" ThisKey="parent_id" OtherKey="id" Type="task_status" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

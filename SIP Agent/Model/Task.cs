@@ -9,6 +9,7 @@ namespace SIP_Agent.Model
     [Table(Name = "Tasks")]
     public class Task : Crud, ICrud
     {
+        [Column(IsPrimaryKey = true, IsDbGenerated = true)] 
         override public int id { get { return CurrentRow == null ? 0 : CurrentRow.id; } }
         public int? parent_id { get { return CurrentRow.parent_id; } set { CurrentRow.parent_id = value; } }
         public DateTime created { get { return CurrentRow.created; }}
