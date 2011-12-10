@@ -9,10 +9,10 @@ namespace SIP_Agent.Model
     [Table(Name = "Tasks")]
     public class Task : Crud, ICrud
     {
-        [Column(IsPrimaryKey = true, IsDbGenerated = true)] 
+        [Column(IsPrimaryKey = true, IsDbGenerated = true)]
         override public int id { get { return CurrentRow == null ? 0 : CurrentRow.id; } }
         public int? parent_id { get { return CurrentRow.parent_id; } set { CurrentRow.parent_id = value; } }
-        public DateTime created { get { return CurrentRow.created; }}
+        public DateTime created { get { return CurrentRow.created; } }
         public DateTime? updated { get { return CurrentRow.updated; } set { CurrentRow.updated = value; } }
         public string title { get { return CurrentRow.title; } set { CurrentRow.title = value; } }
         public string details { get { return CurrentRow.details; } set { CurrentRow.details = value; } }
@@ -39,6 +39,14 @@ namespace SIP_Agent.Model
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public Task()
+        {
+        }
+
+
+        /// <summary>
         /// Load the model with the specified ID
         /// </summary>
         /// <param name="TaskId">The ID of the row in the database</param>
@@ -60,6 +68,19 @@ namespace SIP_Agent.Model
             Load(0);
             CurrentConnection.tasks.InsertOnSubmit(CurrentRow);
             return Save();
+        }
+
+
+        /// <summary>
+        /// Finds all rows
+        /// </summary>
+        /// <returns></returns>
+        override public IQueryable FindAll()
+        {
+            base.FindAll();
+            return from row in CurrentConnection.tasks
+                   where row.deleted.Equals(0)
+                   select row;
         }
 
     }

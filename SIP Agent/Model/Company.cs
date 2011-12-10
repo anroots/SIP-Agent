@@ -79,6 +79,17 @@ namespace SIP_Agent.Model
             return Save();
         }
 
+        /// <summary>
+        /// Finds all rows
+        /// </summary>
+        /// <returns></returns>
+        override public IQueryable FindAll()
+        {
+            base.FindAll();
+            return from row in CurrentConnection.companies
+                   where row.deleted.Equals(0)
+                   select row;
+        }
 
     }
 }

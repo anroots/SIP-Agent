@@ -156,6 +156,18 @@ namespace SIP_Agent.Model
             return c.New(task_id, id) > 0;
         }
 
+        /// <summary>
+        /// Finds all rows
+        /// </summary>
+        /// <returns></returns>
+        override public IQueryable FindAll()
+        {
+            base.FindAll();
+            return from row in CurrentConnection.calls
+                   where row.deleted.Equals(0)
+                   select row;
+        }
+
     }
 
 }
