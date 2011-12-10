@@ -15,5 +15,12 @@ namespace SIP_Agent
     public partial class App : Application
     {
         public static Model.Person CurrentUser = new Model.Person();
+        private string version = System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Windows.Forms.Application.ExecutablePath).FileVersion;
+
+         public String Version
+         {
+             get { return version; }
+        }
+       
     }
 }
