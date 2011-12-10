@@ -52,7 +52,14 @@
             </TabItem>
         </TabControl>
         <Button Content="Open task" Height="23" HorizontalAlignment="Left" Margin="109,393,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
-        <Button Content="Logi välja" Height="37" HorizontalAlignment="Left" Margin="17,541,0,0" Name="btnLogout" VerticalAlignment="Top" Width="104" Click="btnLogout_Click" />
+        <Button Content="Logi välja" Height="37" HorizontalAlignment="Left" Margin="17,541,0,0" Name="btnLogout" VerticalAlignment="Top" Width="104" Click="btnLogout_Click" Opacity="0.6">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#A5D65D5D" Offset="0" />
+                    <GradientStop Color="#48FFFFFF" Offset="1" />
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </UserControl>
 

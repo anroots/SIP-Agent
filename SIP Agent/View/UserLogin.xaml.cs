@@ -51,7 +51,7 @@ namespace SIP_Agent.View
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-
+            App.CurrentUser = new Model.Person();
             if (App.CurrentUser.Login(txtUsername.Text, txtPassword.Password))
             {
                 Model.Log.Write("Successful authentication for user " + txtUsername.Text);
@@ -60,7 +60,7 @@ namespace SIP_Agent.View
             else
             {
                 Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
-                MessageBox.Show("Login Failed!");
+                txtPassword.Clear();
                 Model.Log.Write("Failed authentication for user "+txtUsername.Text);
             }   
         }

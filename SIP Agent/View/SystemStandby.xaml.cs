@@ -55,6 +55,10 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            // Set window position
+            App.Current.MainWindow.Top = 10;
+            App.Current.MainWindow.Left = 10;
+
             using (DatabaseDataContext db = new DatabaseDataContext())
             {
 
