@@ -20,7 +20,7 @@ namespace SIP_Agent
     /// </summary>
     public partial class TaskView : UserControl, ISwitchable
     {
-        public Model.Task CurrentTask;
+        protected Model.Task CurrentTask;
 
         public TaskView(int TaskId)
         {
@@ -42,29 +42,21 @@ namespace SIP_Agent
 
             txtTitle.DataContext = CurrentTask; // Title
             txtDetails.DataContext = CurrentTask;
-            
-            // Select data sources from DB
-            using (DatabaseDataContext db = new DatabaseDataContext())
-            {
-                // Status dropdown
-                var statuses = from row in db.task_statuses
-                               select new { id = row.id, name = row.name.Trim() };
 
-                cmbStatus.ItemsSource = statuses;
-                cmbStatus.DisplayMemberPath = "name";
-                cmbStatus.SelectedValuePath = "id";
-                cmbStatus.SelectedIndex = CurrentTask.status_id;
 
-                // Persons dropdown
-                var persons = from row in db.persons
-                              select new { id = row.id, name = row.first_name.Trim() + " "+row.last_name.Trim() };
+            // Status dropdown
+            cmbStatus.ItemsSource = Model.Status.FindAll();
+            cmbStatus.DisplayMemberPath = "name";
+            cmbStatus.SelectedValuePath = "id";
+            cmbStatus.SelectedIndex = CurrentTask.status_id;
 
-                cmbAssignee.ItemsSource = persons;
-                cmbAssignee.DisplayMemberPath = "name";
-                cmbAssignee.SelectedValuePath = "id";
+            // Assignee dropdown
+            cmbAssignee.ItemsSource = Model.Person.FindAll();
+            cmbAssignee.DisplayMemberPath = "name";
+            cmbAssignee.SelectedValuePath = "id";
 
-                cmbAssignee.SelectedIndex = CurrentTask.assignee_id != null ? (int)CurrentTask.assignee_id : 0;
-            }
+            cmbAssignee.SelectedIndex = CurrentTask.assignee_id != null ? (int)CurrentTask.assignee_id : 0;
+
         }
 
         #region Event For Child Window
@@ -107,16 +99,37 @@ namespace SIP_Agent
         {
             if (CurrentTask.Save() > -1)
             {
-                Helper.UI.flash(sender);
+                Helper.UI.flash(sender, Helper.UI.SUCCESS_BRUSH);
             }
             else
             {
+                Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
                 MessageBox.Show("Salvestamine ebaõnnestus.");
             }
         }
 
+        /// <summary>
+        /// Change Assignee ID (but do not save yet!)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbAssignee_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CurrentTask.assignee_id = (int)cmbAssignee.SelectedValue;
+        }
 
- 
+        /// <summary>
+        /// Change Status ID (but do not save yet!)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CurrentTask.status_id = (int)cmbStatus.SelectedValue;
+        }
+
+
+
 
     }
 }

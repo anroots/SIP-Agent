@@ -149,6 +149,18 @@ namespace SIP_Agent.Model
             App.CurrentUser = null;
         }
 
+        /// <summary>
+        /// Finds all persons
+        /// </summary>
+        /// <returns>Pairs of ID and first + last names</returns>
+        public static IQueryable FindAll()
+        {
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+                return from row in db.persons where row.deleted.Equals(0)
+                       select new { id = row.id, name = row.first_name.Trim() + " " + row.last_name.Trim() };
+            }
+        }
        
     }
 }
