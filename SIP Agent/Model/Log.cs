@@ -17,7 +17,7 @@ namespace SIP_Agent.Model
         override public int id { get { return CurrentRow == null ? 0 : CurrentRow.id; } }
         public string text { get { return CurrentRow.text; } set { CurrentRow.text = value; } }
         public int person_id { get { return CurrentRow.person_id.Value; } set { CurrentRow.person_id = value; } }
-        [Column(IsDbGenerated=true)]
+        [Column(IsDbGenerated = true)]
         public DateTime created { get { return CurrentRow.created; } set { CurrentRow.created = value; } }
 
         public Person Person;
@@ -28,7 +28,22 @@ namespace SIP_Agent.Model
         /// The log class should only have 1 instance at any time.
         /// This is called the singleton pattern.
         /// </summary>
-        private static Model.Log LogInstance;
+        private static Model.Log instance;
+
+
+        private Log() { }
+
+        public static Model.Log Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Log();
+                }
+                return instance;
+            }
+        }
 
         /// <summary>
         /// Load the model with the specified ID
@@ -50,12 +65,9 @@ namespace SIP_Agent.Model
         /// <returns>The insert ID of the new log row</returns>
         public static int Write(string text)
         {
-            // Check if an instance exists
-            if (LogInstance == null)
-            {
-                LogInstance = new Model.Log();
-            }
 
+            Model.Log LogInstance = Model.Log.Instance;
+            
             // Create a new log entry
             LogInstance.New();
             LogInstance.text = text;
@@ -78,8 +90,20 @@ namespace SIP_Agent.Model
 
             CurrentConnection.logs.InsertOnSubmit(CurrentRow);
             CurrentConnection.SubmitChanges();
-            
+
             return Save();
+        }
+
+        /// <summary>
+        /// Finds all rows
+        /// </summary>
+        /// <returns></returns>
+        override public IQueryable FindAll()
+        {
+            base.FindAll();
+            return from row in CurrentConnection.logs
+                   where row.deleted.Equals(0)
+                   select row;
         }
 
     }

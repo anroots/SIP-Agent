@@ -59,18 +59,15 @@ namespace SIP_Agent.View
             App.Current.MainWindow.Top = 10;
             App.Current.MainWindow.Left = 10;
 
-            using (DatabaseDataContext db = new DatabaseDataContext())
-            {
+            // Persons selectbox
+            cmbClient.ItemsSource = new Model.Person().FindAll();
+            cmbClient.DisplayMemberPath = "name";
+            cmbClient.SelectedValuePath = "id";
 
-                var clients = from row in db.persons
-                              select new { id = row.id, name = row.first_name.Trim() + " " + row.last_name.Trim() };
-
-                cmbClient.ItemsSource = clients;
-                cmbClient.DisplayMemberPath = "name";
-                cmbClient.SelectedValuePath = "id";
-
-                sender = cmbClient.SelectedValuePath;
-            }
+            // Fill Datagrids with info
+            dataGridTasks.ItemsSource = new Model.Task().FindAll();
+            //dataGridCalls.ItemsSource = new Model.Call().FindAll();
+            //dataGridLogs.ItemsSource = new Model.Log().FindAll();
         }
 
 

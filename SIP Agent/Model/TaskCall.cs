@@ -71,6 +71,16 @@ namespace SIP_Agent.Model
 
             return Save();
         }
-       
+
+        /// <summary>
+        /// Finds all rows
+        /// </summary>
+        /// <returns></returns>
+        override public IQueryable FindAll()
+        {
+            base.FindAll();
+            return from row in CurrentConnection.tasks_calls
+                   select row;
+        }
     }
 }
