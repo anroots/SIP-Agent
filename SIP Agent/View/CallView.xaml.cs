@@ -74,12 +74,14 @@ namespace SIP_Agent.View
             CurrentCall.summary = summaryBox.Text;
             if (CurrentCall.Save() != 0)
             {
-                Helper.UI.flash(btn_saveData); 
+                Helper.UI.flash(btn_saveData);
+                Model.Log.Write("Successfully saved summary data.");
             }
             else
             {
                 Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
                 MessageBox.Show("Viga Salvestamisel");
+                Model.Log.Write("Failed to save summary data: " + summaryBox.Text);
             }
 
         }
@@ -109,11 +111,13 @@ namespace SIP_Agent.View
             {
                 txtBindTaskId.Clear();
                 Helper.UI.flash(sender);
+                Model.Log.Write("Successful binding");
             }
             else
             {
                 Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
                 MessageBox.Show("Sidumine ebaõnnestus: töö ID formaat on vigane või on kõne selle tööga juba seotud.");
+                Model.Log.Write("Binding failed");
             }
         }
 
@@ -124,6 +128,7 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
+            Model.Log.Write("Initialized system standby view.");
             Switcher.Switch(new SystemStandby());
         }
 

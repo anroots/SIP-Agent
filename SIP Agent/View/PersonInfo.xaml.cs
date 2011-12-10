@@ -56,6 +56,7 @@ namespace SIP_Agent.View
         private void btn_sSaveData_Click(object sender, RoutedEventArgs e)
         {
             SaveCustomerInfo();
+            
         }
 
         private void SaveCustomerInfo()
@@ -89,6 +90,7 @@ namespace SIP_Agent.View
 
             }
 
+            Model.Log.Write("Saved person information: " + userNameBox.Text);
             Switcher.Switch(new View.SystemStandby());
 
         }
@@ -100,6 +102,7 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
+            Model.Log.Write("Initialized system standby view");
             Switcher.Switch(new View.SystemStandby());
         }
 
@@ -144,12 +147,14 @@ namespace SIP_Agent.View
                 person pers = new person();
                 pers.username = userNameBox.Text;
                 pers.password = passWordBox.Text;
+                Model.Log.Write("Deleted user information: " + userNameBox.Text);
 
                 db.persons.DeleteOnSubmit(pers);
 
                 db.SubmitChanges();
 
                 MessageBox.Show("Kasutaja info kustutatud");
+                
             }
         }
     

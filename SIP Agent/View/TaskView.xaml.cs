@@ -86,6 +86,7 @@ namespace SIP_Agent
         /// <param name="e"></param>
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
+            Model.Log.Write("Initialized system standby view.");
             Switcher.Switch(new View.SystemStandby());
         }
 
@@ -99,11 +100,13 @@ namespace SIP_Agent
             if (CurrentTask.Save() > -1)
             {
                 Helper.UI.flash(sender, Helper.UI.SUCCESS_BRUSH);
+                Model.Log.Write("Successfully saved task information" + CurrentTask);
             }
             else
             {
                 Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
                 MessageBox.Show("Salvestamine ebaõnnestus.");
+                Model.Log.Write("Failed to save task information" + CurrentTask);
             }
         }
 

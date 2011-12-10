@@ -81,6 +81,7 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void button2_Click(object sender, RoutedEventArgs e)
         {
+            Model.Log.Write("Initialized make new call.");
             int callerID = SelectedPerson();
             // Caller has to be selected
             if (callerID == 0)
@@ -121,12 +122,15 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void btnChangePerson_Click(object sender, RoutedEventArgs e)
         {
+            Model.Log.Write("Initialized change person information.");
             Switcher.Switch(new PersonInfo(SelectedPerson())); //When using SelectedPerson, it won't work.
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
+            Model.Log.Write("Initialized open task");
             Switcher.Switch(new TaskView(1));
+
         }
 
         /// <summary>
@@ -137,6 +141,7 @@ namespace SIP_Agent.View
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             App.CurrentUser.Logout();
+            Model.Log.Write("User logged out: " + App.CurrentUser.username);
             Switcher.Switch(new UserLogin());
         }
 
