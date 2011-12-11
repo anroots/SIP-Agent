@@ -79,16 +79,16 @@ namespace SIP_Agent.Model
             return Save();
         }
 
-        /// <summary>
-        /// Finds all rows
+       /// <summary>
+        /// Find all non-deleted rows
         /// </summary>
+        /// <param name="Limit">Max number of rows to return</param>
         /// <returns></returns>
-        override public IQueryable FindAll()
-        {
+        override public IQueryable FindAll(int Limit = 100){
             base.FindAll();
-            return from row in CurrentConnection.companies
+            return (from row in CurrentConnection.companies
                    where row.deleted.Equals(0)
-                   select row;
+                   select row).Take(Limit);
         }
 
     }

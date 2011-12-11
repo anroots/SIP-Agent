@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="call.cs" />
     <Compile Include="Helper\I18n\Est.cs" />
     <Compile Include="Database.cs">
       <DependentUpon>Database.dbml</DependentUpon>

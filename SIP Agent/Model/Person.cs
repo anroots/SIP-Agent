@@ -146,14 +146,47 @@ namespace SIP_Agent.Model
         /// <summary>
         /// Finds all persons
         /// </summary>
+        /// <param name="Limit">The max number of rows to return</param>
         /// <returns>Pairs of ID and first + last names</returns>
-        override public IQueryable FindAll()
+        override public IQueryable FindAll(int Limit = 100)
         {
             base.FindAll();
-                return from row in CurrentConnection.persons where row.deleted.Equals(0)
-                       select new { id = row.id, name = row.first_name.Trim() + " " + row.last_name.Trim() };
+                return (from row in CurrentConnection.persons where row.deleted.Equals(0)
+                       select new { id = row.id, name = row.first_name.Trim() + " " + row.last_name.Trim() }).Take(Limit);
             
         }
+
+
+        /// <summary>
+        /// Take a DB person row and concat first + last names
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns>FirstName LastName</returns>
+        public static string FullName(person row)
+        {
+            // No name is known
+            if (row == null || (row.first_name == null && row.last_name == null))
+            {
+                return null;
+            }
+
+            // Only last name is known
+            if (row.first_name == null)
+            {
+                return row.last_name;
+            }
+
+            // Only first name is known
+            else if (row.last_name == null)
+            {
+                return row.first_name;
+            }
+
+            // Both names are known
+            return row.first_name.Trim() + " " + row.last_name.Trim();
+        }
+
+       
        
     }
 }

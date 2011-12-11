@@ -33,6 +33,9 @@ namespace SIP_Agent
     partial void Insertcall(call instance);
     partial void Updatecall(call instance);
     partial void Deletecall(call instance);
+    partial void Inserttasks_call(tasks_call instance);
+    partial void Updatetasks_call(tasks_call instance);
+    partial void Deletetasks_call(tasks_call instance);
     partial void Insertcompany(company instance);
     partial void Updatecompany(company instance);
     partial void Deletecompany(company instance);
@@ -48,19 +51,16 @@ namespace SIP_Agent
     partial void Inserttask_category(task_category instance);
     partial void Updatetask_category(task_category instance);
     partial void Deletetask_category(task_category instance);
-    partial void Inserttask_statuses(task_statuses instance);
-    partial void Updatetask_statuses(task_statuses instance);
-    partial void Deletetask_statuses(task_statuses instance);
+    partial void Inserttask_statuse(task_statuse instance);
+    partial void Updatetask_statuse(task_statuse instance);
+    partial void Deletetask_statuse(task_statuse instance);
     partial void Inserttask(task instance);
     partial void Updatetask(task instance);
     partial void Deletetask(task instance);
-    partial void Inserttasks_call(tasks_call instance);
-    partial void Updatetasks_call(tasks_call instance);
-    partial void Deletetasks_call(tasks_call instance);
     #endregion
 		
 		public DatabaseDataContext() : 
-				base(global::SIP_Agent.Properties.Settings.Default.sip_agentConnectionString, mappingSource)
+				base(global::SIP_Agent.Properties.Settings.Default.agentConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -94,6 +94,14 @@ namespace SIP_Agent
 			get
 			{
 				return this.GetTable<call>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tasks_call> tasks_calls
+		{
+			get
+			{
+				return this.GetTable<tasks_call>();
 			}
 		}
 		
@@ -137,11 +145,11 @@ namespace SIP_Agent
 			}
 		}
 		
-		public System.Data.Linq.Table<task_statuses> task_statuses
+		public System.Data.Linq.Table<task_statuse> task_statuses
 		{
 			get
 			{
-				return this.GetTable<task_statuses>();
+				return this.GetTable<task_statuse>();
 			}
 		}
 		
@@ -150,14 +158,6 @@ namespace SIP_Agent
 			get
 			{
 				return this.GetTable<task>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tasks_call> tasks_calls
-		{
-			get
-			{
-				return this.GetTable<tasks_call>();
 			}
 		}
 	}
@@ -188,6 +188,8 @@ namespace SIP_Agent
 		
 		private EntityRef<person> _person;
 		
+		private EntityRef<person> _person1;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -214,6 +216,7 @@ namespace SIP_Agent
 		{
 			this._tasks_calls = new EntitySet<tasks_call>(new Action<tasks_call>(this.attach_tasks_calls), new Action<tasks_call>(this.detach_tasks_calls));
 			this._person = default(EntityRef<person>);
+			this._person1 = default(EntityRef<person>);
 			OnCreated();
 		}
 		
@@ -268,6 +271,10 @@ namespace SIP_Agent
 			{
 				if ((this._caller_id != value))
 				{
+					if (this._person.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.Oncaller_idChanging(value);
 					this.SendPropertyChanging();
 					this._caller_id = value;
@@ -288,7 +295,7 @@ namespace SIP_Agent
 			{
 				if ((this._clerk_id != value))
 				{
-					if (this._person.HasLoadedOrAssignedValue)
+					if (this._person1.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -394,7 +401,7 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_call", Storage="_person", ThisKey="clerk_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_call", Storage="_person", ThisKey="caller_id", OtherKey="id", IsForeignKey=true)]
 		public person person
 		{
 			get
@@ -417,13 +424,47 @@ namespace SIP_Agent
 					if ((value != null))
 					{
 						value.calls.Add(this);
+						this._caller_id = value.id;
+					}
+					else
+					{
+						this._caller_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("person");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_call1", Storage="_person1", ThisKey="clerk_id", OtherKey="id", IsForeignKey=true)]
+		public person person1
+		{
+			get
+			{
+				return this._person1.Entity;
+			}
+			set
+			{
+				person previousValue = this._person1.Entity;
+				if (((previousValue != value) 
+							|| (this._person1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._person1.Entity = null;
+						previousValue.calls1.Remove(this);
+					}
+					this._person1.Entity = value;
+					if ((value != null))
+					{
+						value.calls1.Add(this);
 						this._clerk_id = value.id;
 					}
 					else
 					{
 						this._clerk_id = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("person");
+					this.SendPropertyChanged("person1");
 				}
 			}
 		}
@@ -458,6 +499,198 @@ namespace SIP_Agent
 		{
 			this.SendPropertyChanging();
 			entity.call = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tasks_calls")]
+	public partial class tasks_call : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _call_id;
+		
+		private int _task_id;
+		
+		private int _id;
+		
+		private EntityRef<call> _call;
+		
+		private EntityRef<task> _task;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oncall_idChanging(int value);
+    partial void Oncall_idChanged();
+    partial void Ontask_idChanging(int value);
+    partial void Ontask_idChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    #endregion
+		
+		public tasks_call()
+		{
+			this._call = default(EntityRef<call>);
+			this._task = default(EntityRef<task>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_call_id", DbType="Int NOT NULL")]
+		public int call_id
+		{
+			get
+			{
+				return this._call_id;
+			}
+			set
+			{
+				if ((this._call_id != value))
+				{
+					if (this._call.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oncall_idChanging(value);
+					this.SendPropertyChanging();
+					this._call_id = value;
+					this.SendPropertyChanged("call_id");
+					this.Oncall_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_task_id", DbType="Int NOT NULL")]
+		public int task_id
+		{
+			get
+			{
+				return this._task_id;
+			}
+			set
+			{
+				if ((this._task_id != value))
+				{
+					if (this._task.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ontask_idChanging(value);
+					this.SendPropertyChanging();
+					this._task_id = value;
+					this.SendPropertyChanged("task_id");
+					this.Ontask_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="call_tasks_call", Storage="_call", ThisKey="call_id", OtherKey="id", IsForeignKey=true)]
+		public call call
+		{
+			get
+			{
+				return this._call.Entity;
+			}
+			set
+			{
+				call previousValue = this._call.Entity;
+				if (((previousValue != value) 
+							|| (this._call.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._call.Entity = null;
+						previousValue.tasks_calls.Remove(this);
+					}
+					this._call.Entity = value;
+					if ((value != null))
+					{
+						value.tasks_calls.Add(this);
+						this._call_id = value.id;
+					}
+					else
+					{
+						this._call_id = default(int);
+					}
+					this.SendPropertyChanged("call");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_tasks_call", Storage="_task", ThisKey="task_id", OtherKey="id", IsForeignKey=true)]
+		public task task
+		{
+			get
+			{
+				return this._task.Entity;
+			}
+			set
+			{
+				task previousValue = this._task.Entity;
+				if (((previousValue != value) 
+							|| (this._task.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._task.Entity = null;
+						previousValue.tasks_calls.Remove(this);
+					}
+					this._task.Entity = value;
+					if ((value != null))
+					{
+						value.tasks_calls.Add(this);
+						this._task_id = value.id;
+					}
+					else
+					{
+						this._task_id = default(int);
+					}
+					this.SendPropertyChanged("task");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -870,6 +1103,8 @@ namespace SIP_Agent
 		
 		private EntitySet<call> _calls;
 		
+		private EntitySet<call> _calls1;
+		
 		private EntitySet<log> _logs;
 		
 		private EntitySet<task> _tasks;
@@ -903,6 +1138,7 @@ namespace SIP_Agent
 		public person()
 		{
 			this._calls = new EntitySet<call>(new Action<call>(this.attach_calls), new Action<call>(this.detach_calls));
+			this._calls1 = new EntitySet<call>(new Action<call>(this.attach_calls1), new Action<call>(this.detach_calls1));
 			this._logs = new EntitySet<log>(new Action<log>(this.attach_logs), new Action<log>(this.detach_logs));
 			this._tasks = new EntitySet<task>(new Action<task>(this.attach_tasks), new Action<task>(this.detach_tasks));
 			this._tasks1 = new EntitySet<task>(new Action<task>(this.attach_tasks1), new Action<task>(this.detach_tasks1));
@@ -1074,7 +1310,7 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_call", Storage="_calls", ThisKey="id", OtherKey="clerk_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_call", Storage="_calls", ThisKey="id", OtherKey="caller_id")]
 		public EntitySet<call> calls
 		{
 			get
@@ -1084,6 +1320,19 @@ namespace SIP_Agent
 			set
 			{
 				this._calls.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_call1", Storage="_calls1", ThisKey="id", OtherKey="clerk_id")]
+		public EntitySet<call> calls1
+		{
+			get
+			{
+				return this._calls1;
+			}
+			set
+			{
+				this._calls1.Assign(value);
 			}
 		}
 		
@@ -1190,6 +1439,18 @@ namespace SIP_Agent
 		{
 			this.SendPropertyChanging();
 			entity.person = null;
+		}
+		
+		private void attach_calls1(call entity)
+		{
+			this.SendPropertyChanging();
+			entity.person1 = this;
+		}
+		
+		private void detach_calls1(call entity)
+		{
+			this.SendPropertyChanging();
+			entity.person1 = null;
 		}
 		
 		private void attach_logs(log entity)
@@ -1619,7 +1880,7 @@ namespace SIP_Agent
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.task_statuses")]
-	public partial class task_statuses : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class task_statuse : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1628,15 +1889,15 @@ namespace SIP_Agent
 		
 		private string _name;
 		
-		private System.Nullable<bool> _deleted;
+		private bool _deleted;
 		
 		private System.Nullable<int> _parent_id;
 		
-		private EntitySet<task_statuses> _task_statuses1;
+		private EntitySet<task_statuse> _task_statuses;
 		
 		private EntitySet<task> _tasks;
 		
-		private EntityRef<task_statuses> _task_statuse1;
+		private EntityRef<task_statuse> _task_statuse1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1646,17 +1907,17 @@ namespace SIP_Agent
     partial void OnidChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
-    partial void OndeletedChanging(System.Nullable<bool> value);
+    partial void OndeletedChanging(bool value);
     partial void OndeletedChanged();
     partial void Onparent_idChanging(System.Nullable<int> value);
     partial void Onparent_idChanged();
     #endregion
 		
-		public task_statuses()
+		public task_statuse()
 		{
-			this._task_statuses1 = new EntitySet<task_statuses>(new Action<task_statuses>(this.attach_task_statuses1), new Action<task_statuses>(this.detach_task_statuses1));
+			this._task_statuses = new EntitySet<task_statuse>(new Action<task_statuse>(this.attach_task_statuses), new Action<task_statuse>(this.detach_task_statuses));
 			this._tasks = new EntitySet<task>(new Action<task>(this.attach_tasks), new Action<task>(this.detach_tasks));
-			this._task_statuse1 = default(EntityRef<task_statuses>);
+			this._task_statuse1 = default(EntityRef<task_statuse>);
 			OnCreated();
 		}
 		
@@ -1700,8 +1961,8 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit")]
-		public System.Nullable<bool> deleted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit NOT NULL")]
+		public bool deleted
 		{
 			get
 			{
@@ -1744,16 +2005,16 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_statuse_task_statuse", Storage="_task_statuses1", ThisKey="id", OtherKey="parent_id")]
-		public EntitySet<task_statuses> task_statuses1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_statuse_task_statuse", Storage="_task_statuses", ThisKey="id", OtherKey="parent_id")]
+		public EntitySet<task_statuse> task_statuses
 		{
 			get
 			{
-				return this._task_statuses1;
+				return this._task_statuses;
 			}
 			set
 			{
-				this._task_statuses1.Assign(value);
+				this._task_statuses.Assign(value);
 			}
 		}
 		
@@ -1771,7 +2032,7 @@ namespace SIP_Agent
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_statuse_task_statuse", Storage="_task_statuse1", ThisKey="parent_id", OtherKey="id", IsForeignKey=true)]
-		public task_statuses task_statuse1
+		public task_statuse task_statuse1
 		{
 			get
 			{
@@ -1779,7 +2040,7 @@ namespace SIP_Agent
 			}
 			set
 			{
-				task_statuses previousValue = this._task_statuse1.Entity;
+				task_statuse previousValue = this._task_statuse1.Entity;
 				if (((previousValue != value) 
 							|| (this._task_statuse1.HasLoadedOrAssignedValue == false)))
 				{
@@ -1787,12 +2048,12 @@ namespace SIP_Agent
 					if ((previousValue != null))
 					{
 						this._task_statuse1.Entity = null;
-						previousValue.task_statuses1.Remove(this);
+						previousValue.task_statuses.Remove(this);
 					}
 					this._task_statuse1.Entity = value;
 					if ((value != null))
 					{
-						value.task_statuses1.Add(this);
+						value.task_statuses.Add(this);
 						this._parent_id = value.id;
 					}
 					else
@@ -1824,13 +2085,13 @@ namespace SIP_Agent
 			}
 		}
 		
-		private void attach_task_statuses1(task_statuses entity)
+		private void attach_task_statuses(task_statuse entity)
 		{
 			this.SendPropertyChanging();
 			entity.task_statuse1 = this;
 		}
 		
-		private void detach_task_statuses1(task_statuses entity)
+		private void detach_task_statuses(task_statuse entity)
 		{
 			this.SendPropertyChanging();
 			entity.task_statuse1 = null;
@@ -1839,13 +2100,13 @@ namespace SIP_Agent
 		private void attach_tasks(task entity)
 		{
 			this.SendPropertyChanging();
-			entity.task_statuses = this;
+			entity.task_statuse = this;
 		}
 		
 		private void detach_tasks(task entity)
 		{
 			this.SendPropertyChanging();
-			entity.task_statuses = null;
+			entity.task_statuse = null;
 		}
 	}
 	
@@ -1879,9 +2140,9 @@ namespace SIP_Agent
 		
 		private bool _deleted;
 		
-		private EntitySet<task> _tasks;
-		
 		private EntitySet<tasks_call> _tasks_calls;
+		
+		private EntitySet<task> _tasks;
 		
 		private EntityRef<person> _person;
 		
@@ -1891,7 +2152,7 @@ namespace SIP_Agent
 		
 		private EntityRef<task> _task1;
 		
-		private EntityRef<task_statuses> _task_statuses;
+		private EntityRef<task_statuse> _task_statuse;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1925,13 +2186,13 @@ namespace SIP_Agent
 		
 		public task()
 		{
-			this._tasks = new EntitySet<task>(new Action<task>(this.attach_tasks), new Action<task>(this.detach_tasks));
 			this._tasks_calls = new EntitySet<tasks_call>(new Action<tasks_call>(this.attach_tasks_calls), new Action<tasks_call>(this.detach_tasks_calls));
+			this._tasks = new EntitySet<task>(new Action<task>(this.attach_tasks), new Action<task>(this.detach_tasks));
 			this._person = default(EntityRef<person>);
 			this._task_category = default(EntityRef<task_category>);
 			this._person1 = default(EntityRef<person>);
 			this._task1 = default(EntityRef<task>);
-			this._task_statuses = default(EntityRef<task_statuses>);
+			this._task_statuse = default(EntityRef<task_statuse>);
 			OnCreated();
 		}
 		
@@ -2138,7 +2399,7 @@ namespace SIP_Agent
 			{
 				if ((this._status_id != value))
 				{
-					if (this._task_statuses.HasLoadedOrAssignedValue)
+					if (this._task_statuse.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2195,19 +2456,6 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_task", Storage="_tasks", ThisKey="id", OtherKey="parent_id")]
-		public EntitySet<task> tasks
-		{
-			get
-			{
-				return this._tasks;
-			}
-			set
-			{
-				this._tasks.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_tasks_call", Storage="_tasks_calls", ThisKey="id", OtherKey="task_id")]
 		public EntitySet<tasks_call> tasks_calls
 		{
@@ -2218,6 +2466,19 @@ namespace SIP_Agent
 			set
 			{
 				this._tasks_calls.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_task", Storage="_tasks", ThisKey="id", OtherKey="parent_id")]
+		public EntitySet<task> tasks
+		{
+			get
+			{
+				return this._tasks;
+			}
+			set
+			{
+				this._tasks.Assign(value);
 			}
 		}
 		
@@ -2357,26 +2618,26 @@ namespace SIP_Agent
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_statuse_task", Storage="_task_statuses", ThisKey="status_id", OtherKey="id", IsForeignKey=true)]
-		public task_statuses task_statuses
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_statuse_task", Storage="_task_statuse", ThisKey="status_id", OtherKey="id", IsForeignKey=true)]
+		public task_statuse task_statuse
 		{
 			get
 			{
-				return this._task_statuses.Entity;
+				return this._task_statuse.Entity;
 			}
 			set
 			{
-				task_statuses previousValue = this._task_statuses.Entity;
+				task_statuse previousValue = this._task_statuse.Entity;
 				if (((previousValue != value) 
-							|| (this._task_statuses.HasLoadedOrAssignedValue == false)))
+							|| (this._task_statuse.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._task_statuses.Entity = null;
+						this._task_statuse.Entity = null;
 						previousValue.tasks.Remove(this);
 					}
-					this._task_statuses.Entity = value;
+					this._task_statuse.Entity = value;
 					if ((value != null))
 					{
 						value.tasks.Add(this);
@@ -2386,7 +2647,7 @@ namespace SIP_Agent
 					{
 						this._status_id = default(int);
 					}
-					this.SendPropertyChanged("task_statuses");
+					this.SendPropertyChanged("task_statuse");
 				}
 			}
 		}
@@ -2409,18 +2670,6 @@ namespace SIP_Agent
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_tasks(task entity)
-		{
-			this.SendPropertyChanging();
-			entity.task1 = this;
-		}
-		
-		private void detach_tasks(task entity)
-		{
-			this.SendPropertyChanging();
-			entity.task1 = null;
 		}
 		
 		private void attach_tasks_calls(tasks_call entity)
@@ -2434,197 +2683,17 @@ namespace SIP_Agent
 			this.SendPropertyChanging();
 			entity.task = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tasks_calls")]
-	public partial class tasks_call : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _call_id;
-		
-		private int _task_id;
-		
-		private int _id;
-		
-		private EntityRef<call> _call;
-		
-		private EntityRef<task> _task;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Oncall_idChanging(int value);
-    partial void Oncall_idChanged();
-    partial void Ontask_idChanging(int value);
-    partial void Ontask_idChanged();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    #endregion
-		
-		public tasks_call()
+		private void attach_tasks(task entity)
 		{
-			this._call = default(EntityRef<call>);
-			this._task = default(EntityRef<task>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.task1 = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_call_id", DbType="Int NOT NULL")]
-		public int call_id
+		private void detach_tasks(task entity)
 		{
-			get
-			{
-				return this._call_id;
-			}
-			set
-			{
-				if ((this._call_id != value))
-				{
-					if (this._call.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Oncall_idChanging(value);
-					this.SendPropertyChanging();
-					this._call_id = value;
-					this.SendPropertyChanged("call_id");
-					this.Oncall_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_task_id", DbType="Int NOT NULL")]
-		public int task_id
-		{
-			get
-			{
-				return this._task_id;
-			}
-			set
-			{
-				if ((this._task_id != value))
-				{
-					if (this._task.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Ontask_idChanging(value);
-					this.SendPropertyChanging();
-					this._task_id = value;
-					this.SendPropertyChanged("task_id");
-					this.Ontask_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="call_tasks_call", Storage="_call", ThisKey="call_id", OtherKey="id", IsForeignKey=true)]
-		public call call
-		{
-			get
-			{
-				return this._call.Entity;
-			}
-			set
-			{
-				call previousValue = this._call.Entity;
-				if (((previousValue != value) 
-							|| (this._call.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._call.Entity = null;
-						previousValue.tasks_calls.Remove(this);
-					}
-					this._call.Entity = value;
-					if ((value != null))
-					{
-						value.tasks_calls.Add(this);
-						this._call_id = value.id;
-					}
-					else
-					{
-						this._call_id = default(int);
-					}
-					this.SendPropertyChanged("call");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="task_tasks_call", Storage="_task", ThisKey="task_id", OtherKey="id", IsForeignKey=true)]
-		public task task
-		{
-			get
-			{
-				return this._task.Entity;
-			}
-			set
-			{
-				task previousValue = this._task.Entity;
-				if (((previousValue != value) 
-							|| (this._task.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._task.Entity = null;
-						previousValue.tasks_calls.Remove(this);
-					}
-					this._task.Entity = value;
-					if ((value != null))
-					{
-						value.tasks_calls.Add(this);
-						this._task_id = value.id;
-					}
-					else
-					{
-						this._task_id = default(int);
-					}
-					this.SendPropertyChanged("task");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.task1 = null;
 		}
 	}
 }

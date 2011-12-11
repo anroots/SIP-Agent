@@ -6,7 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="920"  Loaded="UserControl_Loaded">
     <UserControl.Resources>
+        
         <CollectionViewSource x:Key="tasksViewSource" />
+
     </UserControl.Resources>
     <Grid Height="600" DataContext="{StaticResource tasksViewSource}">
         <Grid.RowDefinitions>
@@ -40,8 +42,8 @@
         </GroupBox>
         <TabControl Grid.Column="1" Height="550" HorizontalAlignment="Left" Margin="15,39,0,0" Name="tabControl1" VerticalAlignment="Top" Width="533">
             <TabItem Header="Tööd" Name="tabItem1" MinWidth="100">
-                
-                    <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridTasks" VerticalAlignment="Top" Width="511">
+
+                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridTasks" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Pealkiri" Binding="{Binding Path=title}" />
                         <DataGridTextColumn Header="Lisatud" Binding="{Binding Path=created}" />
@@ -51,22 +53,23 @@
                 </DataGrid>
             </TabItem>
             <TabItem Header="Kõned" Name="tabItem2" MinWidth="100">
-                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridCalls" VerticalAlignment="Top" Width="511">
+                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridCalls" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Kõne ID" Binding="{Binding Path=id}" />
-                        <DataGridTextColumn Header="Helistaja" Binding="{Binding Path=caller_id}" />
-                        <DataGridTextColumn Header="Kokkuvõte" Binding="{Binding Path=summary}" />
-                        <DataGridTextColumn Header="Vastu võetud" Binding="{Binding Path=received}" />
-                        <DataGridTextColumn Header="Alustatud" Binding="{Binding Path=start}" />
-                        <DataGridTextColumn Header="Lõpetatud" Binding="{Binding Path=finished}" />
+                        <DataGridTextColumn Header="ID" Width="30" Binding="{Binding Path=ID}" />
+                        <DataGridTextColumn Header="Helistaja" Binding="{Binding Path=CallerName}" />
+                        <DataGridTextColumn Header="Kokkuvõte" Binding="{Binding Path=Summary}" />
+                        <DataGridTextColumn Header="Vastatud" Binding="{Binding Path=Started}" />
+                        <DataGridTextColumn Header="Lõpetatud" Binding="{Binding Path=Finished}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
             <TabItem Header="Logid" Name="tabItem3" MinWidth="100">
-                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridLogs" VerticalAlignment="Top" Width="511">
+                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridLogs" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Kasutaja" Binding="{Binding Path=person_id}" />
-                        <DataGridTextColumn Header="Sisu" Binding="{Binding Path=text}" />
+                        <DataGridTextColumn Header="ID" Binding="{Binding Path=ID}" Width="30" FontSize="10" />
+                        <DataGridTextColumn Header="Aeg" Binding="{Binding Path=Created}" Width="140" />
+                        <DataGridTextColumn Header="Kasutaja" Binding="{Binding Path=PersonName}" Width="120" FontSize="10" />
+                        <DataGridTextColumn Header="Sisu" Binding="{Binding Path=Text}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

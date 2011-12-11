@@ -119,10 +119,11 @@ namespace SIP_Agent.Model
         }
 
         /// <summary>
-        /// Find all rows
+        /// Find all non-deleted rows
         /// </summary>
+        /// <param name="Limit">Max number of rows to return</param>
         /// <returns></returns>
-        virtual public IQueryable FindAll()
+        virtual public IQueryable FindAll(int Limit = 0)
         {
             if (CurrentConnection == null)
             {

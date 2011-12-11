@@ -157,15 +157,23 @@ namespace SIP_Agent.Model
         }
 
         /// <summary>
-        /// Finds all rows
+        /// Find all non-deleted rows
         /// </summary>
+        /// <param name="Limit">Max number of rows to return</param>
         /// <returns></returns>
-        override public IQueryable FindAll()
+        override public IQueryable FindAll(int Limit = 100)
         {
             base.FindAll();
-            return from row in CurrentConnection.calls
-                   where row.deleted.Equals(0)
-                   select row;
+            return (from row in CurrentConnection.calls
+                    where row.deleted.Equals(0) && row.caller_id != null
+                    select new {
+                        ID = row.id,
+                        CallerName = Model.Person.FullName(row.person), // FK row.person = caller_id
+                        Summary = row.summary,
+                        Started = row.ShortStarted,
+                        Finished = row.ShortFinished
+                    }
+                    ).Take(Limit);
         }
 
     }

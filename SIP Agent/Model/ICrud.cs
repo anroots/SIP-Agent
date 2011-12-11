@@ -52,6 +52,6 @@ namespace SIP_Agent.Model
         /// Finds all rows from the models table
         /// </summary>
         /// <returns></returns>
-        IQueryable FindAll();
+        IQueryable FindAll(int Limit);
     }
 }

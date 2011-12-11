@@ -57,7 +57,7 @@ namespace SIP_Agent
             cmbAssignee.SelectedIndex = CurrentTask.assignee_id != null ? (int)CurrentTask.assignee_id : 0;
 
             // Calls datagrid
-            gridCalls.ItemsSource = new Model.Call().FindAll();
+            //gridCalls.ItemsSource = new Model.Call().FindAll();
 
         }
 

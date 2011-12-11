@@ -72,15 +72,16 @@ namespace SIP_Agent.Model
 
 
         /// <summary>
-        /// Finds all rows
+        /// Find all non-deleted rows
         /// </summary>
+        /// <param name="Limit">Max number of rows to return</param>
         /// <returns></returns>
-        override public IQueryable FindAll()
+        override public IQueryable FindAll(int Limit = 100)
         {
             base.FindAll();
-            return from row in CurrentConnection.tasks
+            return (from row in CurrentConnection.tasks
                    where row.deleted.Equals(0)
-                   select row;
+                   select row).Take(Limit);
         }
 
     }

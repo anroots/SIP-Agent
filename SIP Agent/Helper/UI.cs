@@ -43,7 +43,8 @@ namespace SIP_Agent.Helper
         /// <param name="duration">How long to flash</param>
         public static void flash(object sender, Brush color = null, int duration = 4000)
         {
-            if (color == null) {
+            if (color == null)
+            {
                 color = UI.SUCCESS_BRUSH;
             }
 
@@ -86,6 +87,30 @@ namespace SIP_Agent.Helper
       return null;
   }), null);
 
+        }
+        
+        /// <summary>
+        /// Returns a short DateString if the input date is today, long DateString otherwise
+        /// </summary>
+        /// <param name="Date"></param>
+        /// <returns>A DateString, depending on the Date == DateTime.Today</returns>
+        public static string TodayDate(DateTime Date)
+        {
+            return Date.ToShortDateString() == DateTime.Today.ToShortDateString() ? Date.ToString("hh:mm") : Date.ToString("dd.MM.yy hh:mm");
+        }
+
+        /// <summary>
+        /// Wrapper for TodayDate(DateTime d)
+        /// </summary>
+        /// <param name="Date"></param>
+        /// <returns></returns>
+        public static string TodayDate(DateTime? Date)
+        {
+            if (Date == null)
+            {
+                return null;
+            }
+            return TodayDate((DateTime)Date);
         }
     }
 }

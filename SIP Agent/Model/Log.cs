@@ -20,8 +20,19 @@ namespace SIP_Agent.Model
         [Column(IsDbGenerated = true)]
         public DateTime created { get { return CurrentRow.created; } set { CurrentRow.created = value; } }
 
+        /// <summary>
+        /// The person who created the log
+        /// </summary>
         public Person Person;
 
+        /// <summary>
+        /// Get log creator's full name
+        /// </summary>
+        public string PersonName { get { return Person.first_name.Trim() + " " + Person.last_name.Trim(); } }
+
+        /// <summary>
+        /// Holds the current Log row
+        /// </summary>
         protected new log CurrentRow { get; set; }
 
         /// <summary>
@@ -67,7 +78,7 @@ namespace SIP_Agent.Model
         {
 
             Model.Log LogInstance = Model.Log.Instance;
-            
+
             // Create a new log entry
             LogInstance.New();
             LogInstance.text = text;
@@ -95,15 +106,24 @@ namespace SIP_Agent.Model
         }
 
         /// <summary>
-        /// Finds all rows
+        /// Find all non-deleted rows
         /// </summary>
+        /// <param name="Limit">Max number of rows to return</param>
         /// <returns></returns>
-        override public IQueryable FindAll()
+        override public IQueryable FindAll(int Limit = 100)
         {
             base.FindAll();
-            return from row in CurrentConnection.logs
-                   where row.deleted.Equals(0)
-                   select row;
+            return (from row in CurrentConnection.logs
+                    where row.deleted.Equals(0)
+                    select new
+                    {
+                        ID = row.id,
+                        Created = "",//Helper.UI.TodayDate(row),
+                        PersonName = Model.Person.FullName(row.person),
+                        Text = row.text
+                    }
+                       ).OrderByDescending(row=>row.ID)
+                       .Take(Limit);
         }
 
     }
