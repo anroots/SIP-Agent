@@ -63,6 +63,7 @@ namespace SIP_Agent.Model
         /// <returns>True on success, False on failure</returns>
         override public bool Load(int LogId)
         {
+            base.Load(LogId);
             CurrentConnection = new DatabaseDataContext();
             var q = from x in CurrentConnection.logs where x.id.Equals(LogId) && x.deleted.Equals(0) select x;
             CurrentRow = q.FirstOrDefault();
@@ -110,20 +111,20 @@ namespace SIP_Agent.Model
         /// </summary>
         /// <param name="Limit">Max number of rows to return</param>
         /// <returns></returns>
-        override public IQueryable FindAll(int Limit = 100)
+        override public IQueryable FindAll(int Limit = 0)
         {
             base.FindAll();
-            return (from row in CurrentConnection.logs
+            
+            var results = (from row in CurrentConnection.logs
                     where row.deleted.Equals(0)
                     select new
                     {
                         ID = row.id,
-                        Created = "",//Helper.UI.TodayDate(row),
+                        Created = row.ShortCreated,
                         PersonName = Model.Person.FullName(row.person),
                         Text = row.text
-                    }
-                       ).OrderByDescending(row=>row.ID)
-                       .Take(Limit);
+                    }).OrderByDescending(row => row.ID);
+            return results.Take(Limit > 0 ? Limit : results.Count());
         }
 
     }

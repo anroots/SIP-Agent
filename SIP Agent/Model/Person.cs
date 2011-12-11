@@ -148,11 +148,13 @@ namespace SIP_Agent.Model
         /// </summary>
         /// <param name="Limit">The max number of rows to return</param>
         /// <returns>Pairs of ID and first + last names</returns>
-        override public IQueryable FindAll(int Limit = 100)
+        override public IQueryable FindAll(int Limit = 0)
         {
             base.FindAll();
-                return (from row in CurrentConnection.persons where row.deleted.Equals(0)
-                       select new { id = row.id, name = row.first_name.Trim() + " " + row.last_name.Trim() }).Take(Limit);
+            var results = from row in CurrentConnection.persons
+                          where row.deleted.Equals(0)
+                          select new { id = row.id, name = row.first_name.Trim() + " " + row.last_name.Trim() };
+            return results.Take(Limit > 0 ? Limit : results.Count());
             
         }
 

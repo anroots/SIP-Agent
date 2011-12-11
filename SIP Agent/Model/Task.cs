@@ -53,6 +53,7 @@ namespace SIP_Agent.Model
         /// <returns>True on success, False on failure</returns>
         override public bool Load(int TaskId)
         {
+            base.Load(TaskId);
             var q = from x in CurrentConnection.tasks where x.id.Equals(TaskId) && x.deleted.Equals(0) select x;
             CurrentRow = q.FirstOrDefault();
             return true;
@@ -76,12 +77,13 @@ namespace SIP_Agent.Model
         /// </summary>
         /// <param name="Limit">Max number of rows to return</param>
         /// <returns></returns>
-        override public IQueryable FindAll(int Limit = 100)
+        override public IQueryable FindAll(int Limit = 0)
         {
             base.FindAll();
-            return (from row in CurrentConnection.tasks
+            var results = from row in CurrentConnection.tasks
                    where row.deleted.Equals(0)
-                   select row).Take(Limit);
+                   select row;
+            return results.Take(Limit > 0 ? Limit : results.Count());
         }
 
     }

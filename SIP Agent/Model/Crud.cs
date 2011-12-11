@@ -16,6 +16,10 @@ namespace SIP_Agent.Model
         abstract public int id { get; }
         virtual public bool deleted { get; set; }
 
+        /// <summary>
+        /// Holds the state of the model
+        /// </summary>
+        protected bool Disposed = false;
 
         /// <summary>
         /// Stores the current database connection.
@@ -39,6 +43,7 @@ namespace SIP_Agent.Model
         {
             CurrentConnection.Dispose();
             CurrentConnection = null;
+            Disposed = true;
         }
 
         /// <summary>
@@ -55,7 +60,14 @@ namespace SIP_Agent.Model
         /// </summary>
         /// <param name="Id">The ID of the row in the database</param>
         /// <returns>True on success, False on failure</returns>
-        abstract public bool Load(int Id);
+        virtual public bool Load(int Id)
+        {
+            if (CurrentConnection == null || Disposed)
+            {
+                CurrentConnection = new DatabaseDataContext();
+            }
+            return true;
+        }
 
         virtual protected ICrud CurrentRow {get; set;}
 
@@ -93,7 +105,7 @@ namespace SIP_Agent.Model
         /// <returns></returns>
         virtual public int New()
         {
-            if (CurrentConnection == null)
+            if (CurrentConnection == null || Disposed)
             {
                 CurrentConnection = new DatabaseDataContext();
             }
@@ -125,7 +137,7 @@ namespace SIP_Agent.Model
         /// <returns></returns>
         virtual public IQueryable FindAll(int Limit = 0)
         {
-            if (CurrentConnection == null)
+            if (CurrentConnection == null || Disposed)
             {
                 CurrentConnection = new DatabaseDataContext();
             }

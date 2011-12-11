@@ -84,11 +84,12 @@ namespace SIP_Agent.Model
         /// </summary>
         /// <param name="Limit">Max number of rows to return</param>
         /// <returns></returns>
-        override public IQueryable FindAll(int Limit = 100){
+        override public IQueryable FindAll(int Limit = 0){
             base.FindAll();
-            return (from row in CurrentConnection.companies
+            var results = from row in CurrentConnection.companies
                    where row.deleted.Equals(0)
-                   select row).Take(Limit);
+                   select row;
+            return results.Take(Limit > 0 ? Limit : results.Count());
         }
 
     }
