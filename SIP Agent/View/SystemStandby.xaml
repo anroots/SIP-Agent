@@ -51,10 +51,24 @@
                 </DataGrid>
             </TabItem>
             <TabItem Header="Kõned" Name="tabItem2" MinWidth="100">
-                <DataGrid AutoGenerateColumns="True" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridCalls" VerticalAlignment="Top" Width="511" />
+                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridCalls" VerticalAlignment="Top" Width="511">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Kõne ID" Binding="{Binding Path=id}" />
+                        <DataGridTextColumn Header="Helistaja" Binding="{Binding Path=caller_id}" />
+                        <DataGridTextColumn Header="Kokkuvõte" Binding="{Binding Path=summary}" />
+                        <DataGridTextColumn Header="Vastu võetud" Binding="{Binding Path=received}" />
+                        <DataGridTextColumn Header="Alustatud" Binding="{Binding Path=start}" />
+                        <DataGridTextColumn Header="Lõpetatud" Binding="{Binding Path=finished}" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </TabItem>
             <TabItem Header="Logid" Name="tabItem3" MinWidth="100">
-                <DataGrid AutoGenerateColumns="True" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridLogs" VerticalAlignment="Top" Width="511" />
+                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridLogs" VerticalAlignment="Top" Width="511">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Kasutaja" Binding="{Binding Path=person_id}" />
+                        <DataGridTextColumn Header="Sisu" Binding="{Binding Path=text}" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </TabItem>
         </TabControl>
         <Button Content="Open task" Height="23" HorizontalAlignment="Left" Margin="109,393,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />

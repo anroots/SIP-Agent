@@ -29,6 +29,7 @@ namespace SIP_Agent.View
             InitializeComponent();
         }
 
+
         /// <summary>
         /// Initialize the page by providing CALL ID to load
         /// </summary>
@@ -50,6 +51,11 @@ namespace SIP_Agent.View
             summaryBox.Text = CurrentCall.summary;
             companyBox.Text = CurrentCall.Caller.Company.name;
             companyPic.Source = new BitmapImage(new Uri("pack://application:,,,/SIP Agent;component/Images/Avatars/" + CurrentCall.Caller.Company.id.ToString() + ".gif"));
+
+            //Load datagrid info
+            lastCallsData.ItemsSource = new Model.Call(callId).FindAll();
+            lastEntry.ItemsSource = new Model.Task(callId).FindAll();
+
         }
 
 

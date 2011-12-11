@@ -66,8 +66,8 @@ namespace SIP_Agent.View
 
             // Fill Datagrids with info
             dataGridTasks.ItemsSource = new Model.Task().FindAll();
-            //dataGridCalls.ItemsSource = new Model.Call().FindAll();
-            //dataGridLogs.ItemsSource = new Model.Log().FindAll();
+            dataGridCalls.ItemsSource = new Model.Call().FindAll();
+            dataGridLogs.ItemsSource = new Model.Log().FindAll();
         }
 
 

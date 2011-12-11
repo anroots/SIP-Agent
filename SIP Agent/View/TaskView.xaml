@@ -38,7 +38,16 @@
             </TabItem>
             <TabItem Header="Kõned" Name="tabItem3">
                 <Grid>
-                    <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="False" Height="301" HorizontalAlignment="Left" Margin="6,6,0,0" Name="gridCalls" VerticalAlignment="Top" Width="667" />
+                    <DataGrid Name="gridCalls" ItemsSource="{Binding}" AutoGenerateColumns="False" Height="301" HorizontalAlignment="Left" Margin="6,6,0,0" VerticalAlignment="Top" Width="667" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Kõne ID" Binding="{Binding Path=id}" />
+                            <DataGridTextColumn Header="Helistaja" Binding="{Binding Path=caller_id}" />
+                            <DataGridTextColumn Header="Kokkuvõte" Binding="{Binding Path=summary}" />
+                            <DataGridTextColumn Header="Vastu võetud" Binding="{Binding Path=received}" />
+                            <DataGridTextColumn Header="Alustatud" Binding="{Binding Path=start}" />
+                            <DataGridTextColumn Header="Lõpetatud" Binding="{Binding Path=finished}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>

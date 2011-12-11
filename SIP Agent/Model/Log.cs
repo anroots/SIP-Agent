@@ -28,10 +28,10 @@ namespace SIP_Agent.Model
         /// The log class should only have 1 instance at any time.
         /// This is called the singleton pattern.
         /// </summary>
-        private static Model.Log instance;
+        public static Model.Log instance;
 
 
-        private Log() { }
+        public Log() { }
 
         public static Model.Log Instance
         {

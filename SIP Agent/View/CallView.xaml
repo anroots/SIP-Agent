@@ -45,19 +45,19 @@
                 <Grid>
                     <Label Content="Selle kõnega seotud tööd" Height="29" HorizontalAlignment="Left" Margin="7,136,0,0" Name="lastEntryLabel" VerticalAlignment="Top" Width="162" />
                     <Label Content="Eelnevad kõned samalt helistajalt" Height="32" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lastCallsLabel" VerticalAlignment="Top" Width="190" />
-                    <DataGrid AutoGenerateColumns="False" Height="105" HorizontalAlignment="Left" Margin="6,29,0,0" Name="lastCallsData" VerticalAlignment="Top" Width="483" ItemsSource="{Binding}" IsEnabled="True">
+                    <DataGrid AutoGenerateColumns="False" Height="105" HorizontalAlignment="Left" Margin="6,29,0,0" Name="lastCallsData" VerticalAlignment="Top" Width="483" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" />
-                            <DataGridTextColumn Header="Seotud tööd" />
-                            <DataGridTextColumn Header="Vastu võetud" />
-                            <DataGridTextColumn Header="Kestus" />
-                            <DataGridTextColumn Header="Kokkuvõte" />
+                            <DataGridTextColumn Header="ID" Binding="{Binding Path=id}" />
+                            <DataGridTextColumn Header="Seotud tööd" Binding="{Binding Path=clerk_id}"/>
+                            <DataGridTextColumn Header="Vastu võetud" Binding="{Binding Path=received}" />
+                            <DataGridTextColumn Header="Kestus" Binding="{Binding Path=finished-start}" />
+                            <DataGridTextColumn Header="Kokkuvõte" Binding="{Binding Path=summary}" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <DataGrid AutoGenerateColumns="False" Height="147" HorizontalAlignment="Left" Margin="7,162,0,0" Name="lastEntry" VerticalAlignment="Top" Width="482">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" />
-                            <DataGridTextColumn Header="Kirjeldus" />
+                            <DataGridTextColumn Header="ID" Binding="{Binding Path=id}"/>
+                            <DataGridTextColumn Header="Kirjeldus" Binding="{Binding Path=details}" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
