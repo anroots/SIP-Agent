@@ -28,7 +28,7 @@ namespace SIP_Agent.Model
         /// <summary>
         /// Get log creator's full name
         /// </summary>
-        public string PersonName { get { return Person.first_name.Trim() + " " + Person.last_name.Trim(); } }
+        public string PersonName { get { return Model.Person.FullName(CurrentRow.person); } }
 
         /// <summary>
         /// Holds the current Log row
@@ -78,18 +78,29 @@ namespace SIP_Agent.Model
         }
 
         /// <summary>
+        /// Wrapper for Write, also includes translation replacements
+        /// </summary>
+        /// <param name="text">Log text</param>
+        /// <param name="replacements">Placeholders for translation replacement</param>
+        /// <returns>Insert ID</returns>
+        public static int Write(string text,Dictionary<string, string> replacements)
+        {
+            return Write(Translate.str(text, replacements), false);
+        }
+
+        /// <summary>
         /// Write a new log message to the database
         /// </summary>
         /// <param name="text">The text of the log message</param>
         /// <returns>The insert ID of the new log row</returns>
-        public static int Write(string text)
+        public static int Write(string text, bool translate = true)
         {
 
             Model.Log LogInstance = Model.Log.Instance;
 
             // Create a new log entry
             LogInstance.New();
-            LogInstance.text = text;
+            LogInstance.text = translate ? Translate.str(text) : text;
             LogInstance.Save();
 
             return LogInstance.id;

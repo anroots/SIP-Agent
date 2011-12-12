@@ -38,14 +38,14 @@ namespace SIP_Agent.View
         {
             InitializeComponent();
 
-            Model.Log.Write("Initialized call view for call #"+CallId);
+            Model.Log.Write("Initialized call view for call #:CallId", new Dictionary<string, string>(){{":CallId", CallId.ToString()}});
 
             CurrentCall = new Model.Call(CallId);
 
             LabelCallID.Content = CallId.ToString(); // Call ID label
 
             // Bind data about the caller only if not null
-            if (CurrentCall.Caller.Loaded())
+            if (CurrentCall.caller_id > 0)
             {
                 userBox.Text = CurrentCall.CallerName;
                 companyBox.Text = CurrentCall.Caller.Company.name;
@@ -92,13 +92,13 @@ namespace SIP_Agent.View
             if (CurrentCall.Save() != 0)
             {
                 Helper.UI.flash(btn_saveData);
-                Model.Log.Write("Successfully saved summary data.");
+                Model.Log.Write("Successfully saved call #:CallId data.", new Dictionary<string, string>() { {":CallId", CurrentCall.id.ToString()}});
             }
             else
             {
                 Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
                 MessageBox.Show("Viga Salvestamisel");
-                Model.Log.Write("Failed to save summary data: " + summaryBox.Text);
+                Model.Log.Write("Call #:CallId data saving failed.", new Dictionary<string, string>() { { ":CallId", CurrentCall.id.ToString() } });
             }
 
         }

@@ -6,24 +6,24 @@ using System.Data.Linq.Mapping;
 
 namespace SIP_Agent.Model
 {
-    [Table(Name="task_status")]
-    class TaskStatus : Crud, ICrud
+    [Table(Name = "task_categories")]
+    class TaskCategory : Crud, ICrud
     {
 
-     [Column(IsPrimaryKey = true, IsDbGenerated = true)] 
+        [Column(IsPrimaryKey = true, IsDbGenerated = true)]
         override public int id { get { return CurrentRow == null ? 0 : CurrentRow.id; } }
         public string name { get { return CurrentRow.name; } set { CurrentRow.name = value; } }
         override public bool deleted { get { return CurrentRow.deleted; } }
 
         /// <summary>
-        /// Default status for new tasks
+        /// Default category for new tasks
         /// </summary>
         public const int DEFAULT = 1;
 
         /// <summary>
         /// Holds the currently loaded row
         /// </summary>
-        protected new task_statuse CurrentRow { get; set; }
+        protected new task_category CurrentRow { get; set; }
 
         /// <summary>
         /// Load the model with the specified ID
@@ -32,7 +32,7 @@ namespace SIP_Agent.Model
         /// <returns>True on success, False on failure</returns>
         override public bool Load(int StatusId)
         {
-            var q = from x in CurrentConnection.task_statuses where x.id.Equals(StatusId) && x.deleted.Equals(0) select x;
+            var q = from x in CurrentConnection.task_categories where x.id.Equals(StatusId) && x.deleted.Equals(0) select x;
             CurrentRow = q.FirstOrDefault();
             return true;
         }
@@ -46,7 +46,7 @@ namespace SIP_Agent.Model
         {
             base.New();
             Load(0);
-            CurrentConnection.task_statuses.InsertOnSubmit(CurrentRow);
+            CurrentConnection.task_categories.InsertOnSubmit(CurrentRow);
             return Save();
         }
 
@@ -61,10 +61,14 @@ namespace SIP_Agent.Model
         override public IQueryable FindAll(int Limit = 0)
         {
             base.FindAll();
-            var results = from row in CurrentConnection.task_statuses
-                       where row.deleted.Equals(0)
-                       select new { id = row.id, name = Translate.str(row.name) };
-             if (Limit > 0) {return results.Take(Limit);}return results;
+            var results = from row in CurrentConnection.task_categories
+                          where row.deleted.Equals(0)
+                          select new { id = row.id, name = Translate.str(row.name) };
+            if (Limit > 0)
+            {
+                return results.Take(Limit);
+            }
+            return results;
         }
 
     }

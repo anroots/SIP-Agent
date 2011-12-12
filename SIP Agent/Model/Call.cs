@@ -21,7 +21,7 @@ namespace SIP_Agent.Model
         public DateTime received { get { return CurrentRow.received; } set { CurrentRow.received = value; } }
         public DateTime? start { get { return start == null ? null : CurrentRow.start; } set { CurrentRow.start = value; } }
         public DateTime? finished { get { return finished == null ? null : CurrentRow.finished; } set { CurrentRow.finished = value; } }
-        public string CallerName { get { return CurrentRow.CallerName; } }
+        public string CallerName { get { return CurrentRow == null ? null : CurrentRow.CallerName; } }
         override public bool deleted { get { return CurrentRow.deleted; } }
 
 
@@ -80,7 +80,7 @@ namespace SIP_Agent.Model
             received = DateTime.Now;
             CurrentConnection.calls.InsertOnSubmit(CurrentRow);
             CurrentConnection.SubmitChanges();
-            return Save();
+            return CurrentRow.id;
         }
 
         /// <summary>

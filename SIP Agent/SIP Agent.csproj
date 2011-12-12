@@ -93,6 +93,7 @@
     </Compile>
     <Compile Include="Helper\I18n\ITranslationFile.cs" />
     <Compile Include="Helper\UI.cs" />
+    <Compile Include="Model\TaskCategory.cs" />
     <Compile Include="Model\ICrud.cs" />
     <Compile Include="Model\Crud.cs" />
     <Compile Include="Model\Phonebook.cs" />

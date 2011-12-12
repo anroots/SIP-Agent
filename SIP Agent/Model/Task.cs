@@ -12,6 +12,7 @@ namespace SIP_Agent.Model
         [Column(IsPrimaryKey = true, IsDbGenerated = true)]
         override public int id { get { return CurrentRow == null ? 0 : CurrentRow.id; } }
         public int? parent_id { get { return CurrentRow.parent_id; } set { CurrentRow.parent_id = value; } }
+        [Column(IsDbGenerated=true)]
         public DateTime created { get { return CurrentRow.created; } }
         public DateTime? updated { get { return CurrentRow.updated; } set { CurrentRow.updated = value; } }
         public string title { get { return CurrentRow.title; } set { CurrentRow.title = value; } }
@@ -35,7 +36,14 @@ namespace SIP_Agent.Model
         /// <param name="TaskId"></param>
         public Task(int TaskId)
         {
-            Load(TaskId); // Load Task data
+            if (TaskId == 0)
+            {
+                New();
+            }
+            else
+            {
+                Load(TaskId);
+            }
         }
 
         /// <summary>
@@ -66,9 +74,23 @@ namespace SIP_Agent.Model
         override public int New()
         {
             base.New();
-            Load(0);
+
+            // Set default values for the new Task
+            CurrentRow = new task()
+            {
+                created = DateTime.Now,
+                title = Translate.str("Untitled"),
+                clerk_id = Model.Person.ANONYMOUS,
+                assignee_id = Model.Person.ANONYMOUS,
+                status_id = Model.TaskStatus.DEFAULT,
+                category_id = Model.TaskCategory.DEFAULT
+            };
+
+            // Create new row in the DB
             CurrentConnection.tasks.InsertOnSubmit(CurrentRow);
-            return Save();
+            CurrentConnection.SubmitChanges();
+
+            return CurrentRow.id;
         }
 
 

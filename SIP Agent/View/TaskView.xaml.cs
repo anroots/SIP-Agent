@@ -20,13 +20,21 @@ namespace SIP_Agent
     /// </summary>
     public partial class TaskView : UserControl, ISwitchable
     {
+
+        /// <summary>
+        /// Holds the current task row
+        /// </summary>
         protected Model.Task CurrentTask;
 
+        /// <summary>
+        /// Default constructor - load a task with given ID
+        /// </summary>
+        /// <param name="TaskId">Task ID to load</param>
         public TaskView(int TaskId)
         {
             InitializeComponent();
 
-            Model.Log.Write("Opened task " + TaskId);
+            Model.Log.Write("Opened task #:TaskId.", new Dictionary<string, string>(){{":TaskId", TaskId.ToString()}});
 
             // Load task info
             CurrentTask = new Model.Task(TaskId);
@@ -41,22 +49,24 @@ namespace SIP_Agent
         /// </summary>
         private void LoadValues()
         {
-
-            txtTitle.DataContext = CurrentTask; // Title
-            txtDetails.DataContext = CurrentTask; // Details
-
-            // Status dropdown
             cmbStatus.ItemsSource = new Model.TaskStatus().FindAll();
-            cmbStatus.SelectedIndex = CurrentTask.status_id -1;
-
-            // Assignee dropdown
             cmbAssignee.ItemsSource = new Model.Person().FindAll();
-            cmbAssignee.SelectedIndex = CurrentTask.assignee_id == null ? 0 : (int)CurrentTask.assignee_id-1;
+
+            if (CurrentTask.Loaded())
+            {
+                txtTitle.DataContext = CurrentTask; // Title
+                txtDetails.DataContext = CurrentTask; // Details
+
+                // Status dropdown
+                cmbStatus.SelectedIndex = CurrentTask.status_id - 1;
+
+                // Assignee dropdown
+                cmbAssignee.SelectedIndex = CurrentTask.assignee_id == null ? 0 : (int)CurrentTask.assignee_id - 1;
 
 
-            // Find all associated calls for the calls DataGrid
-            gridCalls.ItemsSource = new Model.Call().GetCalls(CurrentTask.Calls());
-
+                // Find all associated calls for the calls DataGrid
+                gridCalls.ItemsSource = new Model.Call().GetCalls(CurrentTask.Calls());
+            }
         }
 
         #region Event For Child Window

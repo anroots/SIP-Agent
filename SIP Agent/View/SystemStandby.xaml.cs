@@ -158,6 +158,16 @@ namespace SIP_Agent.View
             Switcher.Switch(new CallView(CallId));
         }
 
-    } // end of class
+        /// <summary>
+        /// Create new task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnBewTask_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new TaskView(0));
+        }
+
+    }
 }
 

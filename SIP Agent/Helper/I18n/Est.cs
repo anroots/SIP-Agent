@@ -25,6 +25,13 @@ namespace SIP_Agent.Helper.I18n
 
             // Log messages
             {"App started.", "Rakendus käivitatud"},
+            {"Opened task #:TaskId.", "Töö #:TaskId vaade avatud."},
+            //Initialized call view for call #:CallId
+            //    Successfully saved call #:CallId data.
+            //    Call #:CallId data saving failed.
+
+            //Task
+            {"Untitled", "Pealkirjata"},
 
             // Statuses
             {"New", "Uus"},

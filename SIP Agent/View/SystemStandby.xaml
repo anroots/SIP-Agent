@@ -37,7 +37,8 @@
 
                 <TextBlock Height="48" HorizontalAlignment="Left" Margin="13,14,0,0" Name="textBlock1" Text="Jõudeolek. Uue kõne saabumisel valige rippmenüüst helistaja nimi ja vajutage &quot;Loo uus kõne&quot;." VerticalAlignment="Top" TextWrapping="Wrap" Width="273" />
                 <Button Content="Kliendi andmete muutmine" Height="23" HorizontalAlignment="Left" Margin="121,0,0,271" Name="btnChangePerson" VerticalAlignment="Bottom" Width="182" Click="btnChangePerson_Click" Opacity="0.5" />
-                <Button Content="Loo uus kõne" Height="34" HorizontalAlignment="Left" Margin="13,171,0,0" Name="button2" VerticalAlignment="Top" Width="290" Click="button2_Click" />
+                <Button Content="Uus kõne" Height="34" HorizontalAlignment="Left" Margin="13,171,0,0" Name="btnNewCall" VerticalAlignment="Top" Width="290" Click="button2_Click" Background="#FF9EE5A4" FontWeight="Normal" FontSize="14" />
+                <Button Content="Uus töö" Height="34" HorizontalAlignment="Left" Margin="13,219,0,0" Name="btnBewTask" VerticalAlignment="Top" Width="290" Background="#FF9EE5A4" FontWeight="Normal" FontSize="14" Click="btnBewTask_Click" />
             </Grid>
         </GroupBox>
         <TabControl Grid.Column="1" Height="550" HorizontalAlignment="Left" Margin="15,39,0,0" Name="tabControl1" VerticalAlignment="Top" Width="533">
@@ -72,7 +73,7 @@
                         <DataGridTextColumn Header="ID" Binding="{Binding Path=id}" Width="30" FontSize="10" />
                         <DataGridTextColumn Header="Aeg" Binding="{Binding Path=ShortCreated}" Width="100" />
                         <DataGridTextColumn Header="Kasutaja" Binding="{Binding Path=PersonName}" Width="140" FontSize="10" />
-                        <DataGridTextColumn Header="Sisu" Binding="{Binding Path=I18nText}" Width="*"/>
+                        <DataGridTextColumn Header="Sisu" Binding="{Binding Path=text}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
