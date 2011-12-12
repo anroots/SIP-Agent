@@ -116,6 +116,7 @@ namespace SIP_Agent.Model
         {
             if (Loaded())
             {
+                Model.Log.Write("Deleted entity");
                 deleted = true;
             }
         }

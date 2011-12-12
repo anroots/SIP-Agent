@@ -12,11 +12,11 @@ namespace SIP_Agent.Model
     {
         [Column(IsPrimaryKey = true, IsDbGenerated = true)]
         override public int id { get { return CurrentRow == null? 0 : CurrentRow.id; } }
-        public string first_name { get { return CurrentRow.first_name; } set { CurrentRow.first_name = value; } }
-        public string last_name { get { return CurrentRow.last_name; } set { CurrentRow.last_name = value; } }
-        public string username { get { return CurrentRow.username; } set { CurrentRow.username = value; } }
-        public string password { get { return CurrentRow.password; } set { CurrentRow.password = value; } }
-        public int company_id { get { return CurrentRow.company_id.Value; } set { CurrentRow.company_id = value; } }
+        public string first_name { get { return CurrentRow.first_name.Trim(); } set { CurrentRow.first_name = value.Trim(); } }
+        public string last_name { get { return CurrentRow.last_name.Trim(); } set { CurrentRow.last_name = value.Trim(); } }
+        public string username { get { return CurrentRow.username.Trim(); } set { CurrentRow.username = value.Trim(); } }
+        public string password { get { return CurrentRow.password.Trim(); } set { CurrentRow.password = Helper.Functions.HashPass(value.Trim()); } }
+        public int company_id { get { return  CurrentRow.company_id.Value; } set { CurrentRow.company_id = value; } }
         public string Phone { get { return GetPhone(); } }
         public string Email { get { return GetEmail(); } }
 
@@ -228,7 +228,7 @@ namespace SIP_Agent.Model
 
             foreach (phonebook book in Contacts)
             {
-                if (book.phone.Trim().Length > 0)
+                if (book.phone != null && book.phone.Trim().Length > 0)
                 {
                     return book.phone.Trim();
                 }
@@ -261,7 +261,7 @@ namespace SIP_Agent.Model
 
             foreach (phonebook book in Contacts)
             {
-                if (book.email.Trim().Length > 0)
+                if (book.email != null && book.email.Trim().Length > 0)
                 {
                     return book.email.Trim();
                 }

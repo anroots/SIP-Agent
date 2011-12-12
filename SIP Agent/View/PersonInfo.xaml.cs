@@ -68,10 +68,15 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void btn_sSaveData_Click(object sender, RoutedEventArgs e)
         {
-           CurrentPerson.first_name = firstNameBox.Text;
+            CurrentPerson.first_name = firstNameBox.Text;
             CurrentPerson.last_name = lastNameBox.Text;
             CurrentPerson.username = userNameBox.Text;
-            CurrentPerson.password = passWordBox.Text;
+            CurrentPerson.company_id = (int)companyBox.SelectedValue;
+
+            if (passWordBox.Text.Length > 0)
+            {
+                CurrentPerson.password = passWordBox.Text;
+            }
 
             if (CurrentPerson.Save() > 0)
             {
