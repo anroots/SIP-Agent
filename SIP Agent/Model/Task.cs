@@ -83,7 +83,7 @@ namespace SIP_Agent.Model
             var results = from row in CurrentConnection.tasks
                    where row.deleted.Equals(0)
                    select row;
-            return results.Take(Limit > 0 ? Limit : results.Count());
+             if (Limit > 0) {return results.Take(Limit);}return results;
         }
 
     }

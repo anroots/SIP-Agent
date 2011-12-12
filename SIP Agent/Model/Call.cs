@@ -174,7 +174,11 @@ namespace SIP_Agent.Model
                         Started = row.ShortStarted,
                         Finished = row.ShortFinished
                     };
-            return results.Take(Limit > 0 ? Limit : results.Count());
+            if (Limit > 0)
+            {
+                return results.Take(Limit);
+            }
+            return results;
         }
 
     }

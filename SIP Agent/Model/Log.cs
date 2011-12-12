@@ -39,18 +39,25 @@ namespace SIP_Agent.Model
         /// The log class should only have 1 instance at any time.
         /// This is called the singleton pattern.
         /// </summary>
-        public static Model.Log instance;
+        private static Model.Log instance;
 
+        /// <summary>
+        /// Don't allow constructing multiple
+        /// instances from outside the class 
+        /// - use the Instance property instead
+        /// </summary>
+        private Log() { }
 
-        public Log() { }
-
+        /// <summary>
+        /// Returns the current singleton instance of the model
+        /// </summary>
         public static Model.Log Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new Log();
+                    instance = new Model.Log();
                 }
                 return instance;
             }
@@ -124,7 +131,7 @@ namespace SIP_Agent.Model
                         PersonName = Model.Person.FullName(row.person),
                         Text = row.text
                     }).OrderByDescending(row => row.ID);
-            return results.Take(Limit > 0 ? Limit : results.Count());
+             if (Limit > 0) {return results.Take(Limit);}return results;
         }
 
     }

@@ -82,7 +82,7 @@ namespace SIP_Agent.Model
             base.FindAll();
             var results = from row in CurrentConnection.tasks_calls
                           select row;
-            return results.Take(Limit > 0 ? Limit : results.Count());
+             if (Limit > 0) {return results.Take(Limit);}return results;
         }
     }
 }

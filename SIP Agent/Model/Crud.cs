@@ -16,10 +16,6 @@ namespace SIP_Agent.Model
         abstract public int id { get; }
         virtual public bool deleted { get; set; }
 
-        /// <summary>
-        /// Holds the state of the model
-        /// </summary>
-        protected bool Disposed = false;
 
         /// <summary>
         /// Stores the current database connection.
@@ -43,7 +39,6 @@ namespace SIP_Agent.Model
         {
             CurrentConnection.Dispose();
             CurrentConnection = null;
-            Disposed = true;
         }
 
         /// <summary>
@@ -62,10 +57,7 @@ namespace SIP_Agent.Model
         /// <returns>True on success, False on failure</returns>
         virtual public bool Load(int Id)
         {
-            if (CurrentConnection == null || Disposed)
-            {
-                CurrentConnection = new DatabaseDataContext();
-            }
+            ResetConnection();
             return true;
         }
 
@@ -105,10 +97,7 @@ namespace SIP_Agent.Model
         /// <returns></returns>
         virtual public int New()
         {
-            if (CurrentConnection == null || Disposed)
-            {
-                CurrentConnection = new DatabaseDataContext();
-            }
+            ResetConnection();
             return 0;
         }
 
@@ -119,7 +108,7 @@ namespace SIP_Agent.Model
         /// <returns>True on success, False on failure</returns>
         public bool Delete()
         {
-            if (!Loaded())
+            if (Loaded())
             {
                 deleted = true;
                 if (Save() != -1)
@@ -137,11 +126,20 @@ namespace SIP_Agent.Model
         /// <returns></returns>
         virtual public IQueryable FindAll(int Limit = 0)
         {
-            if (CurrentConnection == null || Disposed)
-            {
-                CurrentConnection = new DatabaseDataContext();
-            }
+            ResetConnection();
             return null;
+        }
+
+        /// <summary>
+        /// Reset the DB connection
+        /// </summary>
+        protected void ResetConnection()
+        {
+            if (CurrentConnection != null)
+            {
+                CurrentConnection.Dispose();
+            }
+            CurrentConnection = new DatabaseDataContext();
         }
     }
 }

@@ -56,7 +56,7 @@ namespace SIP_Agent.Model
             var results = from row in CurrentConnection.task_statuses
                        where row.deleted.Equals(0)
                        select new { id = row.id, name = row.name.Trim() };
-            return results.Take(Limit > 0 ? Limit : results.Count());
+             if (Limit > 0) {return results.Take(Limit);}return results;
         }
 
     }
