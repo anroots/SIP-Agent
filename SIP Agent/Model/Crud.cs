@@ -77,7 +77,7 @@ namespace SIP_Agent.Model
         /// Save the currently loaded model
         /// </summary>
         /// <returns>-1 on failure, insert ID on success</returns>
-        public int Save()
+        virtual public int Save()
         {
             // Can't save a model that's not loaded
             if (!Loaded())

@@ -34,7 +34,7 @@ namespace SIP_Agent
         {
             InitializeComponent();
 
-            Model.Log.Write("Opened task #:TaskId.", new Dictionary<string, string>(){{":TaskId", TaskId.ToString()}});
+            Model.Log.Write("Opened task #:TaskId.", new Dictionary<string, string>() { { ":TaskId", TaskId.ToString() } });
 
             // Load task info
             CurrentTask = new Model.Task(TaskId);
@@ -49,8 +49,18 @@ namespace SIP_Agent
         /// </summary>
         private void LoadValues()
         {
+            // Task statuses
             cmbStatus.ItemsSource = new Model.TaskStatus().FindAll();
-            cmbAssignee.ItemsSource = new Model.Person().FindAll();
+
+            // Task categories
+            cmbCategory.ItemsSource = new Model.TaskCategory().FindAll();
+
+            // All 3 persons selectboxes have same sources
+            cmbAssignee.ItemsSource
+                = cmbNotifier.ItemsSource
+                = cmbClerk.ItemsSource
+                = new Model.Person().FindAll();
+
 
             // Pre-fill values on existing tasks
             if (CurrentTask.Loaded())
@@ -68,9 +78,14 @@ namespace SIP_Agent
 
                 // Status dropdown
                 cmbStatus.SelectedIndex = Helper.UI.CmbIndexByValue(cmbStatus, CurrentTask.status_id);
-                
                 // Assignee dropdown
                 cmbAssignee.SelectedIndex = Helper.UI.CmbIndexByValue(cmbAssignee, CurrentTask.assignee_id);
+                // Clerk dropdown
+                cmbClerk.SelectedIndex = Helper.UI.CmbIndexByValue(cmbClerk, CurrentTask.clerk_id);
+                // Notifier dropdown
+                cmbNotifier.SelectedIndex = Helper.UI.CmbIndexByValue(cmbNotifier, CurrentTask.notifier_id);
+                // Task category dropdown
+                cmbCategory.SelectedIndex = Helper.UI.CmbIndexByValue(cmbCategory, CurrentTask.category_id);
 
                 // Find all associated calls for the calls DataGrid
                 gridCalls.ItemsSource = new Model.Call().GetCalls(CurrentTask.Calls());
@@ -146,7 +161,7 @@ namespace SIP_Agent
         /// <param name="e"></param>
         private void cmbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CurrentTask.status_id = (int)cmbStatus.SelectedValue;
+            CurrentTask.status_id = (int)((ComboBox)sender).SelectedValue;
         }
 
         // Open call view
@@ -154,6 +169,36 @@ namespace SIP_Agent
         {
             int CallId = (int)((DataGrid)sender).SelectedValue;
             Switcher.Switch(new View.CallView(CallId));
+        }
+
+        /// <summary>
+        /// Notifier changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbNotifier_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CurrentTask.notifier_id = (int)((ComboBox)sender).SelectedValue;
+        }
+
+        /// <summary>
+        /// Clerk changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbClerk_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CurrentTask.clerk_id = (int)((ComboBox)sender).SelectedValue;
+        }
+
+        /// <summary>
+        /// Category changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CurrentTask.category_id = (int)((ComboBox)sender).SelectedValue;
         }
 
 

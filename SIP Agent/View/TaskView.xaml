@@ -17,18 +17,39 @@
             <ColumnDefinition Width="360*" />
             <ColumnDefinition Width="178*" />
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="1" Header="Olek" Height="181" HorizontalAlignment="Left" Margin="10,65,0,0" Name="groupBox1" VerticalAlignment="Top" Width="201" Grid.RowSpan="2">
+        <GroupBox Grid.Column="1" Header="Töö Olek" Height="411" HorizontalAlignment="Left" Margin="10,65,0,0" Name="groupBox1" VerticalAlignment="Top" Width="201" Grid.RowSpan="3">
             <Grid>
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,50,0,0" Name="cmbStatus" VerticalAlignment="Top" Width="177" ItemsSource="{Binding}" DisplayMemberPath="name" SelectedValuePath="id" SelectionChanged="cmbStatus_SelectionChanged" />
-                <Label Content="Staatus" Height="28" HorizontalAlignment="Left" Margin="6,27,0,0" Name="label1" VerticalAlignment="Top" Width="138" />
-                <Label Content="Lahendaja" Height="28" HorizontalAlignment="Left" Margin="6,79,0,0" Name="label2" VerticalAlignment="Top" />
-                <ComboBox Height="23" DisplayMemberPath="name" SelectedValuePath="id" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="6,104,0,0" Name="cmbAssignee" VerticalAlignment="Top" Width="177" SelectionChanged="cmbAssignee_SelectionChanged" />
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Content="Staatus" Height="28" HorizontalAlignment="Left" Margin="6,11,0,0" Name="label1" VerticalAlignment="Top" Width="Auto" ToolTip="Staatus näitab töö hetkeseisu." />
+                <ComboBox Height="23" HorizontalAlignment="Left" Name="cmbStatus" VerticalAlignment="Top" Width="177" ItemsSource="{Binding}" DisplayMemberPath="name" SelectedValuePath="id" SelectionChanged="cmbStatus_SelectionChanged" Grid.Row="1" />
+                <Label Content="Kategooria" Height="28" HorizontalAlignment="Left" Margin="2,11,0,0" Name="label11" ToolTip="Staatus näitab töö hetkeseisu." VerticalAlignment="Top" Width="Auto" Grid.Row="2" />
+                <ComboBox DisplayMemberPath="name" Height="23" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="0,1,0,0" Name="cmbCategory" SelectedValuePath="id" VerticalAlignment="Top" Width="177" Grid.Row="3" SelectionChanged="cmbCategory_SelectionChanged" />
+                <Label Content="Lahendaja" Height="28" HorizontalAlignment="Left" Margin="2,11,0,0" Name="label2" VerticalAlignment="Top" ToolTip="Lahendaja on isik, kes töö teostama peab." Grid.Row="4" />
+                <ComboBox Height="23" DisplayMemberPath="name" SelectedValuePath="id" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="2,0,0,0" Name="cmbAssignee" VerticalAlignment="Top" Width="177" SelectionChanged="cmbAssignee_SelectionChanged" Grid.Row="5" />
+                <Label Content="Teataja" Height="28" HorizontalAlignment="Left" Margin="3,11,0,0" Name="label9" VerticalAlignment="Top" ToolTip="Teataja on tööst teavitaka; üldjuhul ka helistaja." Grid.Row="6" />
+                <ComboBox DisplayMemberPath="name" Height="23" HorizontalAlignment="Left" ItemsSource="{Binding}" Name="cmbNotifier" SelectedValuePath="id" VerticalAlignment="Top" Width="177" SelectionChanged="cmbNotifier_SelectionChanged" Grid.Row="7" />
+                <Label Content="Sisestaja" Height="28" HorizontalAlignment="Left" Margin="2,11,0,0" Name="label10" VerticalAlignment="Top" ToolTip="Sisestaja on inimene, kes töö andmebaasi kandis." Grid.Row="8" />
+                <ComboBox DisplayMemberPath="name" Height="23" HorizontalAlignment="Left" ItemsSource="{Binding}" Name="cmbClerk" SelectedValuePath="id" VerticalAlignment="Top" Width="177" SelectionChanged="cmbClerk_SelectionChanged" Grid.Row="9" />
             </Grid>
         </GroupBox>
         <TabControl Grid.Column="2" Height="345" HorizontalAlignment="Left" Margin="6,55,0,0" Name="tabControl1" VerticalAlignment="Top" Width="689" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <TabItem Header="Kirjeldus" Name="tabItem1">
                 <Grid>
-                    <TextBox Text="{Binding Path=details}" Height="307" HorizontalAlignment="Left" Margin="6,6,0,0" Name="txtDetails" VerticalAlignment="Top" Width="667" />
+                    <TextBox Text="{Binding Path=details}" Height="305" HorizontalAlignment="Left" Margin="6,6,0,0" Name="txtDetails" VerticalAlignment="Top" Width="667" />
                 </Grid>
             </TabItem>
             <TabItem Name="tabItem2" Header="Info">
