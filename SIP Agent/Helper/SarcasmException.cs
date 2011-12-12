@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SIP_Agent.Helper
+namespace SIP_Agent
 {
     [Serializable()]
     public class SarcasmException : System.Exception

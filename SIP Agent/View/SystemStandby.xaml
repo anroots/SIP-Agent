@@ -72,7 +72,7 @@
                         <DataGridTextColumn Header="ID" Binding="{Binding Path=id}" Width="30" FontSize="10" />
                         <DataGridTextColumn Header="Aeg" Binding="{Binding Path=ShortCreated}" Width="100" />
                         <DataGridTextColumn Header="Kasutaja" Binding="{Binding Path=PersonName}" Width="140" FontSize="10" />
-                        <DataGridTextColumn Header="Sisu" Binding="{Binding Path=text}" Width="*"/>
+                        <DataGridTextColumn Header="Sisu" Binding="{Binding Path=I18nText}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

@@ -8,7 +8,7 @@ using System.Windows;
 namespace SIP_Agent
 {
 
-    
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -17,10 +17,15 @@ namespace SIP_Agent
         public static Model.Person CurrentUser;
         private string version = System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Windows.Forms.Application.ExecutablePath).FileVersion;
 
-         public String Version
-         {
-             get { return version; }
+        public String Version
+        {
+            get { return version; }
         }
-       
+
+        // Main constructor for the application
+        App()
+        {
+            Model.Log.Write("App started.");
+        }
     }
 }

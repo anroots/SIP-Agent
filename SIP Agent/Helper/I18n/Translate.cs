@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SIP_Agent.Helper
+namespace SIP_Agent
 {
     /// <summary>
     /// Translate (translation) class
@@ -55,6 +55,12 @@ namespace SIP_Agent.Helper
             }
         }
 
+
+        public static string str(string input)
+        {
+            return str(input, null);
+        }
+
         /// <summary>
         /// Translate a string placeholder into the current language
         /// </summary>
@@ -63,14 +69,20 @@ namespace SIP_Agent.Helper
         /// <returns>Translated string or input itself if string not found</returns>
         public static string str(string input, Dictionary<string, string> replacements = null)
         {
+            if (input == null)
+            {
+                return null;
+            }
+            input = input.Trim();
+
             // todo: Multilanguage support (reflection), dynamic loading and unloading
-            Dictionary<string, string> translations = I18n.Est.Table();
+            Dictionary<string, string> translations = Helper.I18n.Est.Table();
 
             // Lookup the translation
             if (translations.ContainsKey(input))
             {
                 input = translations[input];
-            }
+            } 
 
             // Do replacements within the translated text
             if (replacements != null)

@@ -1111,6 +1111,8 @@ namespace SIP_Agent
 		
 		private EntitySet<task> _tasks1;
 		
+		private EntitySet<task> _tasks2;
+		
 		private EntityRef<company> _company;
 		
     #region Extensibility Method Definitions
@@ -1142,6 +1144,7 @@ namespace SIP_Agent
 			this._logs = new EntitySet<log>(new Action<log>(this.attach_logs), new Action<log>(this.detach_logs));
 			this._tasks = new EntitySet<task>(new Action<task>(this.attach_tasks), new Action<task>(this.detach_tasks));
 			this._tasks1 = new EntitySet<task>(new Action<task>(this.attach_tasks1), new Action<task>(this.detach_tasks1));
+			this._tasks2 = new EntitySet<task>(new Action<task>(this.attach_tasks2), new Action<task>(this.detach_tasks2));
 			this._company = default(EntityRef<company>);
 			OnCreated();
 		}
@@ -1375,6 +1378,19 @@ namespace SIP_Agent
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_task2", Storage="_tasks2", ThisKey="id", OtherKey="notifier_id")]
+		public EntitySet<task> tasks2
+		{
+			get
+			{
+				return this._tasks2;
+			}
+			set
+			{
+				this._tasks2.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="company_person", Storage="_company", ThisKey="company_id", OtherKey="id", IsForeignKey=true)]
 		public company company
 		{
@@ -1487,6 +1503,18 @@ namespace SIP_Agent
 		{
 			this.SendPropertyChanging();
 			entity.person1 = null;
+		}
+		
+		private void attach_tasks2(task entity)
+		{
+			this.SendPropertyChanging();
+			entity.person2 = this;
+		}
+		
+		private void detach_tasks2(task entity)
+		{
+			this.SendPropertyChanging();
+			entity.person2 = null;
 		}
 	}
 	
@@ -2154,6 +2182,8 @@ namespace SIP_Agent
 		
 		private EntityRef<task_statuse> _task_statuse;
 		
+		private EntityRef<person> _person2;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2193,6 +2223,7 @@ namespace SIP_Agent
 			this._person1 = default(EntityRef<person>);
 			this._task1 = default(EntityRef<task>);
 			this._task_statuse = default(EntityRef<task_statuse>);
+			this._person2 = default(EntityRef<person>);
 			OnCreated();
 		}
 		
@@ -2331,6 +2362,10 @@ namespace SIP_Agent
 			{
 				if ((this._notifier_id != value))
 				{
+					if (this._person2.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.Onnotifier_idChanging(value);
 					this.SendPropertyChanging();
 					this._notifier_id = value;
@@ -2648,6 +2683,40 @@ namespace SIP_Agent
 						this._status_id = default(int);
 					}
 					this.SendPropertyChanged("task_statuse");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="person_task2", Storage="_person2", ThisKey="notifier_id", OtherKey="id", IsForeignKey=true)]
+		public person person2
+		{
+			get
+			{
+				return this._person2.Entity;
+			}
+			set
+			{
+				person previousValue = this._person2.Entity;
+				if (((previousValue != value) 
+							|| (this._person2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._person2.Entity = null;
+						previousValue.tasks2.Remove(this);
+					}
+					this._person2.Entity = value;
+					if ((value != null))
+					{
+						value.tasks2.Add(this);
+						this._notifier_id = value.id;
+					}
+					else
+					{
+						this._notifier_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("person2");
 				}
 			}
 		}

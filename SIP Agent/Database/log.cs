@@ -13,5 +13,8 @@ namespace SIP_Agent
         public string ShortCreated { get { return Helper.UI.TodayDate(created); } }
 
         public string PersonName { get { return Model.Person.FullName(person); } }
+
+        public string I18nText { get { return Translate.str(text); } }
     }
 }
+

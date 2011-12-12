@@ -59,6 +59,7 @@
       <Association Name="person_log" Member="logs" ThisKey="id" OtherKey="person_id" Type="log" />
       <Association Name="person_task" Member="tasks" ThisKey="id" OtherKey="assignee_id" Type="task" />
       <Association Name="person_task1" Member="tasks1" ThisKey="id" OtherKey="clerk_id" Type="task" />
+      <Association Name="person_task2" Member="tasks2" ThisKey="id" OtherKey="notifier_id" Type="task" />
       <Association Name="company_person" Member="company" ThisKey="company_id" OtherKey="id" Type="company" IsForeignKey="true" />
     </Type>
   </Table>
@@ -114,6 +115,7 @@
       <Association Name="person_task1" Member="person1" ThisKey="clerk_id" OtherKey="id" Type="person" IsForeignKey="true" />
       <Association Name="task_task" Member="task1" ThisKey="parent_id" OtherKey="id" Type="task" IsForeignKey="true" />
       <Association Name="task_statuse_task" Member="task_statuse" ThisKey="status_id" OtherKey="id" Type="task_statuse" IsForeignKey="true" />
+      <Association Name="person_task2" Member="person2" ThisKey="notifier_id" OtherKey="id" Type="person" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

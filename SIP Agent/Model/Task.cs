@@ -85,6 +85,10 @@ namespace SIP_Agent.Model
                           select new { 
                             ID = row.id,
                             Created = row.ShortCreated,
+                            Title = row.title,
+                            StatusName = Translate.str(row.task_statuse.name),
+                            AssigneeName = Model.Person.FullName(row.person),
+                            NotifierName = Model.Person.FullName(row.person2)
                           };
             if (Limit > 0)
             {
