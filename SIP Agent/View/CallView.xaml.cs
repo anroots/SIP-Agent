@@ -63,9 +63,7 @@ namespace SIP_Agent.View
             {
             }
 
-
-            //Load datagrid info
-            lastEntry.ItemsSource = new Model.Task(CallId).FindAll();
+            lastEntry.ItemsSource = new Model.Task().GetTasks(CurrentCall.AssociatedTasks()); // Tasks associated with the call
 
         }
 
@@ -135,7 +133,7 @@ namespace SIP_Agent.View
             {
                 txtBindTaskId.Clear();
                 Helper.UI.flash(sender);
-                Model.Log.Write("Successful binding");
+                Model.Log.Write("Successful binding of call #"+CurrentCall.id+" to task #"+txtBindTaskId.Text);
             }
             else
             {
@@ -152,8 +150,17 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            Model.Log.Write("Initialized system standby view.");
             Switcher.Switch(new SystemStandby());
+        }
+
+        /// <summary>
+        /// Switch to task view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lastEntry_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Switcher.Switch(new TaskView((int)((DataGrid)sender).SelectedValue));
         }
 
        

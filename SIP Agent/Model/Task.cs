@@ -111,5 +111,18 @@ namespace SIP_Agent.Model
                    where row.task_id.Equals(id)
                    select row.id).ToArray();
         }
+
+        /// <summary>
+        /// Returns tasks matching given ID's
+        /// </summary>
+        /// <param name="CallIds">An int array of task ID's</param>
+        /// <returns>All tasks whose ID's are within the TaskIds param</returns>
+        public task[] GetTasks(int[] TaskIds)
+        {
+            return (from row in
+                        (from task_row in CurrentConnection.tasks select task_row)
+                    where TaskIds.Contains(row.id)
+                    select row).ToArray<task>();
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace SIP_Agent.View
         public SystemStandby()
         {
             InitializeComponent();
-
+            Model.Log.Write("Initialized system standby view.");
         }
 
 

@@ -235,6 +235,18 @@ namespace SIP_Agent.Model
                     select row).ToArray<call>();
         }
 
+
+        /// <summary>
+        /// Get an array of all task IDs associated with the call
+        /// </summary>
+        /// <returns>An array of Task IDs</returns>
+        public int[] AssociatedTasks()
+        {
+            return (from row in
+                       CurrentConnection.tasks_calls
+                    where row.call_id.Equals(id)
+                    select row.call_id).ToArray();
+        }
     }
 
 }
