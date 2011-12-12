@@ -131,6 +131,13 @@ namespace SIP_Agent
             CurrentTask.status_id = (int)cmbStatus.SelectedValue;
         }
 
+        // Open call view
+        private void gridCalls_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int CallId = (int)((DataGrid)sender).SelectedValue;
+            Switcher.Switch(new View.CallView(CallId));
+        }
+
 
 
 

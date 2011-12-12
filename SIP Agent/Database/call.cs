@@ -13,6 +13,7 @@ namespace SIP_Agent
         public string ShortReceived { get { return Helper.UI.TodayDate(received); } }
         public string ShortStarted { get { return Helper.UI.TodayDate(start); } }
         public string ShortFinished { get { return Helper.UI.TodayDate(finished); } }
+        public string CallerName { get { return Model.Person.FullName(person); } }
 
     }
 }

@@ -55,7 +55,7 @@
                 </DataGrid>
             </TabItem>
             <TabItem Header="Kõned" Name="tabItem2" MinWidth="100">
-                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridCalls" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="dataGridCalls_MouseDoubleClick">
+                <DataGrid AutoGenerateColumns="False" Height="506" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridCalls" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="dataGridCalls_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" FontSize="10" Width="30" Binding="{Binding Path=ID}" />
                         <DataGridTextColumn Header="Helistaja" Binding="{Binding Path=CallerName}" />

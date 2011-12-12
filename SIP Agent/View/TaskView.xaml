@@ -38,7 +38,7 @@
             </TabItem>
             <TabItem Header="Kõned" Name="tabItem3">
                 <Grid>
-                    <DataGrid Name="gridCalls" ItemsSource="{Binding}" AutoGenerateColumns="False" Height="301" HorizontalAlignment="Left" Margin="6,6,0,0" VerticalAlignment="Top" Width="667" >
+                    <DataGrid Name="gridCalls" ItemsSource="{Binding}" SelectedValuePath="id" AutoGenerateColumns="False" Height="301" HorizontalAlignment="Left" Margin="6,6,0,0" Width="667" MouseDoubleClick="gridCalls_MouseDoubleClick" VerticalAlignment="Top" BorderThickness="0" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Kõne ID" Binding="{Binding Path=id}" />
                             <DataGridTextColumn Header="Helistaja" Binding="{Binding Path=caller_id}" />

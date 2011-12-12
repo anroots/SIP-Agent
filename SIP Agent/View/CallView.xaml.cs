@@ -34,27 +34,38 @@ namespace SIP_Agent.View
         /// Initialize the page by providing CALL ID to load
         /// </summary>
         /// <param name="callId">When given, open an already existing call</param>
-        public CallView(int callId = 0)
+        public CallView(int CallId = 0)
         {
             InitializeComponent();
 
-            // The XAML represents one call so create & load the model
-            CurrentCall = new Model.Call(callId);
-            if (!CurrentCall.Loaded())
+            Model.Log.Write("Initialized call view for call #"+CallId);
+
+            CurrentCall = new Model.Call(CallId);
+
+            LabelCallID.Content = CallId.ToString(); // Call ID label
+
+            // Bind data about the caller only if not null
+            if (CurrentCall.Caller.Loaded())
             {
-                throw new NullReferenceException("No call with such ID found.");
+                userBox.Text = CurrentCall.CallerName;
+                companyBox.Text = CurrentCall.Caller.Company.name;
+                // Previous calls by caller
+                lastCallsData.ItemsSource = new Model.Person(CurrentCall.Caller.id)
+                    .PreviousCalls(CurrentCall.received);
+            }
+            summaryBox.Text = CurrentCall.summary;
+
+            try
+            {
+                companyPic.Source = new BitmapImage(new Uri("pack://application:,,,/SIP Agent;component/Images/Avatars/" + CurrentCall.Caller.Company.id.ToString() + ".gif"));
+            }
+            catch (Exception) // The default pic remains on exception (404)
+            {
             }
 
-            LabelCallID.Content = callId.ToString(); // Call ID label
-
-            userBox.Text = CurrentCall.Caller.first_name;
-            summaryBox.Text = CurrentCall.summary;
-            companyBox.Text = CurrentCall.Caller.Company.name;
-            companyPic.Source = new BitmapImage(new Uri("pack://application:,,,/SIP Agent;component/Images/Avatars/" + CurrentCall.Caller.Company.id.ToString() + ".gif"));
 
             //Load datagrid info
-            lastCallsData.ItemsSource = new Model.Call(callId).FindAll();
-            lastEntry.ItemsSource = new Model.Task(callId).FindAll();
+            lastEntry.ItemsSource = new Model.Task(CallId).FindAll();
 
         }
 
@@ -108,7 +119,14 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void btnPlayback_Click(object sender, RoutedEventArgs e)
         {
-            Model.Call.playback(CurrentCall.id);
+            if (Model.Call.playback(CurrentCall.id))
+            {
+                Helper.UI.flash(sender, Helper.UI.SUCCESS_BRUSH);
+            }
+            else
+            {
+                Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
+            }
         }
 
         private void btnBindTask_Click(object sender, RoutedEventArgs e)

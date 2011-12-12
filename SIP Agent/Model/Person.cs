@@ -191,7 +191,21 @@ namespace SIP_Agent.Model
             return row.first_name.Trim() + " " + row.last_name.Trim();
         }
 
-       
+        /// <summary>
+        /// Get previous calls (up to that point) by the caller
+        /// </summary>
+        /// <param name="Until">Previous calls up to that point</param>
+        /// <returns></returns>
+        public call[] PreviousCalls(DateTime Until)
+        {
+            ResetConnection();
+            return (from row in CurrentConnection.calls 
+                    where
+                    row.caller_id.Equals(id) 
+                    && row.deleted.Equals(0)
+                    && (Until - row.received).TotalSeconds>0
+                        select row).ToArray();
+        }
        
     }
 }

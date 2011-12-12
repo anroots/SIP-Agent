@@ -79,7 +79,6 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            Model.Log.Write("Initialized make new call.");
             int callerID = SelectedPerson();
             // Caller has to be selected
             if (callerID == 0)

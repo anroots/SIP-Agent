@@ -11,7 +11,7 @@
             <ColumnDefinition Width="173*" />
             <ColumnDefinition Width="527*" />
         </Grid.ColumnDefinitions>
-        <Image Height="139" HorizontalAlignment="Left" Margin="12,390,0,0" x:Name="companyPic" Stretch="Fill" VerticalAlignment="Top" Width="147" Grid.Column="1" Source="/SIP%20Agent;component/Images/Avatars/1.gif" />
+        <Image Height="139" HorizontalAlignment="Left" Margin="12,390,0,0" x:Name="companyPic" Stretch="Fill" VerticalAlignment="Top" Width="147" Grid.Column="1" Source="/SIP%20Agent;component/Images/Avatars/default.gif" />
         <Label Content="Kõne kokkuvõte" Height="23" HorizontalAlignment="Left" Margin="21,361,0,0" Name="SummaryLabel" VerticalAlignment="Top" Width="133" Grid.Column="2" />
         <TextBox x:Name="summaryBox" Height="144" HorizontalAlignment="Left" Margin="15,0,0,66" VerticalAlignment="Bottom" Width="500" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Grid.Column="2" Text="" />
         <Button Content="Salvesta" Height="35" HorizontalAlignment="Left" Margin="374,540,0,0" Name="btn_saveData" VerticalAlignment="Top" Width="141" Click="SaveData_Click" Grid.Column="2" />

@@ -21,7 +21,9 @@ namespace SIP_Agent.Model
         public DateTime received { get { return CurrentRow.received; } set { CurrentRow.received = value; } }
         public DateTime? start { get { return start == null ? null : CurrentRow.start; } set { CurrentRow.start = value; } }
         public DateTime? finished { get { return finished == null ? null : CurrentRow.finished; } set { CurrentRow.finished = value; } }
+        public string CallerName { get { return CurrentRow.CallerName; } }
         override public bool deleted { get { return CurrentRow.deleted; } }
+
 
         /// <summary>
         /// Holds the current record
@@ -88,8 +90,17 @@ namespace SIP_Agent.Model
         /// <returns>URL to the file or null</returns>
         public static string getCallLink(int callId)
         {
-            // Contact the server API (XML response)
-            XDocument cl = XDocument.Load(ConfigurationManager.AppSettings["callApiURL"] + callId);
+            XDocument cl; // Holds the XML DOM
+
+            try
+            {
+                // Contact the server API (XML response)
+                cl = XDocument.Load(ConfigurationManager.AppSettings["callApiURL"] + callId);
+            }
+            catch (System.Net.WebException)
+            {
+                return null;
+            }
 
             // Try to find the URL from the servers response
             try
