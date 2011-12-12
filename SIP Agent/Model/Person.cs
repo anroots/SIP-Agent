@@ -18,9 +18,16 @@ namespace SIP_Agent.Model
         public string password { get { return CurrentRow.password; } set { CurrentRow.password = value; } }
         public int company_id { get { return CurrentRow.company_id.Value; } set { CurrentRow.company_id = value; } }
         public string Phone { get { return GetPhone(); } }
+        public string Email { get { return GetEmail(); } }
+
         [Column(IsDbGenerated = true)]
         public DateTime created { get { return CurrentRow.created; } }
         override public bool deleted { get { return CurrentRow.deleted; } }
+
+        /// <summary>
+        /// Holds phonebook entries
+        /// </summary>
+        protected IQueryable Contacts;
 
         /// <summary>
         /// Holds the current loaded row
@@ -214,12 +221,52 @@ namespace SIP_Agent.Model
         /// <returns>Phone number or empty</returns>
         public string GetPhone()
         {
-            return (from row in CurrentConnection.phonebooks
-                          where
-                          row.person_id.Equals(id)
-                          && row.deleted.Equals(0)
-                          && row.phone != null
-                          select row.phone).FirstOrDefault().Trim();
+            if (Contacts == null)
+            {
+                LoadContacts();
+            }
+
+            foreach (phonebook book in Contacts)
+            {
+                if (book.phone.Trim().Length > 0)
+                {
+                    return book.phone.Trim();
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Loads the loaded person's contact entries
+        /// </summary>
+        private void LoadContacts()
+        {
+            Contacts = from row in CurrentConnection.phonebooks
+                       where
+                       row.person_id.Equals(id)
+                       && row.deleted.Equals(0)
+                       select row; 
+        }
+
+        /// <summary>
+        /// Get's the person's email
+        /// </summary>
+        /// <returns>E-mail</returns>
+        public string GetEmail()
+        {
+            if (Contacts == null)
+            {
+                LoadContacts();
+            }
+
+            foreach (phonebook book in Contacts)
+            {
+                if (book.email.Trim().Length > 0)
+                {
+                    return book.email.Trim();
+                }
+            }
+            return null;
         }
     }
 }

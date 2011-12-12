@@ -33,6 +33,12 @@ namespace SIP_Agent.View
             InitializeComponent();
             Model.Log.Write("Initialized PersonInfo screen for person #:PersonId.", new Dictionary<string,string>(){{":PersonId", PersonId.ToString()}});
             CurrentPerson = new Model.Person(PersonId);
+            
+            TheGrid.DataContext = CurrentPerson;
+            companyBox.ItemsSource = new Model.Company().FindAll();
+            companyBox.SelectedIndex = Helper.UI.CmbIndexByValue(companyBox, CurrentPerson.company_id);
+            phoneBox.Text = CurrentPerson.Phone;
+            mailBox.Text = CurrentPerson.Email;
         }
 
         /// <summary>
