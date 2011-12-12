@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Database\call.cs" />
+    <Compile Include="Database\task.cs" />
     <Compile Include="Database\log.cs" />
     <Compile Include="Helper\I18n\Est.cs" />
     <Compile Include="Database.cs">

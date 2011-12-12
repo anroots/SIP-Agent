@@ -124,13 +124,7 @@ namespace SIP_Agent.Model
             
             var results = (from row in CurrentConnection.logs
                     where row.deleted.Equals(0)
-                    select new
-                    {
-                        ID = row.id,
-                        Created = row.ShortCreated,
-                        PersonName = Model.Person.FullName(row.person),
-                        Text = row.text
-                    }).OrderByDescending(row => row.ID);
+                    select row).OrderByDescending(row => row.id);
              if (Limit > 0) {return results.Take(Limit);}return results;
         }
 

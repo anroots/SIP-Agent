@@ -65,9 +65,9 @@ namespace SIP_Agent.View
             cmbClient.SelectedValuePath = "id";
 
             // Fill Datagrids with info
-            dataGridTasks.ItemsSource = new Model.Task().FindAll();
-            dataGridCalls.ItemsSource = new Model.Call().FindAll();
-            dataGridLogs.ItemsSource = Model.Log.Instance.FindAll();
+            dataGridTasks.ItemsSource = new Model.Task().FindAll(50);
+            dataGridCalls.ItemsSource = new Model.Call().FindAll(50);
+            dataGridLogs.ItemsSource = Model.Log.Instance.FindAll(100);
         }
 
 

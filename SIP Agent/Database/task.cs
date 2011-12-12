@@ -6,12 +6,10 @@ using System.Text;
 namespace SIP_Agent
 {
     /// <summary>
-    /// Additions to the default log class (Database)
+    /// Additions to the default call class (Database)
     /// </summary>
-    public partial class log
+    public partial class task
     {
         public string ShortCreated { get { return Helper.UI.TodayDate(created); } }
-
-        public string PersonName { get { return Model.Person.FullName(person); } }
     }
 }

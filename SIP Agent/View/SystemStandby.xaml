@@ -46,10 +46,11 @@
                 <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridTasks" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" FontSize="10" Width="30" Binding="{Binding Path=ID}" />
-                        <DataGridTextColumn Header="Pealkiri" Binding="{Binding Path=title}" />
-                        <DataGridTextColumn Header="Lisatud" FontSize="10" Binding="{Binding Path=created}" />
-                        <DataGridTextColumn Header="Staatus" Binding="{Binding Path=status_id}" />
-                        <DataGridTextColumn Header="Lahendaja" Binding="{Binding Path=assignee_id}" />
+                        <DataGridTextColumn Header="Pealkiri" Binding="{Binding Path=Title}" />
+                        <DataGridTextColumn Header="Lisatud" FontSize="10" Binding="{Binding Path=Created}" />
+                        <DataGridTextColumn Header="Staatus" Binding="{Binding Path=StatusName}" />
+                        <DataGridTextColumn Header="Lahendaja" Binding="{Binding Path=AssigneeName}" />
+                        <DataGridTextColumn Header="Teataja" Binding="{Binding Path=NotifierName}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
@@ -59,6 +60,7 @@
                         <DataGridTextColumn Header="ID" FontSize="10" Width="30" Binding="{Binding Path=ID}" />
                         <DataGridTextColumn Header="Helistaja" Binding="{Binding Path=CallerName}" />
                         <DataGridTextColumn Header="Kokkuvõte" Binding="{Binding Path=Summary}" />
+                        <DataGridTextColumn Header="Kestvus" Width="100" Binding="{Binding Path=Duration}" />
                         <DataGridTextColumn Header="Vastatud" Width="100" FontSize="10" Binding="{Binding Path=Started}" />
                         <DataGridTextColumn Header="Lõpetatud" Width="100" FontSize="10" Binding="{Binding Path=Finished}" />
                     </DataGrid.Columns>
@@ -67,10 +69,10 @@
             <TabItem Header="Logid" Name="tabItem3" MinWidth="100">
                 <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridLogs" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding Path=ID}" Width="30" FontSize="10" />
-                        <DataGridTextColumn Header="Aeg" Binding="{Binding Path=Created}" Width="100" />
+                        <DataGridTextColumn Header="ID" Binding="{Binding Path=id}" Width="30" FontSize="10" />
+                        <DataGridTextColumn Header="Aeg" Binding="{Binding Path=ShortCreated}" Width="100" />
                         <DataGridTextColumn Header="Kasutaja" Binding="{Binding Path=PersonName}" Width="140" FontSize="10" />
-                        <DataGridTextColumn Header="Sisu" Binding="{Binding Path=Text}" Width="*"/>
+                        <DataGridTextColumn Header="Sisu" Binding="{Binding Path=text}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

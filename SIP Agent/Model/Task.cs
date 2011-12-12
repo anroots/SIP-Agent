@@ -81,9 +81,16 @@ namespace SIP_Agent.Model
         {
             base.FindAll();
             var results = from row in CurrentConnection.tasks
-                   where row.deleted.Equals(0)
-                   select row;
-             if (Limit > 0) {return results.Take(Limit);}return results;
+                          where row.deleted.Equals(0)
+                          select new { 
+                            ID = row.id,
+                            Created = row.ShortCreated,
+                          };
+            if (Limit > 0)
+            {
+                return results.Take(Limit);
+            }
+            return results;
         }
 
     }

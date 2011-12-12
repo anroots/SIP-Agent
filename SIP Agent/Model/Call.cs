@@ -158,6 +158,33 @@ namespace SIP_Agent.Model
         }
 
         /// <summary>
+        /// Wrapper for CalcDuration(DateTime start, DateTime end)
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public static string CalcDuration(DateTime? start, DateTime? end)
+        {
+            if (start == null || end == null)
+            {
+                return null;
+            }
+            return CalcDuration(start.Value, end.Value);
+        }
+
+        public static string CalcDuration(DateTime start, DateTime end)
+        {
+            if (start == null || end == null)
+            {
+                return null;
+            }
+            TimeSpan diff = end.Subtract(start);
+
+            return diff.ToString("mm':'ss");
+
+        }
+
+        /// <summary>
         /// Find all non-deleted rows
         /// </summary>
         /// <param name="Limit">Max number of rows to return</param>
@@ -172,7 +199,8 @@ namespace SIP_Agent.Model
                         CallerName = Model.Person.FullName(row.person), // FK row.person = caller_id
                         Summary = row.summary,
                         Started = row.ShortStarted,
-                        Finished = row.ShortFinished
+                        Finished = row.ShortFinished,
+                        Duration = Model.Call.CalcDuration(row.start, row.finished)
                     };
             if (Limit > 0)
             {
