@@ -64,7 +64,6 @@ namespace SIP_Agent.View
 
             // Fill Datagrids with info
             dataGridTasks.ItemsSource = new Model.Task().FindAll(50);
-            //dataGridTasks.SelectedValuePath = "ID";
             dataGridCalls.ItemsSource = new Model.Call().FindAll(50);
             dataGridLogs.ItemsSource = Model.Log.Instance.FindAll(100);
         }
@@ -85,6 +84,7 @@ namespace SIP_Agent.View
             // Caller has to be selected
             if (callerID == 0)
             {
+                Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
                 return;
             }
 
@@ -125,13 +125,6 @@ namespace SIP_Agent.View
             Switcher.Switch(new PersonInfo(SelectedPerson())); //When using SelectedPerson, it won't work.
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            Model.Log.Write("Initialized open task");
-            Switcher.Switch(new TaskView(1));
-
-        }
-
         /// <summary>
         /// Logout
         /// </summary>
@@ -144,10 +137,26 @@ namespace SIP_Agent.View
             Switcher.Switch(new UserLogin());
         }
 
+        /// <summary>
+        /// Open selected task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridTasks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            int TaskId = (int)dataGridTasks.SelectedValue;
+            int TaskId = (int)((DataGrid)sender).SelectedValue;
             Switcher.Switch(new TaskView(TaskId));
+        }
+
+        /// <summary>
+        /// Open selected call
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridCalls_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int CallId = (int)((DataGrid)sender).SelectedValue;
+            Switcher.Switch(new CallView(CallId));
         }
 
     } // end of class

@@ -37,7 +37,7 @@ namespace SIP_Agent.Model
         /// </summary>
         ~Crud()
         {
-            CurrentConnection.Dispose();
+            //CurrentConnection.Dispose();
             CurrentConnection = null;
         }
 
@@ -61,8 +61,14 @@ namespace SIP_Agent.Model
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         virtual protected ICrud CurrentRow {get; set;}
 
+        /// <summary>
+        /// 
+        /// </summary>
         virtual public void Unload() {
             CurrentRow = null;
         }

@@ -26,6 +26,8 @@ namespace SIP_Agent
         {
             InitializeComponent();
 
+            Model.Log.Write("Opened task " + TaskId);
+
             // Load task info
             CurrentTask = new Model.Task(TaskId);
 
@@ -45,12 +47,12 @@ namespace SIP_Agent
 
             // Status dropdown
             cmbStatus.ItemsSource = new Model.TaskStatus().FindAll();
-            cmbStatus.SelectedIndex = CurrentTask.status_id;
+            cmbStatus.SelectedIndex = CurrentTask.status_id -1;
 
             // Assignee dropdown
             cmbAssignee.ItemsSource = new Model.Person().FindAll();
+            cmbAssignee.SelectedIndex = CurrentTask.assignee_id == null ? 0 : (int)CurrentTask.assignee_id-1;
 
-            cmbAssignee.SelectedIndex = CurrentTask.assignee_id != null ? (int)CurrentTask.assignee_id : 0;
 
             // Find all associated calls for the calls DataGrid
             gridCalls.ItemsSource = new Model.Call().GetCalls(CurrentTask.Calls());
