@@ -33,7 +33,28 @@
             </TabItem>
             <TabItem Name="tabItem2" Header="Info">
                 <Grid>
-                    <Label Content="Todo: loodud, muudetud jne" Height="28" HorizontalAlignment="Left" Margin="141,70,0,0" Name="label3" VerticalAlignment="Top" />
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="157*" />
+                        <ColumnDefinition Width="27*"/>
+                        <ColumnDefinition Width="495*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Loodud:" Height="28" HorizontalAlignment="Left" Name="label3" VerticalAlignment="Top" Width="Auto" Margin="101,35,0,0" />
+                    <Label Content="Uuendatud:" Height="28" HorizontalAlignment="Left"  Name="label5" VerticalAlignment="Top" Width="73" Grid.Row="1" Margin="81,34,0,0" />
+                    <Label Content="Teataja:" Height="28" HorizontalAlignment="Left" Name="label6" VerticalAlignment="Top" Width="Auto" Grid.Row="2" Margin="104,35,0,0" />
+                    <Label Content="Sisestaja:" Height="28" HorizontalAlignment="Left"  Name="label7" VerticalAlignment="Top" Width="Auto" Grid.Row="3" Margin="96,34,0,0" />
+                    <Label Content="Kategooria:" Height="34" HorizontalAlignment="Left"  Name="label8" VerticalAlignment="Top" Width="Auto" Grid.Row="4" Margin="84,22,0,0" />
+                    <Label Content="???" Grid.Column="2" Height="28" HorizontalAlignment="Left" Margin="0,35,0,0" Name="lblCreated" VerticalAlignment="Top" />
+                    <Label Content="???" Height="28" HorizontalAlignment="Left" Margin="0,34,0,0" Name="lblUpdated" VerticalAlignment="Top" Grid.Column="2" Grid.Row="1" />
+                    <Label Content="???" Height="28" HorizontalAlignment="Left" Margin="0,35,0,0" Name="lblNotifier" VerticalAlignment="Top" Grid.Column="2" Grid.Row="2" />
+                    <Label Content="???" Height="28" HorizontalAlignment="Left" Margin="0,34,0,0" Name="lblClerk" VerticalAlignment="Top" Grid.Column="2" Grid.Row="3" />
+                    <Label Content="???" Height="28" HorizontalAlignment="Left" Margin="0,22,0,0" Name="lblCategory" VerticalAlignment="Top" Grid.Column="2" Grid.Row="4" />
                 </Grid>
             </TabItem>
             <TabItem Header="Kõned" Name="tabItem3">

@@ -52,11 +52,19 @@ namespace SIP_Agent
             cmbStatus.ItemsSource = new Model.TaskStatus().FindAll();
             cmbAssignee.ItemsSource = new Model.Person().FindAll();
 
+            // Pre-fill values on existing tasks
             if (CurrentTask.Loaded())
             {
                 txtTitle.DataContext = CurrentTask; // Title
                 txtDetails.DataContext = CurrentTask; // Details
-                lblTaskId.Content = CurrentTask.id;
+                lblTaskId.Content = CurrentTask.id; // ID
+
+                // Info tab
+                lblCreated.Content = CurrentTask.created.ToShortDateString();
+                lblUpdated.Content = CurrentTask.updated == null ? Translate.str("Not yet changed") : CurrentTask.updated.Value.ToShortDateString();
+                lblNotifier.Content = CurrentTask.NotifierName;
+                lblClerk.Content = CurrentTask.ClerkName;
+                lblCategory.Content = CurrentTask.CategoryName;
 
                 // Status dropdown
                 cmbStatus.SelectedIndex = Helper.UI.CmbIndexByValue(cmbStatus, CurrentTask.status_id);
