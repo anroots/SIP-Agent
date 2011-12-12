@@ -11,18 +11,18 @@ namespace SIP_Agent.Model
     public class Person : Crud, ICrud
     {
         [Column(IsPrimaryKey = true, IsDbGenerated = true)]
-        override public int id { get { return CurrentRow == null? 0 : CurrentRow.id; } }
+        override public int id { get { return CurrentRow == null ? 0 : CurrentRow.id; } }
         public string first_name { get { return CurrentRow.first_name.Trim(); } set { CurrentRow.first_name = value.Trim(); } }
         public string last_name { get { return CurrentRow.last_name.Trim(); } set { CurrentRow.last_name = value.Trim(); } }
         public string username { get { return CurrentRow.username.Trim(); } set { CurrentRow.username = value.Trim(); } }
         public string password { get { return CurrentRow.password.Trim(); } set { CurrentRow.password = Helper.Functions.HashPass(value.Trim()); } }
-        public int company_id { get { return  CurrentRow.company_id.Value; } set { CurrentRow.company_id = value; } }
+        public int company_id { get { return CurrentRow.company_id.GetValueOrDefault(); } set { CurrentRow.company_id = value; } }
         public string Phone { get { return GetPhone(); } }
         public string Email { get { return GetEmail(); } }
 
         [Column(IsDbGenerated = true)]
         public DateTime created { get { return CurrentRow.created; } }
-        override public bool deleted { get { return CurrentRow.deleted; } }
+        override public bool deleted { get { return CurrentRow.deleted; } set { CurrentRow.deleted = value; } }
 
         /// <summary>
         /// Holds phonebook entries
@@ -103,14 +103,36 @@ namespace SIP_Agent.Model
         }
 
         /// <summary>
+        /// Validation checks before saving
+        /// </summary>
+        /// <returns></returns>
+        public override int Save()
+        {
+            if (CurrentRow.id > 0 && (
+                CurrentRow.first_name.Trim().Length == 0
+                || CurrentRow.last_name.Trim().Length == 0
+                || CurrentRow.username.Trim().Length == 0
+                ))
+            {
+                return -1;
+            }
+            return base.Save();
+        }
+
+        /// <summary>
         /// Creates a new row in the database
         /// </summary>
         /// <returns>Insert ID of the new row</returns>
         override public int New()
         {
             base.New();
-            CurrentRow = new person();
-            CurrentRow.created = DateTime.Now; // Todo: DB should generate this automatically. 
+
+            CurrentRow = new person()
+            {
+                created = DateTime.Now,
+                company_id = Model.Company.ANONYMOUS
+            };
+
             CurrentConnection.persons.InsertOnSubmit(CurrentRow);
             CurrentConnection.SubmitChanges();
             return Save();
@@ -162,11 +184,12 @@ namespace SIP_Agent.Model
             var results = from row in CurrentConnection.persons
                           where row.deleted.Equals(0)
                           select new { id = row.id, name = FullName(row) };
-             if (Limit > 0) {
-                 return results.Take(Limit);
-             }
+            if (Limit > 0)
+            {
+                return results.Take(Limit);
+            }
             return results;
-            
+
         }
 
 
@@ -207,12 +230,12 @@ namespace SIP_Agent.Model
         public call[] PreviousCalls(DateTime Until)
         {
             ResetConnection();
-            return (from row in CurrentConnection.calls 
+            return (from row in CurrentConnection.calls
                     where
-                    row.caller_id.Equals(id) 
+                    row.caller_id.Equals(id)
                     && row.deleted.Equals(0)
-                    && (Until - row.received).TotalSeconds>0
-                        select row).ToArray();
+                    && (Until - row.received).TotalSeconds > 0
+                    select row).ToArray();
         }
 
         /// <summary>
@@ -245,7 +268,7 @@ namespace SIP_Agent.Model
                        where
                        row.person_id.Equals(id)
                        && row.deleted.Equals(0)
-                       select row; 
+                       select row;
         }
 
         /// <summary>

@@ -120,8 +120,14 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void btnChangePerson_Click(object sender, RoutedEventArgs e)
         {
-            Model.Log.Write("Initialized change person information.");
-            Switcher.Switch(new View.PersonInfo(SelectedPerson()));
+            if (SelectedPerson() > 0)
+            {
+                Switcher.Switch(new View.PersonInfo(SelectedPerson()));
+            }
+            else
+            {
+                Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
+            }
         }
 
         /// <summary>

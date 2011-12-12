@@ -111,7 +111,7 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void checkBox1_Checked(object sender, RoutedEventArgs e)
         {
-            CurrentPerson.Delete();
+            CurrentPerson.deleted = true;
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void checkBox1_Unchecked(object sender, RoutedEventArgs e)
         {
-            CurrentPerson.Undelete();
+            CurrentPerson.deleted = false;
         }
     
 

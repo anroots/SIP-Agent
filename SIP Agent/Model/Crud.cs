@@ -107,31 +107,6 @@ namespace SIP_Agent.Model
             return 0;
         }
 
-
-        /// <summary>
-        /// Mark the record as deleted
-        /// </summary>
-        /// <returns>True on success, False on failure</returns>
-        public void Delete()
-        {
-            if (Loaded())
-            {
-                Model.Log.Write("Deleted entity");
-                deleted = true;
-            }
-        }
-
-        /// <summary>
-        /// Restore a deleted object
-        /// </summary>
-        public void Undelete()
-        {
-            if (Loaded())
-            {
-                deleted = false;
-            }
-        }
-
         /// <summary>
         /// Find all non-deleted rows
         /// </summary>

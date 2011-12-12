@@ -17,19 +17,6 @@ namespace SIP_Agent.Model
         int Save();
 
         /// <summary>
-        /// Delete the currently loaded object.
-        /// No record is deleted permanately (except pivot table entries),
-        /// rather, their deleted column is set to 1
-        /// </summary>
-        /// <returns>True on success, False on failure</returns>
-        void Delete();
-
-        /// <summary>
-        /// Reverse the deletion
-        /// </summary>
-        void Undelete();
-
-        /// <summary>
         /// Check whether the current model is loaded
         /// </summary>
         /// <returns>True / False</returns>
