@@ -22,7 +22,12 @@ namespace SIP_Agent.Model
         /// rather, their deleted column is set to 1
         /// </summary>
         /// <returns>True on success, False on failure</returns>
-        bool Delete();
+        void Delete();
+
+        /// <summary>
+        /// Reverse the deletion
+        /// </summary>
+        void Undelete();
 
         /// <summary>
         /// Check whether the current model is loaded

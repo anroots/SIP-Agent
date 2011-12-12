@@ -110,7 +110,7 @@ namespace SIP_Agent.View
             }
 
             // Get the selected person ID
-            return Int32.Parse(cmbClient.SelectedValue.ToString());
+            return (int)cmbClient.SelectedValue;
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace SIP_Agent.View
         private void btnChangePerson_Click(object sender, RoutedEventArgs e)
         {
             Model.Log.Write("Initialized change person information.");
-            Switcher.Switch(new PersonInfo(SelectedPerson())); //When using SelectedPerson, it won't work.
+            Switcher.Switch(new View.PersonInfo(SelectedPerson()));
         }
 
         /// <summary>

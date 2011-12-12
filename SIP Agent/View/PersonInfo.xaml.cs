@@ -22,15 +22,17 @@ namespace SIP_Agent.View
         /// <summary>
         /// Holds the data for the currently loaded Person
         /// </summary>
-        public Model.Person Person;
+        public Model.Person CurrentPerson;
 
         /// <summary>
         /// Load an existing person
         /// </summary>
         /// <param name="personId"></param>
-        public PersonInfo(int personId = 0)
+        public PersonInfo(int PersonId = 0)
         {
-            Person = new Model.Person(personId);
+            InitializeComponent();
+            Model.Log.Write("Initialized PersonInfo screen for person #:PersonId.", new Dictionary<string,string>(){{":PersonId", PersonId.ToString()}});
+            CurrentPerson = new Model.Person(PersonId);
         }
 
         /// <summary>
@@ -38,7 +40,7 @@ namespace SIP_Agent.View
         /// </summary>
         public PersonInfo()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         #region ISwitchable Members
@@ -53,47 +55,29 @@ namespace SIP_Agent.View
         }
         #endregion
 
+        /// <summary>
+        /// Save person data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_sSaveData_Click(object sender, RoutedEventArgs e)
         {
-            SaveCustomerInfo();
-            
-        }
+           CurrentPerson.first_name = firstNameBox.Text;
+            CurrentPerson.last_name = lastNameBox.Text;
+            CurrentPerson.username = userNameBox.Text;
+            CurrentPerson.password = passWordBox.Text;
 
-        private void SaveCustomerInfo()
-        {
-            using (DatabaseDataContext db = new DatabaseDataContext())
+            if (CurrentPerson.Save() > 0)
             {
-
-                Model.Person pers = new Model.Person();
-                pers.first_name = firstNameBox.Text;
-                pers.last_name = lastNameBox.Text;
-                pers.username = userNameBox.Text;
-                pers.password = passWordBox.Text;
-                pers.Save();
-
-                Model.Company c = new Model.Company();
-                c.New();
-                c.name = companyBox.Text;
-                c.Save();
-
-                
-                //Phonebook class not complete.
-
-                /*Model.Phonebook p = new Model.Phonebook();
-                p.New();
-                p.phone = phoneBox.Text;
-                p.email = mailBox.Text;
-                p.Save();*/
-
-                MessageBox.Show("Kliendi info salvestatud");
-                
-
+                Helper.UI.flash(sender, Helper.UI.SUCCESS_BRUSH);
+                Model.Log.Write("Saved person #:PersonId.", new Dictionary<string,string>(){{":PersonId", CurrentPerson.id.ToString()}});
+            } else {
+                Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
+                Model.Log.Write("Saving of person #:PersonId failed.", new Dictionary<string,string>(){{":PersonId", CurrentPerson.id.ToString()}});
             }
-
-            Model.Log.Write("Saved person information: " + userNameBox.Text);
-            Switcher.Switch(new View.SystemStandby());
-
         }
+
+    
 
         /// <summary>
         /// Navigate back to standby screen
@@ -102,60 +86,31 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            Model.Log.Write("Initialized system standby view");
             Switcher.Switch(new View.SystemStandby());
         }
 
-        private void companyBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            using (DatabaseDataContext db = new DatabaseDataContext())
-            {
+    
 
-                var companies = from x in db.companies
-                                select new { name = x.name };
+        
 
-                companyBox.ItemsSource = companies;
-            }
-        }
-
-        private void companyBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-            using (DatabaseDataContext db = new DatabaseDataContext())
-            {
-                {
-                    // Companies dropdown
-                    var companies = from row in db.companies
-                                   select new { name = row.name.Trim() };
-
-                    companyBox.ItemsSource = companies;
-                    companyBox.DisplayMemberPath = "name";
-                    
-                }
-
-            }
-            
-            if (!IsInitialized) return;
-
-            ComboBoxItem item = companyBox.SelectedItem as ComboBoxItem;
-        }
-
+        /// <summary>
+        /// Mark person as deleted
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkBox1_Checked(object sender, RoutedEventArgs e)
         {
-            using (DatabaseDataContext db = new DatabaseDataContext())
-            {
-                person pers = new person();
-                pers.username = userNameBox.Text;
-                pers.password = passWordBox.Text;
-                Model.Log.Write("Deleted user information: " + userNameBox.Text);
+            CurrentPerson.Delete();
+        }
 
-                db.persons.DeleteOnSubmit(pers);
-
-                db.SubmitChanges();
-
-                MessageBox.Show("Kasutaja info kustutatud");
-                
-            }
+        /// <summary>
+        /// Mark person as undeleted
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBox1_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CurrentPerson.Undelete();
         }
     
 

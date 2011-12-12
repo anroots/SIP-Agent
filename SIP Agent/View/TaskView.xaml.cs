@@ -70,8 +70,8 @@ namespace SIP_Agent
                 lblTaskId.Content = CurrentTask.id; // ID
 
                 // Info tab
-                lblCreated.Content = CurrentTask.created.ToShortDateString();
-                lblUpdated.Content = CurrentTask.updated == null ? Translate.str("Not yet changed") : CurrentTask.updated.Value.ToShortDateString();
+                lblCreated.Content = CurrentTask.created.ToString();
+                lblUpdated.Content = CurrentTask.updated == null ? Translate.str("Not yet changed") : CurrentTask.updated.Value.ToString();
                 lblNotifier.Content = CurrentTask.NotifierName;
                 lblClerk.Content = CurrentTask.ClerkName;
                 lblCategory.Content = CurrentTask.CategoryName;

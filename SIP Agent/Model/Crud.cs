@@ -112,17 +112,23 @@ namespace SIP_Agent.Model
         /// Mark the record as deleted
         /// </summary>
         /// <returns>True on success, False on failure</returns>
-        public bool Delete()
+        public void Delete()
         {
             if (Loaded())
             {
                 deleted = true;
-                if (Save() != -1)
-                {
-                    return true;
-                }
             }
-            return false;
+        }
+
+        /// <summary>
+        /// Restore a deleted object
+        /// </summary>
+        public void Undelete()
+        {
+            if (Loaded())
+            {
+                deleted = false;
+            }
         }
 
         /// <summary>
