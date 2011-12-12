@@ -61,11 +61,10 @@ namespace SIP_Agent.View
 
             // Persons selectbox
             cmbClient.ItemsSource = new Model.Person().FindAll();
-            cmbClient.DisplayMemberPath = "name";
-            cmbClient.SelectedValuePath = "id";
 
             // Fill Datagrids with info
             dataGridTasks.ItemsSource = new Model.Task().FindAll(50);
+            //dataGridTasks.SelectedValuePath = "ID";
             dataGridCalls.ItemsSource = new Model.Call().FindAll(50);
             dataGridLogs.ItemsSource = Model.Log.Instance.FindAll(100);
         }
@@ -143,6 +142,12 @@ namespace SIP_Agent.View
             App.CurrentUser.Logout();
             Model.Log.Write("User logged out: " + App.CurrentUser.username);
             Switcher.Switch(new UserLogin());
+        }
+
+        private void dataGridTasks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int TaskId = (int)dataGridTasks.SelectedValue;
+            Switcher.Switch(new TaskView(TaskId));
         }
 
     } // end of class

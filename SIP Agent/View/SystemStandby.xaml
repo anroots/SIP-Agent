@@ -27,6 +27,7 @@
 
                 <ComboBox x:Name="cmbClient" 
                           Height="34"
+                          SelectedValuePath="id" DisplayMemberPath="name"
                           HorizontalAlignment="Left" 
                           Margin="13,102,0,0" 
                           VerticalAlignment="Top" 
@@ -43,7 +44,7 @@
         <TabControl Grid.Column="1" Height="550" HorizontalAlignment="Left" Margin="15,39,0,0" Name="tabControl1" VerticalAlignment="Top" Width="533">
             <TabItem Header="Tööd" Name="tabItem1" MinWidth="100">
 
-                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridTasks" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto">
+                <DataGrid AutoGenerateColumns="False" SelectedValuePath="ID" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridTasks" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="dataGridTasks_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" FontSize="10" Width="30" Binding="{Binding Path=ID}" />
                         <DataGridTextColumn Header="Pealkiri" Binding="{Binding Path=Title}" />

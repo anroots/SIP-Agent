@@ -209,6 +209,21 @@ namespace SIP_Agent.Model
             return results;
         }
 
+
+
+        /// <summary>
+        /// Returns calls matching give ID's
+        /// </summary>
+        /// <param name="CallIds">An int array of call ID's</param>
+        /// <returns>All calls whose ID's are within the CallIds param</returns>
+        public call[] GetCalls(int[] CallIds)
+        {
+            return (from row in
+                        (from call_row in CurrentConnection.calls select call_row)
+                    where CallIds.Contains(row.id)
+                    select row).ToArray<call>();
+        }
+
     }
 
 }

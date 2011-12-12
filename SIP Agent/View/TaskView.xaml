@@ -19,10 +19,10 @@
         </Grid.ColumnDefinitions>
         <GroupBox Grid.Column="1" Header="Olek" Height="181" HorizontalAlignment="Left" Margin="10,65,0,0" Name="groupBox1" VerticalAlignment="Top" Width="201" Grid.RowSpan="2">
             <Grid>
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,50,0,0" Name="cmbStatus" VerticalAlignment="Top" Width="177" ItemsSource="{Binding}" SelectionChanged="cmbStatus_SelectionChanged" />
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,50,0,0" Name="cmbStatus" VerticalAlignment="Top" Width="177" ItemsSource="{Binding}" DisplayMemberPath="name" SelectedValuePath="id" SelectionChanged="cmbStatus_SelectionChanged" />
                 <Label Content="Staatus" Height="28" HorizontalAlignment="Left" Margin="6,27,0,0" Name="label1" VerticalAlignment="Top" Width="138" />
                 <Label Content="Lahendaja" Height="28" HorizontalAlignment="Left" Margin="6,79,0,0" Name="label2" VerticalAlignment="Top" />
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,104,0,0" Name="cmbAssignee" VerticalAlignment="Top" Width="177" SelectionChanged="cmbAssignee_SelectionChanged" />
+                <ComboBox Height="23" DisplayMemberPath="name" SelectedValuePath="id" HorizontalAlignment="Left" Margin="6,104,0,0" Name="cmbAssignee" VerticalAlignment="Top" Width="177" SelectionChanged="cmbAssignee_SelectionChanged" />
             </Grid>
         </GroupBox>
         <TabControl Grid.Column="2" Height="345" HorizontalAlignment="Left" Margin="6,55,0,0" Name="tabControl1" VerticalAlignment="Top" Width="689" Grid.ColumnSpan="2" Grid.RowSpan="2">

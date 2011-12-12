@@ -55,7 +55,7 @@ namespace SIP_Agent.Model
             base.FindAll();
             var results = from row in CurrentConnection.task_statuses
                        where row.deleted.Equals(0)
-                       select new { id = row.id, name = row.name.Trim() };
+                       select new { id = row.id, name = Translate.str(row.name) };
              if (Limit > 0) {return results.Take(Limit);}return results;
         }
 

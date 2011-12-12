@@ -153,8 +153,11 @@ namespace SIP_Agent.Model
             base.FindAll();
             var results = from row in CurrentConnection.persons
                           where row.deleted.Equals(0)
-                          select new { id = row.id, name = row.first_name.Trim() + " " + row.last_name.Trim() };
-             if (Limit > 0) {return results.Take(Limit);}return results;
+                          select new { id = row.id, name = FullName(row) };
+             if (Limit > 0) {
+                 return results.Take(Limit);
+             }
+            return results;
             
         }
 

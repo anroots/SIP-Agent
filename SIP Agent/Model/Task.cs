@@ -97,5 +97,19 @@ namespace SIP_Agent.Model
             return results;
         }
 
+        /// <summary>
+        /// Returns an array of all call ID's associated with this task
+        /// </summary>
+        /// <returns>An array of Call ID's</returns>
+        public int[] Calls()
+        {
+            if (!Loaded())
+            {
+                return null;
+            }
+            return (from row in CurrentConnection.tasks_calls
+                   where row.task_id.Equals(id)
+                   select row.id).ToArray();
+        }
     }
 }

@@ -45,19 +45,15 @@ namespace SIP_Agent
 
             // Status dropdown
             cmbStatus.ItemsSource = new Model.TaskStatus().FindAll();
-            cmbStatus.DisplayMemberPath = "name";
-            cmbStatus.SelectedValuePath = "id";
             cmbStatus.SelectedIndex = CurrentTask.status_id;
 
             // Assignee dropdown
             cmbAssignee.ItemsSource = new Model.Person().FindAll();
-            cmbAssignee.DisplayMemberPath = "name";
-            cmbAssignee.SelectedValuePath = "id";
 
             cmbAssignee.SelectedIndex = CurrentTask.assignee_id != null ? (int)CurrentTask.assignee_id : 0;
 
-            // Calls datagrid
-            //gridCalls.ItemsSource = new Model.Call().FindAll();
+            // Find all associated calls for the calls DataGrid
+            gridCalls.ItemsSource = new Model.Call().GetCalls(CurrentTask.Calls());
 
         }
 
