@@ -22,6 +22,7 @@ namespace SIP_Agent.Model
         public int clerk_id { get { return CurrentRow.clerk_id; } set { CurrentRow.clerk_id = value; } }
         public int status_id { get { return CurrentRow.status_id; } set { CurrentRow.status_id = value; } }
         public int category_id { get { return CurrentRow.category_id; } set { CurrentRow.category_id = value; } }
+        public task_statuse Status { get { return CurrentRow.task_statuse; } }
         override public bool deleted { get { return CurrentRow.deleted; } }
 
         /// <summary>

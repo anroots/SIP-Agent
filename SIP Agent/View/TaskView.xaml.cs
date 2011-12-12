@@ -56,13 +56,13 @@ namespace SIP_Agent
             {
                 txtTitle.DataContext = CurrentTask; // Title
                 txtDetails.DataContext = CurrentTask; // Details
+                lblTaskId.Content = CurrentTask.id;
 
                 // Status dropdown
-                cmbStatus.SelectedIndex = CurrentTask.status_id - 1;
-
+                cmbStatus.SelectedIndex = Helper.UI.CmbIndexByValue(cmbStatus, CurrentTask.status_id);
+                
                 // Assignee dropdown
-                cmbAssignee.SelectedIndex = CurrentTask.assignee_id == null ? 0 : (int)CurrentTask.assignee_id - 1;
-
+                cmbAssignee.SelectedIndex = Helper.UI.CmbIndexByValue(cmbAssignee, CurrentTask.assignee_id);
 
                 // Find all associated calls for the calls DataGrid
                 gridCalls.ItemsSource = new Model.Call().GetCalls(CurrentTask.Calls());

@@ -112,5 +112,36 @@ namespace SIP_Agent.Helper
             }
             return TodayDate((DateTime)Date);
         }
+
+        /// <summary>
+        /// Searches combobox items by their value
+        /// </summary>
+        /// <param name="combo">Reference to to combobox (SetValuePath)</param>
+        /// <param name="s">Searched value</param>
+        /// <returns>Matching index or -1</returns>
+        public static int CmbIndexByValue(ComboBox combo, int? s)
+        {
+            if (s == null)
+            {
+                return -1;
+            }
+
+            int search = s.Value;
+
+            // Loop over all combobox items
+            for (int i = 0; i < combo.Items.Count; i++)
+            {
+                var item = combo.Items[i];
+                System.Type type = item.GetType();
+                int assignee_id = (int)type.GetProperty("id").GetValue(item, null);
+                
+                // Found a match?
+                if (assignee_id == search)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
     }
 }

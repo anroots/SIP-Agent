@@ -22,7 +22,7 @@
                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,50,0,0" Name="cmbStatus" VerticalAlignment="Top" Width="177" ItemsSource="{Binding}" DisplayMemberPath="name" SelectedValuePath="id" SelectionChanged="cmbStatus_SelectionChanged" />
                 <Label Content="Staatus" Height="28" HorizontalAlignment="Left" Margin="6,27,0,0" Name="label1" VerticalAlignment="Top" Width="138" />
                 <Label Content="Lahendaja" Height="28" HorizontalAlignment="Left" Margin="6,79,0,0" Name="label2" VerticalAlignment="Top" />
-                <ComboBox Height="23" DisplayMemberPath="name" SelectedValuePath="id" HorizontalAlignment="Left" Margin="6,104,0,0" Name="cmbAssignee" VerticalAlignment="Top" Width="177" SelectionChanged="cmbAssignee_SelectionChanged" />
+                <ComboBox Height="23" DisplayMemberPath="name" SelectedValuePath="id" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="6,104,0,0" Name="cmbAssignee" VerticalAlignment="Top" Width="177" SelectionChanged="cmbAssignee_SelectionChanged" />
             </Grid>
         </GroupBox>
         <TabControl Grid.Column="2" Height="345" HorizontalAlignment="Left" Margin="6,55,0,0" Name="tabControl1" VerticalAlignment="Top" Width="689" Grid.ColumnSpan="2" Grid.RowSpan="2">
@@ -40,12 +40,9 @@
                 <Grid>
                     <DataGrid Name="gridCalls" ItemsSource="{Binding}" SelectedValuePath="id" AutoGenerateColumns="False" Height="301" HorizontalAlignment="Left" Margin="6,6,0,0" Width="667" MouseDoubleClick="gridCalls_MouseDoubleClick" VerticalAlignment="Top" BorderThickness="0" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Kõne ID" Binding="{Binding Path=id}" />
-                            <DataGridTextColumn Header="Helistaja" Binding="{Binding Path=caller_id}" />
-                            <DataGridTextColumn Header="Kokkuvõte" Binding="{Binding Path=summary}" />
-                            <DataGridTextColumn Header="Vastu võetud" Binding="{Binding Path=received}" />
-                            <DataGridTextColumn Header="Alustatud" Binding="{Binding Path=start}" />
-                            <DataGridTextColumn Header="Lõpetatud" Binding="{Binding Path=finished}" />
+                            <DataGridTextColumn Header="ID" Binding="{Binding Path=id}" Width="30" />
+                            <DataGridTextColumn Header="Helistaja" Binding="{Binding Path=CallerName}" Width="100" />
+                            <DataGridTextColumn Header="Kokkuvõte" Binding="{Binding Path=summary}" Width="*" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
