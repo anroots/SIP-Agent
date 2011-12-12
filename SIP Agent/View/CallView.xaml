@@ -23,7 +23,7 @@
                 <Label Content="Firma" Height="31" HorizontalAlignment="Left" Margin="6,0,0,153" Name="companyLabel" VerticalAlignment="Bottom" Width="147" />
                 <TextBox Height="24" HorizontalAlignment="Left" Margin="6,83,0,0" x:Name="companyBox" VerticalAlignment="Top" Width="147" IsEnabled="False" />
                 <Label Content="Telefon" Height="31" HorizontalAlignment="Left" Margin="6,113,0,0" Name="phoneLabel" VerticalAlignment="Top" Width="54" />
-                <TextBox PreviewTextInput="phonePreview" Text="{Binding Path=phoneBox}" Height="25" HorizontalAlignment="Left" Margin="6,0,0,80" x:Name="phoneBox" VerticalAlignment="Bottom" Width="147" IsEnabled="False" />
+                <TextBox Height="25" HorizontalAlignment="Left" Margin="6,0,0,80" x:Name="phoneBox" VerticalAlignment="Bottom" Width="147" IsEnabled="False" />
             </Grid>
         </GroupBox>
         <Label Content="Kõne #" FontFamily="Arial" FontSize="18" FontWeight="Bold" Grid.Column="1" Height="32" Margin="7,15,75,0" Name="label1" VerticalAlignment="Top" />

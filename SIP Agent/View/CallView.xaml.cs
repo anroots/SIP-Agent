@@ -49,6 +49,8 @@ namespace SIP_Agent.View
             {
                 userBox.Text = CurrentCall.CallerName;
                 companyBox.Text = CurrentCall.Caller.Company.name;
+                phoneBox.Text = CurrentCall.Caller.Phone;
+
                 // Previous calls by caller
                 lastCallsData.ItemsSource = new Model.Person(CurrentCall.Caller.id)
                     .PreviousCalls(CurrentCall.received);
@@ -102,14 +104,6 @@ namespace SIP_Agent.View
         }
 
 
-
-        private void phonePreview(object sender, TextCompositionEventArgs e)
-        {
-            foreach (char ch in e.Text)
-                if (!Char.IsDigit(ch))
-                    e.Handled = true;
-        }
-
         /// <summary>
         /// Open call .mp3 in external player
         /// </summary>
@@ -139,7 +133,7 @@ namespace SIP_Agent.View
             {
                 Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
                 MessageBox.Show("Sidumine ebaõnnestus: töö ID formaat on vigane või on kõne selle tööga juba seotud.");
-                Model.Log.Write("Binding failed");
+                Model.Log.Write("Failed binding call #" + CurrentCall.id + " to task #" + txtBindTaskId.Text);
             }
         }
 

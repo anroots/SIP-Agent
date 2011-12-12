@@ -17,6 +17,7 @@ namespace SIP_Agent.Model
         public string username { get { return CurrentRow.username; } set { CurrentRow.username = value; } }
         public string password { get { return CurrentRow.password; } set { CurrentRow.password = value; } }
         public int company_id { get { return CurrentRow.company_id.Value; } set { CurrentRow.company_id = value; } }
+        public string Phone { get { return GetPhone(); } }
         [Column(IsDbGenerated = true)]
         public DateTime created { get { return CurrentRow.created; } }
         override public bool deleted { get { return CurrentRow.deleted; } }
@@ -206,6 +207,19 @@ namespace SIP_Agent.Model
                     && (Until - row.received).TotalSeconds>0
                         select row).ToArray();
         }
-       
+
+        /// <summary>
+        /// Search for the person's phone
+        /// </summary>
+        /// <returns>Phone number or empty</returns>
+        public string GetPhone()
+        {
+            return (from row in CurrentConnection.phonebooks
+                          where
+                          row.person_id.Equals(id)
+                          && row.deleted.Equals(0)
+                          && row.phone != null
+                          select row.phone).FirstOrDefault().Trim();
+        }
     }
 }

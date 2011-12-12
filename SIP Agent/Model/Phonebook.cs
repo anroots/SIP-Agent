@@ -7,7 +7,7 @@ using System.Data.Linq.Mapping;
 namespace SIP_Agent.Model
 {
 
-    [Table(Name = "Phonebook")]
+    [Table(Name = "phonebook")]
     public class Phonebook : Crud, ICrud
     {
         [Column(IsPrimaryKey = true, IsDbGenerated = true)]
@@ -15,13 +15,12 @@ namespace SIP_Agent.Model
         public string phone { get { return CurrentRow.phone; } set { CurrentRow.phone = value; } }
         public string email { get { return CurrentRow.email; } set { CurrentRow.email = value; } }
         public int person_id { get { return CurrentRow.person_id.Value; } set { CurrentRow.person_id = value; } }
-        [Column(IsDbGenerated = true)]
         override public bool deleted { get { return CurrentRow.deleted; } }
 
         /// <summary>
         /// Holds the current loaded row
         /// </summary>
-        protected phonebook CurrentRow;
+        protected new phonebook CurrentRow {get; set;}
 
 
         /// <summary>
@@ -54,7 +53,6 @@ namespace SIP_Agent.Model
         /// <returns></returns>
         override public bool Load(int EntryId)
         {
-            CurrentConnection = new DatabaseDataContext();
             var q = from x in CurrentConnection.phonebooks where x.id.Equals(EntryId) && x.deleted.Equals(0) select x;
             CurrentRow = q.FirstOrDefault();
 
@@ -68,19 +66,11 @@ namespace SIP_Agent.Model
         override public int New()
         {
             base.New();
-            CurrentRow = new phonebook();
+            Load(0);
             CurrentConnection.phonebooks.InsertOnSubmit(CurrentRow);
-            CurrentConnection.SubmitChanges();
             return Save();
         }
 
-        /// <summary>
-        /// Unload the current row
-        /// </summary>
-        public void Unload()
-        {
-            CurrentRow = null;
-        }
 
     }
 }
