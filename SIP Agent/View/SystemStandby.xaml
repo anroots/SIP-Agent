@@ -78,14 +78,7 @@
                 </DataGrid>
             </TabItem>
         </TabControl>
-        <Button Content="Logi välja" Height="37" HorizontalAlignment="Left" Margin="17,541,0,0" Name="btnLogout" VerticalAlignment="Top" Width="104" Click="btnLogout_Click" Opacity="0.6">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#A5D65D5D" Offset="0" />
-                    <GradientStop Color="#48FFFFFF" Offset="1" />
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+        <Button Content="Logi välja" Height="37" HorizontalAlignment="Left" Margin="17,541,0,0" Name="btnLogout" VerticalAlignment="Top" Width="104" Click="btnLogout_Click" Opacity="0.8" Background="#FFD64937"></Button>
     </Grid>
 </UserControl>
 

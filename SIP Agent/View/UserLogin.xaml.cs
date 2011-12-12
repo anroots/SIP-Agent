@@ -48,7 +48,11 @@ namespace SIP_Agent.View
 
         #endregion
 
-
+        /// <summary>
+        /// Clicked the Login btn
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
             App.CurrentUser = new Model.Person();
@@ -65,10 +69,17 @@ namespace SIP_Agent.View
             }   
         }
 
+        /// <summary>
+        /// Login view ready
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Model.Log.Write("Initialized login screen.");
             App.CurrentUser = new Model.Person();
+
+            // Uncomment to "cheat" login during development
             App.CurrentUser.Login("ando", "ando");  // stub
             Switcher.Switch(new SystemStandby()); // stub
         }

@@ -131,8 +131,8 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
+            Model.Log.Write("Logout ::UserName", new Dictionary<string,string>(){{":UserName", App.CurrentUser.username}});
             App.CurrentUser.Logout();
-            Model.Log.Write("User logged out: " + App.CurrentUser.username);
             Switcher.Switch(new UserLogin());
         }
 

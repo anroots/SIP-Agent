@@ -125,7 +125,7 @@ namespace SIP_Agent.Model
                 var query = from x
                                 in db.persons
                             where x.username.Equals(Username)
-                            where x.password.Equals(Password)
+                            where x.password.Equals(Helper.Functions.HashPass(Password))
                             select x;
 
                 if (query.Count() > 0)
