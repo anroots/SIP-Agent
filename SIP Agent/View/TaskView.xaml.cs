@@ -167,8 +167,15 @@ namespace SIP_Agent
         // Open call view
         private void gridCalls_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            int CallId = (int)((DataGrid)sender).SelectedValue;
-            Switcher.Switch(new View.CallView(CallId));
+            try
+            {
+                int CallId = (int)((DataGrid)sender).SelectedValue;
+                Switcher.Switch(new View.CallView(CallId));
+            }
+            catch (NullReferenceException nex)
+            {
+                Console.WriteLine(nex.ToString());
+            }
         }
 
         /// <summary>

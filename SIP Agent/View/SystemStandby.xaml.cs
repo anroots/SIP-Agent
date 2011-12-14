@@ -149,8 +149,15 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void dataGridTasks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            int TaskId = (int)((DataGrid)sender).SelectedValue;
-            Switcher.Switch(new TaskView(TaskId));
+            try
+            {
+                int TaskId = (int)((DataGrid)sender).SelectedValue;
+                Switcher.Switch(new TaskView(TaskId));
+            }
+            catch (NullReferenceException nex)
+            {
+                Console.WriteLine(nex.ToString());
+            }
         }
 
         /// <summary>
@@ -160,8 +167,15 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void dataGridCalls_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            int CallId = (int)((DataGrid)sender).SelectedValue;
-            Switcher.Switch(new CallView(CallId));
+            try
+            {
+                int CallId = (int)((DataGrid)sender).SelectedValue;
+                Switcher.Switch(new CallView(CallId));
+            }
+            catch (NullReferenceException nex)
+            {
+                Console.WriteLine(nex.ToString());
+            }
         }
 
         /// <summary>
