@@ -20,6 +20,12 @@ namespace SIP_Agent.View
     /// </summary>
     public partial class SystemStandby : UserControl, ISwitchable
     {
+        /// <summary>
+        /// Main window position is set after login, this variable
+        /// makes sure it's not set twice
+        /// </summary>
+        public static bool PositionSet = false;
+
         public SystemStandby()
         {
             InitializeComponent();
@@ -55,9 +61,13 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            // Todo: Set these only one time
-            App.Current.MainWindow.SizeToContent = SizeToContent.Manual;
-            App.Current.MainWindow.WindowState = WindowState.Maximized;
+            // Set window position
+            if (SystemStandby.PositionSet == false)
+            {
+                App.Current.MainWindow.Top = 10;
+                App.Current.MainWindow.Left = 10;
+                SystemStandby.PositionSet = true;
+            }
 
             // Persons selectbox
             cmbClient.ItemsSource = new Model.Person().FindAll();

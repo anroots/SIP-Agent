@@ -13,7 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
 
-namespace SIP_Agent
+namespace SIP_Agent.View
 {
     /// <summary>
     /// Interaction logic for UserLogin.xaml

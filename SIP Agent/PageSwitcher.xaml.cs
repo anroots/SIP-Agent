@@ -42,5 +42,6 @@ namespace SIP_Agent
                 throw new ArgumentException("NextPage is not ISwitchable! "
                   + nextPage.Name.ToString());
         }
+
     }
 }
