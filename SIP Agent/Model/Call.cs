@@ -203,7 +203,7 @@ namespace SIP_Agent.Model
         override public IQueryable FindAll(int Limit = 0)
         {
             base.FindAll();
-            var results = from row in CurrentConnection.calls
+            var results = (from row in CurrentConnection.calls
                     where row.deleted.Equals(0) && row.caller_id != null
                     select new {
                         ID = row.id,
@@ -212,7 +212,7 @@ namespace SIP_Agent.Model
                         Started = row.ShortStarted,
                         Finished = row.ShortFinished,
                         Duration = Model.Call.CalcDuration(row.start, row.finished)
-                    };
+                    }).OrderByDescending(row => row.ID);
             if (Limit > 0)
             {
                 return results.Take(Limit);

@@ -154,7 +154,13 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void lastEntry_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Switcher.Switch(new TaskView((int)((DataGrid)sender).SelectedValue));
+            int TaskId;
+            try {
+                TaskId = (int)((DataGrid)sender).SelectedValue;
+            } catch (NullReferenceException) {
+                return;
+            }
+            Switcher.Switch(new TaskView(TaskId));
         }
 
        

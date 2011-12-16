@@ -80,8 +80,8 @@ namespace SIP_Agent.View
             App.CurrentUser = new Model.Person();
 
             // Uncomment to "cheat" login during development
-            App.CurrentUser.Login("ando", "ando");  // stub
-            Switcher.Switch(new SystemStandby()); // stub
+            //App.CurrentUser.Login("ando", "ando");  // stub
+            //Switcher.Switch(new SystemStandby()); // stub
         }
 
         /// <summary>

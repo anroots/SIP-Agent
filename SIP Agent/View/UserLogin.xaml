@@ -18,9 +18,9 @@
             <ColumnDefinition Width="178*" />
         </Grid.ColumnDefinitions>
         <Label Content="SIP Agent" Height="89" HorizontalAlignment="Center" Margin="4,31,135,0" Name="loginLabel" VerticalAlignment="Top" Width="270" Grid.Column="2" FontFamily="Arial" FontSize="48" BorderThickness="1" Grid.ColumnSpan="2" />
-        <Label Content="Kasutaja" Height="35" HorizontalAlignment="Left" Name="userLabel" VerticalAlignment="Top" Width="55" Grid.Column="1" Grid.Row="1" Margin="67,2,0,0" />
+        <Label Content="Kasutaja" Height="35" HorizontalAlignment="Left" Name="userLabel" VerticalAlignment="Top" Width="55" Grid.Column="1" Grid.Row="1" Margin="50,0,0,0" />
         <TextBox Height="35" HorizontalAlignment="Left" Name="txtUsername" VerticalAlignment="Top" Width="275" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" FontSize="16" Text="ando" />
-        <Label Content="Parool" Height="35" HorizontalAlignment="Left" Margin="67,41,0,0" Name="passwordLabel" VerticalAlignment="Top" Width="55" Grid.Column="1" Grid.Row="1" />
+        <Label Content="Parool" Height="35" HorizontalAlignment="Left" Margin="50,41,0,0" Name="passwordLabel" VerticalAlignment="Top" Width="55" Grid.Column="1" Grid.Row="1" />
         <PasswordBox Height="35" HorizontalAlignment="Left" Margin="0,41,0,0" Name="txtPassword" VerticalAlignment="Top" Width="274" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Password="" FontSize="16" />
         <Button Content="Sisene" Height="35" HorizontalAlignment="Left" Margin="174,91,0,0" Name="btn_login" VerticalAlignment="Top" Width="100" Click="btn_login_Click" IsDefault="True" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" />
         <Label Content="{Binding Path=Version, Source={x:Static Application.Current}}" Grid.Column="2" Height="28" HorizontalAlignment="Left" Margin="84,92,0,0" Name="LabelVersion" VerticalAlignment="Top" Foreground="#AB000000" DataContext="{Binding}" FontSize="16" FontWeight="Normal" FontStyle="Italic" />

@@ -66,9 +66,15 @@ namespace SIP_Agent.Model
             CurrentRow.task_id = TaskId;
             CurrentRow.call_id = CallId;
 
-            CurrentConnection.tasks_calls.InsertOnSubmit(CurrentRow);
-            CurrentConnection.SubmitChanges();
-
+            try
+            {
+                CurrentConnection.tasks_calls.InsertOnSubmit(CurrentRow);
+                CurrentConnection.SubmitChanges();
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
             return Save();
         }
 
