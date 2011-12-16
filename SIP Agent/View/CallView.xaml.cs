@@ -162,7 +162,5 @@ namespace SIP_Agent.View
             }
             Switcher.Switch(new TaskView(TaskId));
         }
-
-       
     }
 }
