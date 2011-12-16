@@ -55,9 +55,9 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            // Set window position
-            App.Current.MainWindow.Top = 10;
-            App.Current.MainWindow.Left = 10;
+            // Todo: Set these only one time
+            App.Current.MainWindow.SizeToContent = SizeToContent.Manual;
+            App.Current.MainWindow.WindowState = WindowState.Maximized;
 
             // Persons selectbox
             cmbClient.ItemsSource = new Model.Person().FindAll();

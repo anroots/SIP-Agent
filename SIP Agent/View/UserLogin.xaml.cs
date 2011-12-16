@@ -100,6 +100,12 @@ namespace SIP_Agent.View
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            App.Current.MainWindow.SourceInitialized += (s, a) => App.Current.MainWindow.WindowState = WindowState.Maximized;
+        }
       
     }
 }
