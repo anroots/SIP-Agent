@@ -78,6 +78,7 @@ namespace SIP_Agent.View
         {
             Model.Log.Write("Initialized login screen.");
             App.CurrentUser = new Model.Person();
+            txtUsername.Focus();
 
             // Uncomment to "cheat" login during development
             //App.CurrentUser.Login("ando", "ando");  // stub
@@ -99,6 +100,30 @@ namespace SIP_Agent.View
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
+        }
+
+        /// <summary>
+        /// Close login screen on esc press
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UserControl_KeyUp(object sender, KeyEventArgs e)
+        {
+
+            if (e.Equals(Key.Escape))
+            {
+                App.Current.Shutdown(0);
+            }
+        }
+
+        /// <summary>
+        /// Exit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
         }
       
     }

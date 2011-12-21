@@ -198,6 +198,21 @@ namespace SIP_Agent.View
             Switcher.Switch(new TaskView(0));
         }
 
+        /// <summary>
+        /// Doubleclick on log row - show message
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridLogs_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                log row = (log)((DataGrid)sender).SelectedItem;
+                MessageBox.Show(row.I18nText);
+            }
+            catch (NullReferenceException) { }
+        }
+
     }
 }
 

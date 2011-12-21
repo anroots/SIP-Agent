@@ -62,12 +62,12 @@ namespace SIP_Agent.Model
         }
 
         /// <summary>
-        /// 
+        /// Holds the currently loaded row
         /// </summary>
         virtual protected ICrud CurrentRow {get; set;}
 
         /// <summary>
-        /// 
+        /// Unload the model
         /// </summary>
         virtual public void Unload() {
             CurrentRow = null;
@@ -98,7 +98,7 @@ namespace SIP_Agent.Model
 
 
         /// <summary>
-        /// 
+        /// Create a new row
         /// </summary>
         /// <returns></returns>
         virtual public int New()

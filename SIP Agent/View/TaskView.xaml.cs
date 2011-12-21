@@ -90,6 +90,10 @@ namespace SIP_Agent.View
                 // Find all associated calls for the calls DataGrid
                 gridCalls.ItemsSource = new Model.Call().GetCalls(CurrentTask.Calls());
             }
+            else
+            {
+                txtTitle.Focus(); // Set focus to 1st field on new tasks
+            }
         }
 
         #region Event For Child Window
@@ -134,13 +138,13 @@ namespace SIP_Agent.View
             if (CurrentTask.Save() > -1)
             {
                 Helper.UI.flash(sender, Helper.UI.SUCCESS_BRUSH);
-                Model.Log.Write("Successfully saved task information" + CurrentTask);
+                Model.Log.Write("Saved: #" + CurrentTask.id);
             }
             else
             {
                 Helper.UI.flash(sender, Helper.UI.ERROR_BRUSH);
                 MessageBox.Show("Salvestamine ebaõnnestus.");
-                Model.Log.Write("Failed to save task information" + CurrentTask);
+                Model.Log.Write("Failed to save #" + CurrentTask.id);
             }
         }
 

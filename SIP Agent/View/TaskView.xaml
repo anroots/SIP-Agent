@@ -49,7 +49,7 @@
         <TabControl Grid.Column="2" Height="345" HorizontalAlignment="Left" Margin="6,55,0,0" Name="tabControl1" VerticalAlignment="Top" Width="689" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <TabItem Header="Kirjeldus" Name="tabItem1">
                 <Grid>
-                    <TextBox Text="{Binding Path=details}" Height="305" HorizontalAlignment="Left" Margin="6,6,0,0" Name="txtDetails" VerticalAlignment="Top" Width="667" />
+                    <TextBox Text="{Binding Path=details}" Height="305" HorizontalAlignment="Left" Margin="6,6,0,0" Name="txtDetails" VerticalAlignment="Top" Width="667" TabIndex="2" />
                 </Grid>
             </TabItem>
             <TabItem Name="tabItem2" Header="Info">
@@ -90,7 +90,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <TextBox Grid.Column="2" Height="23" HorizontalAlignment="Left" Margin="0,12,0,0" Name="txtTitle" VerticalAlignment="Top" Width="690" Grid.ColumnSpan="2" Text="{Binding Path=title}" />
+        <TextBox Grid.Column="2" Height="23" HorizontalAlignment="Left" Margin="0,12,0,0" Name="txtTitle" VerticalAlignment="Top" Width="690" Grid.ColumnSpan="2" Text="{Binding Path=title}" TabIndex="1" />
         <Button Content="Salvesta" Grid.Column="3" Grid.Row="2" Height="39" HorizontalAlignment="Left" Margin="94,52,0,0" Name="btnSave" VerticalAlignment="Top" Width="123" Click="btnSave_Click" />
         <Button Content="Tagasi" Grid.Column="2" Height="39" HorizontalAlignment="Left" Margin="11,52,0,0" Name="btnBack" VerticalAlignment="Top" Width="123" Grid.Row="2" Click="btnBack_Click" />
         <Label Content="Töö #" Grid.Column="1" Height="28" HorizontalAlignment="Left" Margin="16,12,0,0" Name="label4" VerticalAlignment="Top" FontSize="16" />

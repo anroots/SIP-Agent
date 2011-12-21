@@ -10,7 +10,7 @@
         <CollectionViewSource x:Key="tasksViewSource" />
 
     </UserControl.Resources>
-    <Grid Height="600" DataContext="{StaticResource tasksViewSource}">
+    <Grid Height="600" DataContext="{StaticResource tasksViewSource}" Name="Container">
         <Grid.RowDefinitions>
             <RowDefinition Height="200*" />
         </Grid.RowDefinitions>
@@ -41,7 +41,7 @@
                 <Button Content="Uus töö" Height="34" HorizontalAlignment="Left" Margin="13,219,0,0" Name="btnBewTask" VerticalAlignment="Top" Width="290" Background="#FF9EE5A4" FontWeight="Normal" FontSize="14" Click="btnBewTask_Click" />
             </Grid>
         </GroupBox>
-        <TabControl Grid.Column="1" Height="550" HorizontalAlignment="Left" Margin="15,39,0,0" Name="tabControl1" VerticalAlignment="Top" Width="533">
+        <TabControl Grid.Column="1" Height="550" HorizontalAlignment="Left" Margin="15,39,0,0" Name="tabControl1" VerticalAlignment="Top" Width="Auto" MinWidth="500" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <TabItem Header="Tööd" Name="tabItem1" MinWidth="100">
 
                 <DataGrid AutoGenerateColumns="False" SelectedValuePath="ID" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridTasks" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="dataGridTasks_MouseDoubleClick">
@@ -68,7 +68,7 @@
                 </DataGrid>
             </TabItem>
             <TabItem Header="Logid" Name="tabItem3" MinWidth="100">
-                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridLogs" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto">
+                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridLogs" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="dataGridLogs_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding Path=id}" Width="30" FontSize="10" />
                         <DataGridTextColumn Header="Aeg" Binding="{Binding Path=ShortCreated}" Width="100" />
