@@ -16,6 +16,11 @@ namespace SIP_Agent
     {
         public static Model.Person CurrentUser;
         private string version = System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Windows.Forms.Application.ExecutablePath).FileVersion;
+        
+        /// <summary>
+        /// Whether we have a database connection
+        /// </summary>
+        public static bool DatabaseConnection = true;
 
         public String Version
         {
@@ -25,7 +30,14 @@ namespace SIP_Agent
         // Main constructor for the application
         App()
         {
-            Model.Log.Write("App started.");
+            try
+            {
+                Model.Log.Write("App started.");
+            }
+            catch (System.Data.SqlClient.SqlException)
+            {
+                DatabaseConnection = false;
+            }
         }
     }
 }

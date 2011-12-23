@@ -76,13 +76,29 @@ namespace SIP_Agent.View
         /// <param name="e"></param>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Model.Log.Write("Initialized login screen.");
-            App.CurrentUser = new Model.Person();
-            txtUsername.Focus();
 
-            // Uncomment to "cheat" login during development
-            //App.CurrentUser.Login("ando", "ando");  // stub
-            //Switcher.Switch(new SystemStandby()); // stub
+
+            // Database connection not succesful
+            if (!App.DatabaseConnection)
+            {
+                textBlock3.Visibility = Visibility.Visible;
+                txtPassword.Visibility = Visibility.Hidden;
+                txtUsername.Visibility = Visibility.Hidden;
+                btn_login.Visibility = Visibility.Hidden;
+                passwordLabel.Visibility = Visibility.Hidden;
+                userLabel.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                Model.Log.Write("Initialized login screen.");
+
+                App.CurrentUser = new Model.Person();
+                txtUsername.Focus();
+
+                // Uncomment to "cheat" login during development
+                //App.CurrentUser.Login("ando", "ando");  // stub
+                //Switcher.Switch(new SystemStandby()); // stub
+            }
         }
 
         /// <summary>
@@ -96,6 +112,11 @@ namespace SIP_Agent.View
             about.Show();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));

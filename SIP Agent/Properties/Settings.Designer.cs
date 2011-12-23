@@ -26,16 +26,6 @@ namespace SIP_Agent.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DAVID-7;Initial Catalog=agent;Integrated Security=True")]
-        public string agentConnectionString {
-            get {
-                return ((string)(this["agentConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DAVID-7;Initial Catalog=sip-agent;Integrated Security=True")]
         public string agentConnectionString1 {
             get {
@@ -50,6 +40,16 @@ namespace SIP_Agent.Properties {
         public string sip_agentConnectionString {
             get {
                 return ((string)(this["sip_agentConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DAVID-7;Initial Catalog=treff;Integrated Security=True")]
+        public string agentConnectionString {
+            get {
+                return ((string)(this["agentConnectionString"]));
             }
         }
     }
