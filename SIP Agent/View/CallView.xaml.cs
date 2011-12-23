@@ -175,9 +175,8 @@ namespace SIP_Agent.View
                 int CallId = (int)((DataGrid)sender).SelectedValue;
                 Switcher.Switch(new CallView(CallId));
             }
-            catch (NullReferenceException nex)
+            catch (NullReferenceException)
             {
-                Console.WriteLine(nex.ToString());
             }
         }
     }

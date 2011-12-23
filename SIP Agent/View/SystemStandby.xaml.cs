@@ -213,6 +213,17 @@ namespace SIP_Agent.View
             catch (NullReferenceException) { }
         }
 
+        /// <summary>
+        /// Create new person
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            int PersonId = new Model.Person().New();
+            Switcher.Switch(new PersonInfo(PersonId));
+        }
+
     }
 }
 

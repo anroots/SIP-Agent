@@ -14,7 +14,7 @@ namespace SIP_Agent.Model
         override public int id { get { return CurrentRow == null ? 0 : CurrentRow.id; } }
         public string first_name { get { return CurrentRow.first_name.Trim(); } set { CurrentRow.first_name = value.Trim(); } }
         public string last_name { get { return CurrentRow.last_name.Trim(); } set { CurrentRow.last_name = value.Trim(); } }
-        public string username { get { return CurrentRow.username.Trim(); } set { CurrentRow.username = value.Trim(); } }
+        public string username { get { return CurrentRow.username == null ? null : CurrentRow.username.Trim(); } set { CurrentRow.username = value.Trim(); } }
         public string password { get { return CurrentRow.password.Trim(); } set { CurrentRow.password = Helper.Functions.HashPass(value.Trim()); } }
         public int company_id { get { return CurrentRow.company_id.GetValueOrDefault(); } set { CurrentRow.company_id = value; } }
         public string Phone { get { return GetPhone(); } }
@@ -130,12 +130,14 @@ namespace SIP_Agent.Model
             CurrentRow = new person()
             {
                 created = DateTime.Now,
-                company_id = Model.Company.ANONYMOUS
+                company_id = Model.Company.ANONYMOUS,
+                first_name = "???",
+                last_name = "???"
             };
 
             CurrentConnection.persons.InsertOnSubmit(CurrentRow);
             CurrentConnection.SubmitChanges();
-            return Save();
+            return CurrentRow.id;
         }
 
 

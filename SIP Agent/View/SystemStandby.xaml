@@ -36,9 +36,10 @@
                            />
 
                 <TextBlock Height="48" HorizontalAlignment="Left" Margin="13,14,0,0" Name="textBlock1" Text="Jõudeolek. Uue kõne saabumisel valige rippmenüüst helistaja nimi ja vajutage &quot;Loo uus kõne&quot;." VerticalAlignment="Top" TextWrapping="Wrap" Width="273" />
-                <Button Content="Kliendi andmete muutmine" Height="23" HorizontalAlignment="Left" Margin="121,0,0,271" Name="btnChangePerson" VerticalAlignment="Bottom" Width="182" Click="btnChangePerson_Click" Opacity="0.5" />
+                <Button Content="Isiku andmete muutmine" Height="23" HorizontalAlignment="Right" Margin="0,0,38,271" Name="btnChangePerson" VerticalAlignment="Bottom" Width="160" Click="btnChangePerson_Click" Opacity="0.5" />
                 <Button Content="Uus kõne" Height="34" HorizontalAlignment="Left" Margin="13,171,0,0" Name="btnNewCall" VerticalAlignment="Top" Width="290" Click="button2_Click" Background="#FF9EE5A4" FontWeight="Normal" FontSize="14" />
                 <Button Content="Uus töö" Height="34" HorizontalAlignment="Left" Margin="13,219,0,0" Name="btnBewTask" VerticalAlignment="Top" Width="290" Background="#FF9EE5A4" FontWeight="Normal" FontSize="14" Click="btnBewTask_Click" />
+                <Button Content="Uus isik" Height="23" HorizontalAlignment="Left" Margin="13,0,0,271" Name="button1" Opacity="0.5" VerticalAlignment="Bottom" Width="124" Click="button1_Click" />
             </Grid>
         </GroupBox>
         <TabControl Grid.Column="1" Height="550" HorizontalAlignment="Stretch" Margin="15,39,0,0" Name="tabControl1" VerticalAlignment="Stretch" Width="Auto" MinWidth="500" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
