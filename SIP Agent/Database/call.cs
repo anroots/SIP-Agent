@@ -14,6 +14,6 @@ namespace SIP_Agent
         public string ShortStarted { get { return Helper.UI.TodayDate(start); } }
         public string ShortFinished { get { return Helper.UI.TodayDate(finished); } }
         public string CallerName { get { return Model.Person.FullName(person); } }
-
+        public string ShortSummary { get { return summary == null ? null : summary.Length > 50 ? summary.Substring(0, 50) + "..." : summary; } }
     }
 }

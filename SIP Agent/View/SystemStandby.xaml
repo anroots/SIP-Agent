@@ -19,7 +19,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <GroupBox Grid.Column="0" Header="Helistaja tuvastamine" Height="321" HorizontalAlignment="Left" Margin="11,35,0,0" Name="groupBox1" VerticalAlignment="Top" Width="335" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Grid Height="436" Width="568">
+            <Grid Height="436" Width="341">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
@@ -41,10 +41,10 @@
                 <Button Content="Uus töö" Height="34" HorizontalAlignment="Left" Margin="13,219,0,0" Name="btnBewTask" VerticalAlignment="Top" Width="290" Background="#FF9EE5A4" FontWeight="Normal" FontSize="14" Click="btnBewTask_Click" />
             </Grid>
         </GroupBox>
-        <TabControl Grid.Column="1" Height="550" HorizontalAlignment="Left" Margin="15,39,0,0" Name="tabControl1" VerticalAlignment="Top" Width="Auto" MinWidth="500" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-            <TabItem Header="Tööd" Name="tabItem1" MinWidth="100">
+        <TabControl Grid.Column="1" Height="550" HorizontalAlignment="Stretch" Margin="15,39,0,0" Name="tabControl1" VerticalAlignment="Stretch" Width="Auto" MinWidth="500" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+            <TabItem Header="Tööd" Name="tabItem1" MinWidth="100" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
 
-                <DataGrid AutoGenerateColumns="False" SelectedValuePath="ID" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridTasks" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="dataGridTasks_MouseDoubleClick">
+                <DataGrid AutoGenerateColumns="False" SelectedValuePath="ID" Height="506" HorizontalAlignment="Stretch" Margin="6,6,0,0" Name="dataGridTasks" VerticalAlignment="Stretch" Width="Auto" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="dataGridTasks_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" FontSize="10" Width="30" Binding="{Binding Path=ID}" />
                         <DataGridTextColumn Header="Pealkiri" Binding="{Binding Path=Title}" />
@@ -55,30 +55,30 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="Kõned" Name="tabItem2" MinWidth="100">
-                <DataGrid AutoGenerateColumns="False" Height="506" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridCalls" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="dataGridCalls_MouseDoubleClick">
+            <TabItem Header="Kõned" Name="tabItem2" MinWidth="100" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+                <DataGrid AutoGenerateColumns="False" Height="506" SelectedValuePath="ID" HorizontalAlignment="Stretch" Margin="6,6,0,0" Name="dataGridCalls" VerticalAlignment="Stretch" Width="Auto" BorderThickness="0" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="dataGridCalls_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" FontSize="10" Width="30" Binding="{Binding Path=ID}" />
                         <DataGridTextColumn Header="Helistaja" Binding="{Binding Path=CallerName}" />
-                        <DataGridTextColumn Header="Kokkuvõte" Binding="{Binding Path=Summary}" />
+                        <DataGridTextColumn Header="Kokkuvõte" Binding="{Binding Path=ShortSummary}" />
                         <DataGridTextColumn Header="Kestvus" Width="100" Binding="{Binding Path=Duration}" />
                         <DataGridTextColumn Header="Vastatud" Width="100" FontSize="10" Binding="{Binding Path=Started}" />
                         <DataGridTextColumn Header="Lõpetatud" Width="100" FontSize="10" Binding="{Binding Path=Finished}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="Logid" Name="tabItem3" MinWidth="100">
-                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Left" Margin="6,6,0,0" Name="dataGridLogs" VerticalAlignment="Top" Width="511" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="dataGridLogs_MouseDoubleClick">
+            <TabItem Header="Logid" Name="tabItem3" MinWidth="100" VerticalContentAlignment="Top" HorizontalContentAlignment="Left">
+                <DataGrid AutoGenerateColumns="False" Height="506" HorizontalAlignment="Stretch" Margin="6,6,0,0" Name="dataGridLogs" VerticalAlignment="Stretch" Width="Auto" BorderThickness="0" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="dataGridLogs_MouseDoubleClick" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding Path=id}" Width="30" FontSize="10" />
-                        <DataGridTextColumn Header="Aeg" Binding="{Binding Path=ShortCreated}" Width="100" />
-                        <DataGridTextColumn Header="Kasutaja" Binding="{Binding Path=PersonName}" Width="140" FontSize="10" />
+                        <DataGridTextColumn Header="Aeg" Binding="{Binding Path=ShortCreated}" Width="100*" MaxWidth="120" />
+                        <DataGridTextColumn Header="Kasutaja" Binding="{Binding Path=PersonName}" Width="140*" FontSize="10" MaxWidth="160" />
                         <DataGridTextColumn Header="Sisu" Binding="{Binding Path=text}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
         </TabControl>
-        <Button Content="Logi välja" Height="37" HorizontalAlignment="Left" Margin="17,541,0,0" Name="btnLogout" VerticalAlignment="Top" Width="104" Click="btnLogout_Click" Opacity="0.8" Background="#FFD64937"></Button>
+        <Button Content="Logi välja" Height="37" HorizontalAlignment="Left" Margin="17,541,0,0" Name="btnLogout" VerticalAlignment="Top" Width="104" Click="btnLogout_Click" Opacity="0.8" Background="#FFD64937" Foreground="White"></Button>
     </Grid>
 </UserControl>
 

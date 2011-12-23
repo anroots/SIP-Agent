@@ -162,5 +162,23 @@ namespace SIP_Agent.View
             }
             Switcher.Switch(new TaskView(TaskId));
         }
+
+        /// <summary>
+        /// Open selected previous call view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lastCallsData_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                int CallId = (int)((DataGrid)sender).SelectedValue;
+                Switcher.Switch(new CallView(CallId));
+            }
+            catch (NullReferenceException nex)
+            {
+                Console.WriteLine(nex.ToString());
+            }
+        }
     }
 }

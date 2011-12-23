@@ -55,7 +55,7 @@ namespace SIP_Agent.View
         #endregion
 
         /// <summary>
-        /// 
+        /// Control loaded
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

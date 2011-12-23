@@ -22,6 +22,7 @@ namespace SIP_Agent.Model
         public DateTime? start { get { return start == null ? null : CurrentRow.start; } set { CurrentRow.start = value; } }
         public DateTime? finished { get { return finished == null ? null : CurrentRow.finished; } set { CurrentRow.finished = value; } }
         public string CallerName { get { return CurrentRow == null ? null : CurrentRow.CallerName; } }
+        public string ShortSummary { get { return CurrentRow.ShortSummary; } }
         override public bool deleted { get { return CurrentRow.deleted; } }
 
 
@@ -208,7 +209,7 @@ namespace SIP_Agent.Model
                     select new {
                         ID = row.id,
                         CallerName = Model.Person.FullName(row.person), // FK row.person = caller_id
-                        Summary = row.summary,
+                        ShortSummary = row.ShortSummary,
                         Started = row.ShortStarted,
                         Finished = row.ShortFinished,
                         Duration = Model.Call.CalcDuration(row.start, row.finished)

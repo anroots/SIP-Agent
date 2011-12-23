@@ -32,8 +32,8 @@
                 <ImageBrush ImageSource="pack://application:,,,/SIP Agent;component/Images/radio.png" Stretch="Uniform" TileMode="None" />
             </Button.Background>
         </Button>
-        <TabControl Grid.Column="2" Height="347" HorizontalAlignment="Left" Margin="10,12,0,0" Name="tabControl1" VerticalAlignment="Top" Width="505">
-            <TabItem Header="Tööga sidumine" Name="tabItem2">
+        <TabControl Grid.Column="2" Height="347" HorizontalAlignment="Left" Margin="10,12,0,0" Name="tabControl1" VerticalAlignment="Top" Width="505" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+            <TabItem Header="Tööga sidumine" Name="tabItem2" HorizontalAlignment="Left">
                 <Grid>
                     <TextBox Height="36" HorizontalAlignment="Left" Margin="128,106,0,0" Name="txtBindTaskId" VerticalAlignment="Top" Width="190" FontSize="16" FontWeight="Bold" MaxLines="1" MaxLength="12" />
                     <Button Content="Seo tööga" Height="35" HorizontalAlignment="Left" Margin="128,152,0,0" Name="btnBindTask" VerticalAlignment="Top" Width="190" Click="btnBindTask_Click" />
@@ -41,11 +41,11 @@
                     <Label Content="Töö ID:" Height="36" HorizontalAlignment="Left" Margin="74,106,0,0" Name="label2" VerticalAlignment="Top" FontWeight="Bold" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Info" Name="tabItem1">
+            <TabItem Header="Info" Name="tabItem1" HorizontalAlignment="Left">
                 <Grid>
                     <Label Content="Selle kõnega seotud tööd" Height="29" HorizontalAlignment="Left" Margin="7,136,0,0" Name="lastEntryLabel" VerticalAlignment="Top" Width="162" />
                     <Label Content="Eelnevad kõned samalt helistajalt" Height="32" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lastCallsLabel" VerticalAlignment="Top" Width="190" />
-                    <DataGrid AutoGenerateColumns="False" SelectedValuePath="id" Height="105" HorizontalAlignment="Left" Margin="6,29,0,0" Name="lastCallsData" VerticalAlignment="Top" Width="483" BorderThickness="0" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto"  >
+                    <DataGrid AutoGenerateColumns="False" SelectedValuePath="id" Height="105" HorizontalAlignment="Stretch" Margin="6,29,0,0" Name="lastCallsData" VerticalAlignment="Top" Width="483" BorderThickness="0" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="lastCallsData_MouseDoubleClick">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Kõne ID" Binding="{Binding Path=id}" />
                             <DataGridTextColumn Header="Helistaja" Binding="{Binding Path=caller_id}" />
@@ -55,7 +55,7 @@
                             <DataGridTextColumn Header="Lõpetatud" Binding="{Binding Path=finished}" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <DataGrid AutoGenerateColumns="False" SelectedValuePath="id" Height="147" HorizontalAlignment="Left" Margin="7,162,0,0" Name="lastEntry" VerticalAlignment="Top" Width="482" BorderThickness="0" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="lastEntry_MouseDoubleClick">
+                    <DataGrid AutoGenerateColumns="False" SelectedValuePath="id" Height="147" HorizontalAlignment="Stretch" Margin="7,162,0,0" Name="lastEntry" VerticalAlignment="Top" Width="482" BorderThickness="0" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" AlternatingRowBackground="#FFE8E8E8" AlternationCount="1" GridLinesVisibility="None" ColumnWidth="Auto" MouseDoubleClick="lastEntry_MouseDoubleClick">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Path=id}"/>
                             <DataGridTextColumn Header="Kirjeldus" Binding="{Binding Path=details}" />
@@ -64,6 +64,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button Content="Tagasi" Grid.Column="2" Height="35" HorizontalAlignment="Left" Margin="15,540,0,0" Name="btnBack" VerticalAlignment="Top" Width="141" Click="btnBack_Click" />
+        <Button Content="Tagasi" Grid.Column="2" Height="35" HorizontalAlignment="Left" Margin="21,540,0,0" Name="btnBack" VerticalAlignment="Top" Width="141" Click="btnBack_Click" />
+        <Label Content="Firma logo" Grid.Column="1" Height="28" HorizontalAlignment="Left" Margin="12,356,0,0" Name="label3" VerticalAlignment="Top" />
     </Grid>
 </UserControl>
