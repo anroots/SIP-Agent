@@ -99,32 +99,6 @@ namespace SIP_Agent.View
         {
             Switcher.Switch(new View.SystemStandby());
         }
-
-    
-
-        
-
-        /// <summary>
-        /// Mark person as deleted
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void checkBox1_Checked(object sender, RoutedEventArgs e)
-        {
-            CurrentPerson.deleted = true;
-        }
-
-        /// <summary>
-        /// Mark person as undeleted
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void checkBox1_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CurrentPerson.deleted = false;
-        }
-    
-
     }
 }
 

@@ -132,7 +132,8 @@ namespace SIP_Agent.Model
                 created = DateTime.Now,
                 company_id = Model.Company.ANONYMOUS,
                 first_name = "???",
-                last_name = "???"
+                last_name = "???",
+                username = "User_"+DateTime.Now.Ticks
             };
 
             CurrentConnection.persons.InsertOnSubmit(CurrentRow);
