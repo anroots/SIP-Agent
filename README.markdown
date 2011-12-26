@@ -22,3 +22,4 @@ Install Instructions
 * Create a new MSSQL database on your local machine
 * Execute the included database file (db/DB_Dump.sql) in that database (modify line 1 and enter your database name)
 * Modify the connection to the database in the Database.dbml file (Connection/Connection String)
+* Run the application. The default username/password is ando/ando

@@ -158,6 +158,7 @@ namespace SIP_Agent.Model
                                 in db.persons
                             where x.username.Equals(Username)
                             where x.password.Equals(Helper.Functions.HashPass(Password))
+                            where x.deleted.Equals(0)
                             select x;
 
                 if (query.Count() > 0)
